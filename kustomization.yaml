@@ -1,0 +1,7 @@
+namespace: gitlab
+
+commonLabels:
+  app: gitlab-runner
+
+resources:
+  - generated.yaml
