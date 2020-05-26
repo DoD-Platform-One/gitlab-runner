@@ -1,0 +1,3 @@
+# NOTE: Generator below is used a reference only, due to the nature of helm and generators, we don't use this `package` as _the_ base
+# generators:
+#   - chart.yaml

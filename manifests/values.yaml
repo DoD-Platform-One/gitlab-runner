@@ -7,12 +7,6 @@
 ##
 # image: gitlab/gitlab-runner:alpine-v11.6.0
 
-## Specify a imagePullPolicy
-## 'Always' if imageTag is 'latest', else set to 'IfNotPresent'
-## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
-##
-imagePullPolicy: IfNotPresent
-
 ## The GitLab Server URL (with protocol) that want to register the runner against
 ## ref: https://docs.gitlab.com/runner/commands/README.html#gitlab-runner-register
 ##
@@ -38,21 +32,6 @@ gitlabUrl: http://gitlab-unicorn.gitlab.svc.cluster.local:8181
 ## ref: https://docs.gitlab.com/runner/commands/README.html#gitlab-runner-unregister
 ##
 unregisterRunners: true
-
-## When stopping the runner, give it time to wait for its jobs to terminate.
-##
-## Updating the runner's chart version or configuration will cause the runner container
-## to be terminated with a graceful stop request. terminationGracePeriodSeconds
-## instructs Kubernetes to wait long enough for the runner pod to terminate gracefully.
-## ref: https://docs.gitlab.com/runner/commands/#signals
-terminationGracePeriodSeconds: 3600
-
-## Set the certsSecretName in order to pass custom certficates for GitLab Runner to use
-## Provide resource name for a Kubernetes Secret Object in the same namespace,
-## this is used to populate the /home/gitlab-runner/.gitlab-runner/certs/ directory
-## ref: https://docs.gitlab.com/runner/configuration/tls-self-signed.html#supported-options-for-self-signed-certificates
-##
-# certsSecretName:
 
 ## Configure the maximum number of concurrent jobs
 ## ref: https://docs.gitlab.com/runner/configuration/advanced-configuration.html#the-global-section
@@ -85,16 +64,6 @@ rbac:
   ## cluster-wide or only within namespace
   clusterWideAccess: false
 
-  ## Use the following Kubernetes Service Account name if RBAC is disabled in this Helm chart (see rbac.create)
-  ##
-  # serviceAccountName: default
-
-  ## Specify annotations for Service Accounts, useful for annotations such as eks.amazonaws.com/role-arn
-  ##
-  ## ref: https://docs.aws.amazon.com/eks/latest/userguide/specify-service-account-role.html
-  ##
-  # serviceAccountAnnotations: {}
-
 ## Configure integrated Prometheus metrics exporter
 ## ref: https://docs.gitlab.com/runner/monitoring/#configuration-of-the-metrics-http-server
 metrics:
@@ -113,24 +82,20 @@ runners:
   ##
   # imagePullSecrets: []
 
-  ## Specify the image pull policy: never, if-not-present, always. The cluster default will be used if not set.
-  ##
-  # imagePullPolicy: ""
-
   ## Defines number of concurrent requests for new job from GitLab
   ## ref: https://docs.gitlab.com/runner/configuration/advanced-configuration.html#the-runners-section
   ##
   # requestConcurrency: 1
 
-  ## Specify whether the runner should be locked to a specific project: true, false. Defaults to true.
-  ##
-  # locked: true
+  # Specify whether the runner should be locked to a specific project: true, false. Defaults to true.
+  #
+  locked: false
 
   ## Specify the tags associated with the runner. Comma-separated list of tags.
   ##
   ## ref: https://docs.gitlab.com/ce/ci/runners/#using-tags
   ##
-  # tags: ""
+  tags: "global-shared"
 
   ## Specify if jobs without tags should be run.
   ## If not specified, Runner will default to true if no tags were specified. In other case it will
@@ -138,7 +103,7 @@ runners:
   ##
   ## ref: https://docs.gitlab.com/ce/ci/runners/#allowing-runners-with-tags-to-pick-jobs-without-tags
   ##
-  # runUntagged: true
+  runUntagged: true
 
   ## Specify whether the runner should only run protected branches.
   ## Defaults to False.
@@ -152,7 +117,7 @@ runners:
   ## commands. Please read the docs before turning this on:
   ## ref: https://docs.gitlab.com/runner/executors/kubernetes.html#using-docker-dind
   ##
-  privileged: true
+  privileged: false
 
   ## The name of the secret containing runner-token and runner-registration-token
   secret: gitlab-gitlab-runner-secret
@@ -252,10 +217,6 @@ runners:
   ##
   # serviceAccountName:
 
-  ## If Gitlab is not reachable through $CI_SERVER_URL
-  ##
-  # cloneUrl:
-
   ## Specify node labels for CI job pods assignment
   ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
   ##
@@ -279,15 +240,6 @@ runners:
   ##
   # env:
   #   NAME: VALUE
-
-
-## Configure securitycontext
-## ref: http://kubernetes.io/docs/user-guide/security-context/
-##
-securityContext:
-  fsGroup: 65533
-  runAsUser: 100
-
 
 ## Configure resource requests and limits
 ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
@@ -313,15 +265,6 @@ nodeSelector: {}
   # them to the regular worker nodes only.
   # node-role.kubernetes.io/worker: "true"
 
-## List of node taints to tolerate (requires Kubernetes >= 1.6)
-## Ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
-##
-tolerations: []
-  # Example: Regular worker nodes may have a taint, thus you need to tolerate the taint
-  # when you assign the gitlab runner manager with nodeSelector or affinity to the nodes.
-  # - key: "node-role.kubernetes.io/worker"
-  #   operator: "Exists"
-
 ## Configure environment variables that will be present when the registration command runs
 ## This provides further control over the registration process and the config.toml file
 ## ref: `gitlab-runner register --help`
@@ -342,30 +285,3 @@ hostAliases: []
   #   hostnames:
   #   - "foo.remote"
   #   - "bar.remote"
-
-## Annotations to be added to manager pod
-##
-podAnnotations: {}
-  # Example:
-  # iam.amazonaws.com/role: <my_role_arn>
-
-## Labels to be added to manager pod
-##
-podLabels: {}
-  # Example:
-  # owner.team: <my_cool_team>
-
-## HPA support for custom metrics:
-## This section enables runners to autoscale based on defined custom metrics.
-## In order to use this functionality, Need to enable a custom metrics API server by
-## implementing "custom.metrics.k8s.io" using supported third party adapter
-## Example: https://github.com/directxman12/k8s-prometheus-adapter
-##
-#hpa: {}
-  # minReplicas: 1
-  # maxReplicas: 10
-  # metrics:
-  # - type: Pods
-  #   pods:
-  #     metricName: gitlab_runner_jobs
-  #     targetAverageValue: 400m
