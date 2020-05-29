@@ -55,7 +55,7 @@ checkInterval: 30
 
 ## For RBAC support:
 rbac:
-  create: false
+  create: true
   ## Define specific rbac permissions.
   # resources: ["pods", "pods/exec", "secrets"]
   # verbs: ["get", "list", "watch", "create", "patch", "delete"]
@@ -74,7 +74,7 @@ metrics:
 runners:
   ## Default container image to use for builds when none is specified
   ##
-  image: ubuntu:16.04
+  image: registry.access.redhat.com/ubi8/ubi-minimal:8.2
 
   ## Specify one or more imagePullSecrets
   ##
