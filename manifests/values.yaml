@@ -5,7 +5,7 @@
 ##
 ## ref: https://hub.docker.com/r/gitlab/gitlab-runner/tags/
 ##
-# image: gitlab/gitlab-runner:alpine-v11.6.0
+image: registry.dsop.io/platform-one/apps/gitlab-runner/gitlab/gitlab-runner:alpine-v11.6.0
 
 ## The GitLab Server URL (with protocol) that want to register the runner against
 ## ref: https://docs.gitlab.com/runner/commands/README.html#gitlab-runner-register
@@ -74,7 +74,7 @@ metrics:
 runners:
   ## Default container image to use for builds when none is specified
   ##
-  image: registry.access.redhat.com/ubi8/ubi-minimal:8.2
+  image: registry.dsop.io/platform-one/apps/gitlab-runner/ubi8/ubi-minimal:8.2
 
   ## Specify one or more imagePullSecrets
   ##
