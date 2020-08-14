@@ -3,7 +3,7 @@ kind: HelmGenerator
 metadata:
   name: helmGenerator
 releaseName: global-shared
-chartPath: gitlab-runner-0.17.0.tgz
+chartPath: gitlab-runner-0.19.0.tgz
 namespace: gitlab
 valueFiles:
   - values.yaml
