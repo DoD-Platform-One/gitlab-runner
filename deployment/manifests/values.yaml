@@ -207,7 +207,7 @@ runners:
 
   ## Helper Container specific configuration
   ##
-  helpers: {}
+  helpers:
     # cpuLimit: 200m
     # memoryLimit: 256Mi
     # cpuRequests: 100m
