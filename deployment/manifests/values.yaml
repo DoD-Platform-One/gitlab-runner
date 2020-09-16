@@ -213,6 +213,7 @@ runners:
     # cpuRequests: 100m
     # memoryRequests: 128Mi
     # image: gitlab/gitlab-runner-helper:x86_64-latest
+    image: registry.dsop.io/platform-one/apps/gitlab-runner/gitlab/gitlab-runner-helper:x86_64-latest
 
   ## Service Account to be used for runners
   ##
