@@ -352,10 +352,9 @@ tolerations: []
 ## ref: `gitlab-runner register --help`
 ## ref: https://docs.gitlab.com/runner/configuration/advanced-configuration.html
 ##
-## envVars:
-#
-#    - name: CLONE_URL
-#      value: http://gitlab-webservice.gitlab.svc.cluster.local:8181
+# envVars:
+#   - name: RUNNER_EXECUTOR
+#     value: kubernetes
 
 ## list of hosts and IPs that will be injected into the pod's hosts file
 hostAliases: []
