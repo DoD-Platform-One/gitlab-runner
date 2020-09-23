@@ -5,7 +5,7 @@
 ##
 ## ref: https://hub.docker.com/r/gitlab/gitlab-runner/tags/
 ##
-image: registry.dsop.io/platform-one/apps/gitlab-runner/gitlab/gitlab-runner:alpine-v11.6.0
+image: registry.dsop.io/platform-one/apps/gitlab-runner/gitlab-runner-ib:13.2.2-ib
 
 ## The GitLab Server URL (with protocol) that want to register the runner against
 ## ref: https://docs.gitlab.com/runner/commands/README.html#gitlab-runner-register
@@ -253,6 +253,9 @@ resources: {}
   # requests:
   #   memory: 128Mi
   #   cpu: 100m
+
+securityContext:
+  runAsUser: 1000
 
 ## Affinity for pod assignment
 ## Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
