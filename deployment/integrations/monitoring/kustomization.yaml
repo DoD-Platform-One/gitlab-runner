@@ -1,0 +1,5 @@
+namespace: gitlab
+
+resources:
+  - gitlab-runner-service.yaml
+  - serviceMonitorGitlabRunner.yaml
