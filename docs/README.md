@@ -13,6 +13,7 @@
 
 GitLab Runner is the open source project that is used to run your jobs and send the results back to GitLab. It is used in conjunction with GitLab CI/CD, the open-source continuous integration service included with GitLab that coordinates the jobs.
 The global-shared-gitlab-runner pod is deployed in the gitlab namespace.
+Deployed via Helm Chart.
 
 ### Daily Application Use
 
