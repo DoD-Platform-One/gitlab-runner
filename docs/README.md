@@ -83,3 +83,8 @@ Further filters that can be used are:
 
 - `kubernetes.pod_name`   = `global-shared-gitlab-runner-#` to get logs from a specific # pod
 - `kubernetes.container_name` = `global-shared-gitlab-runner` to get logs from a specific container
+
+#### Troubleshooting Tips
+
+The gitlab-runner is configured to clone the repository from the gitlab webservice via the "clone_url" setting so the runner clones from the same endpoint it uses to register with the gitlab webservice API which is the gitlab-webservice kubernetes service in the gitlab namespace.
+If gitlab webservice is behind HTTPS ingress then within the values.yaml file "certSecretName" can be populated with certificate and key files if there are certificate issues when cloning.
