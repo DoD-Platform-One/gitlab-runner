@@ -6,6 +6,7 @@
 ## ref: https://hub.docker.com/r/gitlab/gitlab-runner/tags/
 ##
 # image: gitlab/gitlab-runner:alpine-v11.6.0
+image: registry.dsop.io/platform-one/apps/gitlab-runner/gitlab-runner-ib:13.2.2-ib
 
 ## Specify a imagePullPolicy
 ## 'Always' if imageTag is 'latest', else set to 'IfNotPresent'
@@ -16,7 +17,7 @@ imagePullPolicy: IfNotPresent
 ## The GitLab Server URL (with protocol) that want to register the runner against
 ## ref: https://docs.gitlab.com/runner/commands/README.html#gitlab-runner-register
 ##
-# gitlabUrl: http://gitlab.your-domain.com/
+gitlabUrl: http://gitlab-webservice.gitlab.svc.cluster.local:8181
 
 ## The Registration Token for adding new Runners to the GitLab Server. This must
 ## be retrieved from your GitLab Instance.
@@ -37,7 +38,7 @@ imagePullPolicy: IfNotPresent
 ## non-existant runners. Un-registering the runner before termination mitigates this issue.
 ## ref: https://docs.gitlab.com/runner/commands/README.html#gitlab-runner-unregister
 ##
-# unregisterRunners: true
+unregisterRunners: true
 
 ## When stopping the runner, give it time to wait for its jobs to terminate.
 ##
@@ -57,7 +58,7 @@ terminationGracePeriodSeconds: 3600
 ## Configure the maximum number of concurrent jobs
 ## ref: https://docs.gitlab.com/runner/configuration/advanced-configuration.html#the-global-section
 ##
-concurrent: 10
+concurrent: 50
 
 ## Defines in seconds how often to check GitLab for a new builds
 ## ref: https://docs.gitlab.com/runner/configuration/advanced-configuration.html#the-global-section
@@ -76,7 +77,7 @@ checkInterval: 30
 
 ## For RBAC support:
 rbac:
-  create: false
+  create: true
   ## Define specific rbac permissions.
   # resources: ["pods", "pods/exec", "secrets"]
   # verbs: ["get", "list", "watch", "create", "patch", "delete"]
@@ -112,7 +113,8 @@ metrics:
 runners:
   ## Default container image to use for builds when none is specified
   ##
-  image: ubuntu:16.04
+  # image: ubuntu:16.04
+  image: registry.dsop.io/platform-one/apps/gitlab/ubi/ubi8-ib:8.2-ib
 
   ## Specify one or more imagePullSecrets
   ##
@@ -131,7 +133,7 @@ runners:
 
   ## Specify whether the runner should be locked to a specific project: true, false. Defaults to true.
   ##
-  # locked: true
+  locked: false
 
   ## Specify the tags associated with the runner. Comma-separated list of tags.
   ##
@@ -145,7 +147,7 @@ runners:
   ##
   ## ref: https://docs.gitlab.com/ce/ci/runners/#runner-is-allowed-to-run-untagged-jobs
   ##
-  # runUntagged: true
+  runUntagged: true
 
   ## Specify whether the runner should only run protected branches.
   ## Defaults to False.
@@ -162,7 +164,7 @@ runners:
   privileged: false
 
   ## The name of the secret containing runner-token and runner-registration-token
-  # secret: gitlab-runner
+  secret: gitlab-gitlab-runner-secret
 
   ## Namespace to run Kubernetes jobs in (defaults to the same namespace of this release)
   ##
@@ -257,7 +259,7 @@ runners:
     # memoryLimit: 256Mi
     # cpuRequests: 100m
     # memoryRequests: 128Mi
-    # image: "gitlab/gitlab-runner-helper:x86_64-${CI_RUNNER_REVISION}"
+    image: registry.dsop.io/platform-one/apps/gitlab-runner/gitlab/gitlab-runner-helper-ib:13.2.2-ib
 
   ## Helper container security context configuration
   ## Refer to https://docs.gitlab.com/runner/executors/kubernetes.html#using-security-context
@@ -274,7 +276,7 @@ runners:
 
   ## If Gitlab is not reachable through $CI_SERVER_URL
   ##
-  # cloneUrl:
+  cloneUrl: http://gitlab-webservice.gitlab.svc.cluster.local:8181
 
   ## Specify node labels for CI job pods assignment
   ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
@@ -311,7 +313,7 @@ runners:
 ##
 securityContext:
   fsGroup: 65533
-  runAsUser: 100
+  runAsUser: 1000
 
 
 ## Configure resource requests and limits
