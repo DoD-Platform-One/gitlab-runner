@@ -2,12 +2,19 @@
 
 ## Table Of Contents
 
-- Application Overview
-- Daily Application Use
-- Integrations
-    - Prometheus
-    - ECK
-- Troubleshooting Tips
+- [Gitlab Runner](#gitlab-runner)
+  - [Table Of Contents](#table-of-contents)
+    - [Application Overview](#application-overview)
+    - [Daily Application Use](#daily-application-use)
+    - [Integrations](#integrations)
+      - [Prometheus](#prometheus)
+        - [List of metrics gathered](#list-of-metrics-gathered)
+      - [Elastic](#elastic)
+        - [Pre-requisites](#pre-requisites)
+        - [Configuration Items](#configuration-items)
+      - [Global Shared Gitlab Runner](#global-shared-gitlab-runner)
+      - [Useful Queries](#useful-queries)
+      - [Troubleshooting Tips](#troubleshooting-tips)
 
 ### Application Overview
 
@@ -26,27 +33,27 @@ The runner has a single UBI8 based image from the IronBank available to it to ru
 
 ### Integrations
 
-#### Prometheus.md
-
-#### Configuration Items
+#### Prometheus
 
 Metrics are exposed via a built in configuration within the helm chart and the corresponding values.yml file.
 
-#### List of metrics gathered
+##### List of metrics gathered
 
 The exposed information includes:
-  - Runner business logic metrics (e.g., the number of currently running jobs)
-  - Go-specific process metrics (garbage collection stats, goroutines, memstats, etc.)
-  - General process metrics (memory usage, CPU usage, file descriptor usage, etc.)
-  - Build version information 
 
-#### Elastic.md
+- Runner business logic metrics (e.g., the number of currently running jobs)
+- Go-specific process metrics (garbage collection stats, goroutines, memstats, etc.)
+- General process metrics (memory usage, CPU usage, file descriptor usage, etc.)
+- Build version information
 
-#### Pre-requisites
+#### Elastic
+
+##### Pre-requisites
+
 - Monitoring stack is deployed
 - ECK stack deployed
 
-#### Configuration Items
+##### Configuration Items
 
 - Login to Kibana
   - username: elastic
@@ -62,21 +69,25 @@ The exposed information includes:
 - Note: Logs from the monitoring stack can be viewd on Kibana. The default index pattern is logstash-*. Logs for the entire gitlab installation can be procured by filtering on the "gitlab" namespace.
 
 create an index pattern for fluentd if not already created
-```
+
+```bash
 gitlab.*
 ```
 
 There are several pods associated with various apps in a monitoring deployment.
 See each app below in order to see how each pod is split.
-These pods can be pulled via the command <code>kubectl get pods -n gitlab</code>.
+These pods can be pulled via the command `kubectl get pods -n gitlab`.
 
 #### Global Shared Gitlab Runner
-There are several pods for alertmanager.   
-On a default installation, there will be a single pod loaded in the format <code>global-shared-gitlab-runner-#</code> as shown below.
-```
+
+There are several pods for alertmanager.
+On a default installation, there will be a single pod loaded in the format `global-shared-gitlab-runner-#` as shown below.
+
+```bash
 NAME                                          READY   STATUS    RESTARTS   AGE
 global-shared-gitlab-runner-858b5c6796-s694b  1/1     Running   0          156m
 ```
+
 Further filters that can be used are:
 
 #### Useful Queries
