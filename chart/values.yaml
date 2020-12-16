@@ -6,7 +6,7 @@
 ## ref: https://hub.docker.com/r/gitlab/gitlab-runner/tags/
 ##
 # image: gitlab/gitlab-runner:alpine-v11.6.0
-image: registry.dsop.io/platform-one/apps/gitlab-runner/gitlab-runner-ib:13.2.2-ib
+image: registry1.dsop.io/ironbank/gitlab/gitlab-runner/gitlab-runner:13.2.2
 
 ## Specify a imagePullPolicy
 ## 'Always' if imageTag is 'latest', else set to 'IfNotPresent'
@@ -114,7 +114,7 @@ runners:
   ## Default container image to use for builds when none is specified
   ##
   # image: ubuntu:16.04
-  image: registry.dsop.io/platform-one/apps/gitlab/ubi/ubi8-ib:8.2-ib
+  image: registry1.dsop.io/ironbank/redhat/ubi/ubi8:8.3
 
   ## Specify one or more imagePullSecrets
   ##
@@ -254,7 +254,7 @@ runners:
 
   ## Helper Container specific configuration
   ##
-  helpers: {}
+  helpers: 
     # cpuLimit: 200m
     # memoryLimit: 256Mi
     # cpuRequests: 100m
