@@ -27,7 +27,7 @@ Deployed via Helm Chart.
 Gitlab Runner is configured to have a single pod run as a globally shared runner, so any repository configured with the connected gitlab installation will have a single runner pod available for use. This runner automatically registers with the gitlab installation using it's kubernetes service URL upon installation.
 
 This globally shared gitlab-runner pod can be seen in any repository CI/CD Settings page eg:
-https://code.fences.dsop.io/GROUP/PROJECT/-/settings/ci_cd
+https://code.fences.dso.mil/GROUP/PROJECT/-/settings/ci_cd
 
 The runner has a single UBI8 based image from the IronBank available to it to run jobs on as specified in the values.yml file.
 
