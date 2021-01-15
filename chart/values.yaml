@@ -8,13 +8,6 @@
 # image: gitlab/gitlab-runner:alpine-v11.6.0
 image: registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner:v13.2.2
 
-## BigBang:  Added this imagePullSecret field since this wasn't added to the chart until 0.24
-## and since the chart version seems to be tied to the app version, we didn't want to update
-## the chart version:
-
-imagePullSecrets:
-- name: private-registry
-
 ## Specify a imagePullPolicy
 ## 'Always' if imageTag is 'latest', else set to 'IfNotPresent'
 ## ref: https://kubernetes.io/docs/concepts/containers/images/#pre-pulled-images
