@@ -1,0 +1,20 @@
+# Setup the registration token for gitlab and gitlab-runner to be the same
+apiVersion: v1
+kind: Secret
+metadata:
+  name: gitlab-runner-gitlab-runner-secret
+  namespace: gitlab-runner
+type: Opaque
+data:
+  runner-registration-token: "NlZrN1pzb3NxUXlmcmVBeFhUWnIK"
+  runner-token: ""
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: gitlab-runner-dependency-gitlab-runner-secret
+  namespace: gitlab-runner-dependency
+type: Opaque
+data:
+  runner-registration-token: "NlZrN1pzb3NxUXlmcmVBeFhUWnIK"
+  runner-token: ""
