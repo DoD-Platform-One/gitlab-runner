@@ -1,7 +1,6 @@
 imagePullSecrets:
 - name: private-registry-mil
-gitlabUrl: http://gitlab-webservice.gitlab-runner-dependency.svc.cluster.local:8181
+gitlabUrl: http://gitlab-webservice.gitlab-runner.svc.cluster.local:8181
 runners:
   imagePullSecrets:
   - private-registry-mil
-  secret: gitlab-runner-gitlab-runner-secret
