@@ -12,8 +12,8 @@ data:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: gitlab-runner-dependency-gitlab-runner-secret
-  namespace: gitlab-runner-dependency
+  name: gitlab-gitlab-runner-secret
+  namespace: gitlab
 type: Opaque
 data:
   runner-registration-token: "NlZrN1pzb3NxUXlmcmVBeFhUWnIK"
