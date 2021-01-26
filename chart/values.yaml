@@ -6,14 +6,7 @@
 ## ref: https://hub.docker.com/r/gitlab/gitlab-runner/tags/
 ##
 # image: gitlab/gitlab-runner:alpine-v11.6.0
-image: registry1.dsop.io/ironbank/gitlab/gitlab-runner/gitlab-runner:v13.2.2
-
-## BigBang:  Added this imagePullSecret field since this wasn't added to the chart until 0.24
-## and since the chart version seems to be tied to the app version, we didn't want to update 
-## the chart version:
-
-imagePullSecrets:
-- name: private-registry
+image: registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner:v13.2.2
 
 ## Specify a imagePullPolicy
 ## 'Always' if imageTag is 'latest', else set to 'IfNotPresent'
@@ -121,7 +114,7 @@ runners:
   ## Default container image to use for builds when none is specified
   ##
   # image: ubuntu:16.04
-  image: registry1.dsop.io/ironbank/redhat/ubi/ubi8:8.3
+  image: registry1.dso.mil/ironbank/redhat/ubi/ubi8:8.3
 
   ## Specify one or more imagePullSecrets
   ##
@@ -261,12 +254,12 @@ runners:
 
   ## Helper Container specific configuration
   ##
-  helpers: 
+  helpers:
     # cpuLimit: 200m
     # memoryLimit: 256Mi
     # cpuRequests: 100m
     # memoryRequests: 128Mi
-    image: registry1.dsop.io/ironbank/gitlab/gitlab-runner/gitlab-runner-helper:v13.2.2
+    image: registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner-helper:v13.2.2
 
   ## Helper container security context configuration
   ## Refer to https://docs.gitlab.com/runner/executors/kubernetes.html#using-security-context

@@ -1,8 +1,0 @@
-runners:
-  imagePullSecrets:
-  - name: private-registry
-imagePullSecrets:
-- name: private-registry
-
-gitlabUrl: http://gitlab.gitlab.svc
-runnerRegistrationToken: "fake-token"
