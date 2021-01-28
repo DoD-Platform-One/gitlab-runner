@@ -8,10 +8,13 @@
     - [Daily Application Use](#daily-application-use)
     - [Integrations](#integrations)
       - [Prometheus](#prometheus)
+        - [Prerequisites](#prerequisites)
+        - [Configuration Items](#configuration-items)
         - [List of metrics gathered](#list-of-metrics-gathered)
+        - [Verification](#verification)
       - [Elastic](#elastic)
         - [Pre-requisites](#pre-requisites)
-        - [Configuration Items](#configuration-items)
+        - [Configuration Items](#configuration-items-1)
       - [Global Shared Gitlab Runner](#global-shared-gitlab-runner)
       - [Useful Queries](#useful-queries)
       - [Troubleshooting Tips](#troubleshooting-tips)
@@ -19,23 +22,29 @@
 ### Application Overview
 
 GitLab Runner is the open source project that is used to run your jobs and send the results back to GitLab. It is used in conjunction with GitLab CI/CD, the open-source continuous integration service included with GitLab that coordinates the jobs.
-The global-shared-gitlab-runner pod is deployed in the gitlab namespace.
-Deployed via Helm Chart.
+The gitlab-runner pod is deployed in the gitlab namespace via a Helm chart.
 
 ### Daily Application Use
 
-Gitlab Runner is configured to have a single pod run as a globally shared runner, so any repository configured with the connected gitlab installation will have a single runner pod available for use. This runner automatically registers with the gitlab installation using it's kubernetes service URL upon installation.
+Gitlab Runner is configured to run as a globally shared runner.  Any repository in the gitlab installation will have this runner available for CI/CD pipelines. This runner automatically registers with the gitlab installation upon installation.
 
 This globally shared gitlab-runner pod can be seen in any repository CI/CD Settings page eg:
-https://code.fences.dso.mil/GROUP/PROJECT/-/settings/ci_cd
+https://code.bigbang.dev/GROUP/PROJECT/-/settings/ci_cd
 
-The runner has a single UBI8 based image from the IronBank available to it to run jobs on as specified in the values.yml file.
+The runner uses the IronBank RedHat UBI8 image to run jobs.
 
 ### Integrations
 
 #### Prometheus
 
-Metrics are exposed via a built in configuration within the helm chart and the corresponding values.yml file.
+##### Prerequisites
+
+- Monitoring stack or Prometheus
+
+##### Configuration Items
+
+Setting `metrics.enabled` to `true` will expose the gitlab-runner `/metrics` endpoint to the cluster using port 9252.
+If using the monitoring stack with BigBang, it will detect that gitlab-runner is enabled and automatically create a service monitor to scrape the endpoint with Prometheus.
 
 ##### List of metrics gathered
 
@@ -45,6 +54,12 @@ The exposed information includes:
 - Go-specific process metrics (garbage collection stats, goroutines, memstats, etc.)
 - General process metrics (memory usage, CPU usage, file descriptor usage, etc.)
 - Build version information
+
+Reference: [GitLab Runner monitoring](https://docs.gitlab.com/runner/monitoring/)
+
+##### Verification
+
+To verify that the metrics are working, open a browser to your prometheus endpoint (e.g. https://prometheus.bigbang.dev).  Under `Status`, select `Targets`.  You should find `gitlab/gitlab-runner/0` as a target and the State should be `UP`.
 
 #### Elastic
 
