@@ -10,7 +10,7 @@ metadata:
     heritage: "{{ .Release.Service }}"
 spec:
   selector:
-    app: {{ include "gitlab-runner.fullname" . }}
+    release: "{{ .Release.Name }}"
   ports:
   - name: metrics
     port: 9252
