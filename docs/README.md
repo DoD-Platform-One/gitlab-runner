@@ -59,7 +59,7 @@ Reference: [GitLab Runner monitoring](https://docs.gitlab.com/runner/monitoring/
 
 ##### Verification
 
-To verify that the metrics are working, open a browser to your prometheus endpoint (e.g. https://prometheus.bigbang.dev).  Under `Status`, select `Targets`.  You should find `gitlab/gitlab-runner/0` as a target and the State should be `UP`.
+To verify that the metrics are working, open a browser to your prometheus endpoint (e.g. https://prometheus.bigbang.dev).  Under `Status`, select `Targets`.  You should find `monitoring/gitlab-gitlab-runner/0` (if using Big Bang) or the name of your Service Monitor as a target and the State should be `UP`.
 
 #### Elastic
 
@@ -71,46 +71,27 @@ To verify that the metrics are working, open a browser to your prometheus endpoi
 ##### Configuration Items
 
 - Login to Kibana
-  - username: elastic
-  - Password : can be obtained by querying kubectl get secret elasticsearch-es-elastic-user -n elastic -o yaml
-- Create Index by  selecting Management icon from the left menu and  clicking Index patterns under Kibana.  In the Create Index patterns enter <gitlab-*> and click create index pattern.  In the the next step Click on the dropdown and select "@timestamp"
-
-- For Search click on Discovery from the side menu
-
-- In KQL textbox enter `kubernetes.labels.app : global-shared-gitlab-runner`
-
-- Click Refresh/Update
-
-- Note: Logs from the monitoring stack can be viewd on Kibana. The default index pattern is logstash-*. Logs for the entire gitlab installation can be procured by filtering on the "gitlab" namespace.
-
-create an index pattern for fluentd if not already created
-
-```bash
-gitlab.*
-```
-
-There are several pods associated with various apps in a monitoring deployment.
-See each app below in order to see how each pod is split.
-These pods can be pulled via the command `kubectl get pods -n gitlab`.
+  - Username: elastic
+  - Password: obtain with `kubectl get secret logging-ek-es-elastic-user -n logging -o json | jq -r .data.elastic | base64 -d`
+- Create Index by selecting `Management` > `Stack Management` from the left menu, then click `Kibana` > `Index patterns`.  In the Create Index patterns enter `logstash-*` and click `Create index pattern`.  In the the next step, click on the time filed dropdown and select `@timestamp`.  Finally, create `Create index pattern`
+- To use the index, click `Kibana` > `Discovery` on the side menu.  In the KQL entry box, enter `kubernetes.labels.release : "gitlab-runner"` and press enter.
 
 #### Global Shared Gitlab Runner
 
-There are several pods for alertmanager.
-On a default installation, there will be a single pod loaded in the format `global-shared-gitlab-runner-#` as shown below.
+On a default installation, there will be a single pod loaded in the format `gitlab-runner-gitlab-runner-#` in the `gitlab` namespace as shown below.
 
 ```bash
 NAME                                          READY   STATUS    RESTARTS   AGE
-global-shared-gitlab-runner-858b5c6796-s694b  1/1     Running   0          156m
+gitlab-runner-gitlab-runner-858b5c6796-s694b  1/1     Running   0          156m
 ```
-
-Further filters that can be used are:
 
 #### Useful Queries
 
-- `kubernetes.pod_name`   = `global-shared-gitlab-runner-#` to get logs from a specific # pod
-- `kubernetes.container_name` = `global-shared-gitlab-runner` to get logs from a specific container
+- `kubernetes.pod_name : "gitlab-runner-gitlab-runner-#"` to get logs from a specific # pod
+- `kubernetes.container_name : "gitlab-runner-gitlab-runner"` to get logs from a specific container
+- `kubernetes.labels.release : "gitlab-runner"` to get logs from all gitlab runners
 
 #### Troubleshooting Tips
 
-The gitlab-runner is configured to clone the repository from the gitlab webservice via the "clone_url" setting sqo the runner clones from the same endpoint it uses to register with the gitlab webservice API which is the gitlab-webservice kubernetes service in the gitlab namespace.
+The gitlab-runner is configured to clone the repository from the gitlab webservice via the "clone_url" setting so the runner clones from the same endpoint it uses to register with the gitlab webservice API which is the gitlab-webservice kubernetes service in the gitlab namespace.
 If gitlab webservice is behind HTTPS ingress then within the values.yaml file "certSecretName" can be populated with certificate and key files if there are certificate issues when cloning.
