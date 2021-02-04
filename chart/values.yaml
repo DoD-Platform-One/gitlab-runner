@@ -154,7 +154,7 @@ runners:
   ##
   ## ref: https://docs.gitlab.com/ee/ci/runners/#prevent-runners-from-revealing-sensitive-information
   ##
-  # protected: true
+  protected: true
 
   ## Run all containers with the privileged flag enabled
   ## This will allow the docker:dind image to run if you need to run Docker
