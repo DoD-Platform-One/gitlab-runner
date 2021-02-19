@@ -259,7 +259,7 @@ runners:
     # memoryLimit: 256Mi
     # cpuRequests: 100m
     # memoryRequests: 128Mi
-    image: registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner-helper:v13.2.2
+    image: registry.dso.mil/platform-one/big-bang/apps/developer-tools/gitlab-runner/gitlab-runner-helper:ib-v13.2.2
 
   ## Helper container security context configuration
   ## Refer to https://docs.gitlab.com/runner/executors/kubernetes.html#using-security-context
