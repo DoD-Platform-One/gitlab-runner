@@ -1,18 +1,85 @@
-## v0.19.2 (2020-07-30)
+## v0.26.0 (2021-02-22)
 
-### Security
+### New features
 
-- Update GitLab Runner version to 13.2.2
+- Update GitLab Runner version to 13.9.0
+- Make executor configurable !273 (Matthias Baur @m.baur)
 
 ### Other changes
 
+- Typo fix !282 (Ben Bodenmiller @bbodenmiller)
+
+## v0.25.0 (2021-01-20)
+
+### New features
+
+- Support secrets for Azure cache !277
+- Update GitLab Runner version to 13.8.0
+
+### Maintenance
+
+- Fix release CI stage failing due to Helm stable deprecation !278
+- Update GitLab Changelog configuration !275
+
+### Documentation changes
+
+- Update link to doc in README.md !276
+
+## v0.24.0 (2020-12-21)
+
+### New features
+
+- Update GitLab Runner version to 13.7.0
+- add optional 'imagePullSecrets' to deployment !269 (Christian Schoofs @schoofsc)
+
+### Other changes
+
+- Make description configruable !229 (Matthias Baur @m.baur)
+
+## v0.23.0 (2020-11-21)
+
+### New features
+
+- Update GitLab Runner version to 13.6.0
+- Allow user to specify any runner configuraton !271
+
+## v0.22.0 (2020-10-20)
+
+### New features
+
+- Update GitLab Runner version to 13.5.0
+- Add pull secrets to service account for runner image !241 (Horatiu Eugen Vlad @hvlad)
+
+### Maintenance
+
+- Set allowPrivilegeEscalation to false for gitlab-runner pod !243 (Horatiu Eugen Vlad @hvlad)
+
+### Documentation changes
+
+- Add comment on ubuntu image & securityContext !260
+
+## v0.21.0 (2020-09-21)
+
+### Maintenance
+
+- Update GitLab Runner version to 13.4.0
+- Fix changelog generator config to catch all maintenance related labels !255
+
+### Other changes
+
+- Add scripts/security-harness script !258
+
+## v0.20.0 (2020-08-20)
+
+### New features
+
+- Update GitLab Runner version to 13.3.0
+- Enable custom commands !250
+
+### Maintenance
+
 - Add `release stable` job for security fork !252
-
-## v0.19.1 (2020-07-22)
-
-### Bug Fixes
-
-- Update GitLab Runner version to 13.2.1
+- Update changelog generator to accept new labels !249
 
 ## v0.19.0 (2020-07-20)
 
