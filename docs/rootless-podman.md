@@ -27,21 +27,7 @@ Here is an example of an Ansible script
 ``` 
 Example pipeline scripts. You will need to pass a storage-diver argument
 ```
-buildah bud \
-  $args_parameters \
-  --build-arg=BASE_REGISTRY="${BASE_REGISTRY}" \
-  $label_parameters \
-  --label=maintainer="ironbank@dsop.io" \
-  --label=org.opencontainers.image.created="$(date --rfc-3339=seconds)" \
-  --label=org.opencontainers.image.source="${CI_PROJECT_URL}" \
-  --label=org.opencontainers.image.revision="${CI_COMMIT_SHA}" \
-  --add-host="satellite:${SATELLITE_URL}" \
-  --authfile /tmp/prod_auth.json \
-  --format=docker \
-  --loglevel=3 \
-  --storage-driver=vfs \
-  -t "${IMAGE_REGISTRY_REPO}" \
-  .
+buildah bud --format=docker --storage-driver=vfs "${IMAGE_TAG}" .
 
 buildah tag --storage-driver=vfs "${IMAGE_REGISTRY_REPO}" "${IMAGE_FULLTAG}"
 
