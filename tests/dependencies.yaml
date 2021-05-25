@@ -1,4 +1,6 @@
 gitlab:
-  git: "https://repo1.dso.mil/platform-one/big-bang/apps/developer-tools/gitlab.git"
-  namespace: "gitlab-runner"
-  tag: "4.8.0-bb.3"
+  git: 
+    repo: "https://repo1.dso.mil/platform-one/big-bang/apps/developer-tools/gitlab.git"
+    tag: "main"
+  namespace: "gitlab"
+  package-name: "gitlab"
