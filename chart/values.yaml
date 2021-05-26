@@ -147,6 +147,10 @@ runners:
         image = "registry1.dso.mil/ironbank/redhat/ubi/ubi8:8.3"
         helper_image = "registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner-helper:v13.9.0"
         image_pull_secrets = ["private-registry"]
+      [runners.kubernetes.pod_labels]
+        "job_id" = "${CI_JOB_ID}"
+        "job_name" = "${CI_JOB_NAME}"
+        "pipeline_id" = "${CI_PIPELINE_IID}"
 
   ## Which executor should be used
   ##
