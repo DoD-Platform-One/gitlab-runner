@@ -17,6 +17,7 @@
         - [Configuration Items](#configuration-items-1)
       - [Global Shared Gitlab Runner](#global-shared-gitlab-runner)
       - [Useful Queries](#useful-queries)
+      - [Network Policies](#network-policies)
       - [Troubleshooting Tips](#troubleshooting-tips)
 
 ### Application Overview
@@ -90,6 +91,33 @@ gitlab-runner-gitlab-runner-858b5c6796-s694b  1/1     Running   0          156m
 - `kubernetes.pod_name : "gitlab-runner-gitlab-runner-#"` to get logs from a specific # pod
 - `kubernetes.container_name : "gitlab-runner-gitlab-runner"` to get logs from a specific container
 - `kubernetes.labels.release : "gitlab-runner"` to get logs from all gitlab runners
+
+#### Network Policies
+
+By default, Gitlab Runner will inherit the [network policies](https://repo1.dso.mil/platform-one/big-bang/apps/developer-tools/gitlab/-/tree/main/chart/templates/bigbang/networkpolicies) from the Gitlab namespace. Until a long-term solution is implemented that works for all Platform One teams, Gitlab Runner users may manually create their own network policies for the Gitlab Runner pods. For example:
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: runner-allow-egress
+  namespace: gitlab
+spec:
+  policyTypes:
+  - Egress
+  podSelector:
+    matchLabels:
+      app: gitlab-runner-gitlab-runner
+  egress:
+  - to:
+    - ipBlock:
+        cidr: 0.0.0.0/0
+        # ONLY Block requests to AWS metadata IP
+        except:
+        - 169.254.169.254/32
+```
+
+**Note:** By default, the Big Bang Gitlab Runner package is configured to pull kubernetes executor images from registry1.dso.mil. Also, the gitlab-runner pod will require egress to the kube-apiserver in order to create pods for CI jobs.
 
 #### Troubleshooting Tips
 
