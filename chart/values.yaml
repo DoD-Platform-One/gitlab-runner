@@ -144,7 +144,7 @@ runners:
       clone_url = "http://gitlab-webservice-default.gitlab.svc.cluster.local:8181"
       cache_dir = "/tmp/gitlab-runner/cache"
       [runners.kubernetes]
-        image = "registry1.dso.mil/ironbank/redhat/ubi/ubi8:8.3"
+        image = "registry1.dso.mil/ironbank/redhat/ubi/ubi8:8.4"
         helper_image = "registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner-helper:v13.9.0"
         image_pull_secrets = ["private-registry"]
       [runners.kubernetes.pod_labels]
