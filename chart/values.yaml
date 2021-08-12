@@ -6,13 +6,17 @@
 ## ref: https://hub.docker.com/r/gitlab/gitlab-runner/tags/
 ##
 ## Note: If you change the image to the ubuntu release
-##       don't forget to change the securityContext; 
+##       don't forget to change the securityContext;
 ##       these images run on different user IDs.
 ##
-image: registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner:v13.9.0
+image: registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner:v13.12.0
 
-## Specify a imagePullPolicy
+## Specify a imagePullPolicy for the main runner deployment
 ## 'Always' if imageTag is 'latest', else set to 'IfNotPresent'
+##
+## Note: it does not apply to job containers launched by this executor.
+## Use `pull_policy` in [runners.kubernetes] to change it.
+##
 ## ref: https://kubernetes.io/docs/concepts/containers/images/#pre-pulled-images
 ##
 imagePullPolicy: IfNotPresent
@@ -21,8 +25,11 @@ imagePullPolicy: IfNotPresent
 ## Kubernetes supports specifying container image registry keys on a Pod.
 ## ref: https://kubernetes.io/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod
 ##
-# imagePullSecrets: 
+# imagePullSecrets:
 #   - name: "image-pull-secret"
+
+## How many runner pods to launch.
+# replicas: 1
 
 ## The GitLab Server URL (with protocol) that want to register the runner against
 ## ref: https://docs.gitlab.com/runner/commands/README.html#gitlab-runner-register
@@ -100,8 +107,21 @@ checkInterval: 30
 rbac:
   create: true
   ## Define specific rbac permissions.
+  ## DEPRECATED: see .Values.rbac.rules
   # resources: ["pods", "pods/exec", "secrets"]
   # verbs: ["get", "list", "watch", "create", "patch", "delete"]
+
+  ## Define list of rules to be added to the rbac role permissions.
+  ## Each rule supports the keys:
+  ## - apiGroups: default "" (indicates the core API group) if missing or empty.
+  ## - resources: default "*" if missing or empty.
+  ## - verbs: default "*" if missing or empty.
+  rules: []
+  # - resources: ["pods", "secrets"]
+  #   verbs: ["get", "list", "watch", "create", "patch", "delete"]
+  # - apiGroups: [""]
+  #   resources: ["pods/exec"]
+  #   verbs: ["create", "patch", "delete"]
 
   ## Run the gitlab-bastion container with the ability to deploy/manage containers of jobs
   ## cluster-wide or only within namespace
@@ -136,16 +156,20 @@ metrics:
   enabled: true
 
 ## Configuration for the Pods that the runner launches for each new job
-## ref: https://docs.gitlab.com/runner/configuration/advanced-configuration.html
-## ref: https://docs.gitlab.com/runner/executors/kubernetes.html
+##
 runners:
+  # runner configuration, where the multi line strings is evaluated as
+  # template so you can specify helm values inside of it.
+  #
+  # tpl: https://helm.sh/docs/howto/charts_tips_and_tricks/#using-the-tpl-function
+  # runner configuration: https://docs.gitlab.com/runner/configuration/advanced-configuration.html
   config: |
     [[runners]]
       clone_url = "http://gitlab-webservice-default.gitlab.svc.cluster.local:8181"
       cache_dir = "/tmp/gitlab-runner/cache"
       [runners.kubernetes]
         image = "registry1.dso.mil/ironbank/redhat/ubi/ubi8:8.4"
-        helper_image = "registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner-helper:v13.9.0"
+        helper_image = "registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner-helper:v13.12.0"
         image_pull_secrets = ["private-registry"]
       [runners.kubernetes.pod_labels]
         "job_id" = "${CI_JOB_ID}"
@@ -398,11 +422,14 @@ runners:
 ## ref: http://kubernetes.io/docs/user-guide/security-context/
 ##
 securityContext:
-  fsGroup: 65533
-  runAsUser: 1000
+  runAsUser: 998
+  # runAsGroup: 65533
+  fsGroup: 996
+  # supplementalGroups: [65533]
+
   ## Note: values for the ubuntu image:
-  # fsGroup: 999
   # runAsUser: 999
+  # fsGroup: 999
 
 ## Configure resource requests and limits
 ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
@@ -484,6 +511,26 @@ podLabels: {}
   #   pods:
   #     metricName: gitlab_runner_jobs
   #     targetAverageValue: 400m
+
+## Secrets to be additionally mounted to the containers.
+## All secrets are mounted through init-runner-secrets volume
+## and placed as readonly at /init-secrets in the init container
+## and finally copied to an in-memory volume runner-secrets that is
+## mounted at /secrets.
+secrets: []
+  # Example:
+  # - name: my-secret
+  # - name: myOtherSecret
+  #   items:
+  #     - key: key_one
+  #       path: path_one
+
+## Additional config files to mount in the containers in `/configmaps`.
+##
+## Please note that a number of keys are reserved by the runner.
+## See https://gitlab.com/gitlab-org/charts/gitlab-runner/-/blob/master/templates/configmap.yaml
+## for a current list.
+configMaps: {}
 
 # BigBang Additional values
 monitoring:
