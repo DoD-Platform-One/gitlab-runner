@@ -16,7 +16,7 @@ describe('Run Pipeline', () => {
     cy.get('div').contains(Cypress.env('gitlab_project')).click()
 
     // Run Pipeline for Test Project
-    cy.get('a[data-qa-selector="ci_cd_link"]').click()
+    cy.get(`a[href="/${Cypress.env('gitlab_user')}/${Cypress.env('gitlab_project')}/-/pipelines"]`).first().click()
     cy.get('a[data-qa-selector="run_pipeline_button"]').click()
     cy.wait(3000)
     cy.get('button[data-qa-selector="run_pipeline_button"]').click()

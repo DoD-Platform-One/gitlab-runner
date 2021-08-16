@@ -15,8 +15,8 @@ describe('Approve New User', () => {
     // Admin Approve New User
     cy.visit('/admin/users')
     cy.get('a[data-qa-selector="pending_approval_tab"]').click()
-    cy.get('div.table-action-buttons button').click()
-    cy.get('ul.dropdown-menu.dropdown-menu-right.show').contains('Approve').click()
+    cy.get('button[id="__BVID__30__BV_toggle_"]').click()
+    cy.get('a[href="/admin/users/gitlab_user/approve"]').click()
   })
 })
 
