@@ -9,7 +9,13 @@
 - set concurrent: 50
 - set rbac.create: true
 - set runners.config and runners.*
+- set runUntagged: true
+- set protected: true
+- set secret: gitlab-gitlab-runner-secret
+- set securityContext.runAsUser: 998
+- set securityContext.fsGroup: 996
 - set securityContext.runAsUser: 1000
+- set resources limits
 - set BigBang additional values monitoring.enabled: false
 
 ## chart/templates/bigbang/*
@@ -26,11 +32,14 @@
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.32.0-bb.0] - 2021-09-29
+- upgrade to app version 14.2.0 helm chart version v0.32.0
+
 ## [0.29.0-bb.1] - 2021-09-01
 - added resource limits and requests for gitlab-runner pod in charts/values.yaml
 
 ## [0.29.0-bb.0] - 2021-08-12
-- upgrade to app version 13.12.9 helm chart version 0.29.0
+- upgrade to app version 13.12.9 helm chart version v0.29.0
 
 ## [0.26.0-bb.3] - 2021-06-15
 - updated runner image to use UBI 8.4 from Registry1

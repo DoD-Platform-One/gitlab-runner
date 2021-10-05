@@ -1,3 +1,35 @@
+## v0.32.0 (2021-08-22)
+
+### New features
+
+- Update GitLab Runner version to 14.2.0
+- Add support for revisionHistoryLimit !299 (Romain Grenet @romain.grenet1)
+
+## v0.31.0 (2021-07-20)
+
+### New features
+
+- Update GitLab Runner version to 14.1.0
+
+### Bug fixes
+
+- Only add environment variables if values set !295 (Matthew Warman @mcwarman)
+
+## v0.30.0 (2021-06-19)
+
+### New features
+
+- Update GitLab Runner version to 14.0.0
+
+### Bug fixes
+
+- Resolve runner ignores request_concurrency !296
+
+### Maintenance
+
+- refactor: change default brach references to main !298
+- Add support for specifying schedulerName on deployment podspec. !284 (Dominic Bevacqua @dbevacqua)
+
 ## v0.29.0 (2021-05-20)
 
 ### New features
