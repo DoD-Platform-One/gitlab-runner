@@ -1,6 +1,6 @@
 gitlab:
   git: 
     repo: "https://repo1.dso.mil/platform-one/big-bang/apps/developer-tools/gitlab.git"
-    tag: "main"
+    branch: "main"
   namespace: "gitlab"
   package-name: "gitlab"
