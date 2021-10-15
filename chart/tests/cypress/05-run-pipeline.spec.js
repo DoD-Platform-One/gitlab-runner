@@ -38,7 +38,7 @@ describe('Run Pipeline', () => {
     // Go to pipelines page
     cy.visit('/'+Cypress.env('gitlab_username')+'/'+Cypress.env('gitlab_project')+'/-/pipelines')
     // Wait 30 seconds for pipeline to run and pass
-    cy.wait(30000)
+    cy.wait(40000)
     cy.get('a[id="js-code-quality-walkthrough"]').first().contains('passed')
   })
 })
