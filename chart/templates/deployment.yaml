@@ -9,6 +9,7 @@ metadata:
     heritage: "{{ .Release.Service }}"
 spec:
   replicas: {{ default 1 .Values.replicas }}
+  revisionHistoryLimit: {{ default 10 .Values.revisionHistoryLimit }}
   selector:
     matchLabels:
       app: {{ include "gitlab-runner.fullname" . }}
@@ -33,6 +34,9 @@ spec:
         {{   $key }}: {{ $value | quote }}
         {{- end }}
     spec:
+      {{- if .Values.schedulerName }}
+      schedulerName: {{ .Values.schedulerName }}
+      {{- end }}
       securityContext:
         runAsUser: {{ .Values.securityContext.runAsUser }}
         {{- if .Values.securityContext.runAsGroup }}
