@@ -1,1 +1,1 @@
-registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner-helper:v14.2.0
+registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner-helper:v14.3.1
