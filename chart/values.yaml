@@ -9,7 +9,7 @@
 ##       don't forget to change the securityContext;
 ##       these images run on different user IDs.
 ##
-image: registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner:v14.2.0
+image: registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner:v14.3.1
 
 ## Specify a imagePullPolicy for the main runner deployment
 ## 'Always' if imageTag is 'latest', else set to 'IfNotPresent'
@@ -174,7 +174,7 @@ runners:
       [runners.kubernetes]
         namespace = "{{.Release.Namespace}}"
         image = "registry1.dso.mil/ironbank/redhat/ubi/ubi8:8.4"
-        helper_image = "registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner-helper:v14.2.0"
+        helper_image = "registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner-helper:v14.3.1"
         image_pull_secrets = ["private-registry"]
       [runners.kubernetes.pod_labels]
         "job_id" = "${CI_JOB_ID}"
