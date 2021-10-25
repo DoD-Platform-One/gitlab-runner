@@ -32,13 +32,13 @@ describe('Run Pipeline', () => {
     // commit file and start pipeline
     cy.get('button[id="commit-changes"]').click()
 
-    // wait 10 seconds for pipeline to get started
-    cy.wait(10000)
+    // wait 9 seconds for pipeline to get started
+    cy.wait(9000)
 
     // Go to pipelines page
     cy.visit('/'+Cypress.env('gitlab_username')+'/'+Cypress.env('gitlab_project')+'/-/pipelines')
     // Wait 30 seconds for pipeline to run and pass
-    cy.wait(40000)
+    cy.wait(30000)
     cy.get('a[id="js-code-quality-walkthrough"]').first().contains('passed')
   })
 })
