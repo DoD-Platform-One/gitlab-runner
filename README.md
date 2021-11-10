@@ -1,6 +1,6 @@
 # gitlab-runner
 
-![Version: 0.33.1-bb.4](https://img.shields.io/badge/Version-0.33.1--bb.4-informational?style=flat-square) ![AppVersion: 14.3.1](https://img.shields.io/badge/AppVersion-14.3.1-informational?style=flat-square)
+![Version: 0.33.1-bb.5](https://img.shields.io/badge/Version-0.33.1--bb.5-informational?style=flat-square) ![AppVersion: 14.3.1](https://img.shields.io/badge/AppVersion-14.3.1-informational?style=flat-square)
 
 GitLab Runner
 
@@ -10,8 +10,8 @@ GitLab Runner
 * <https://docs.gitlab.com/runner/>
 
 ## Learn More
-- [Application Overview](docs/overview.md)
-- [Other Documentation](docs/)
+* [Application Overview](docs/overview.md)
+* [Other Documentation](docs/)
 
 ## Pre-Requisites
 
@@ -75,4 +75,4 @@ helm install gitlab-runner chart/
 
 ## Contributing
 
-Please see the [contributing guide](https://repo1.dso.mil/platform-one/big-bang/bigbang/-/blob/master/CONTRIBUTING.md) if you are interested in contributing to Big Bang.
+Please see the [contributing guide](./CONTRIBUTING.md) if you are interested in contributing.
