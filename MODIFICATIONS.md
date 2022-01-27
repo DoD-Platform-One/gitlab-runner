@@ -18,9 +18,8 @@
 - set resources limits
 - set BigBang additional values monitoring.enabled: false
 
-## chart/templates/bigbang/*
-- add template for service
-- add templated for servicemonitor
+## chart/templates/deployment.yaml
+- remove /usr/bin/dumb-init line 89. That path does not exist in IronBank hardened image
 
 ## chart/.gitignore
 - comment ```charts/*``` need to include the gluon tgz archive
@@ -28,5 +27,9 @@
 ## chart/requirements.yaml
 - add requirements file for the gluon library
 
-## chart/templates/deployment.yaml
-- remove /usr/bin/dumb-init line 89. That path does not exist in IronBank hardened image
+##  chart/charts/*.tgz
+- run ```helm dependency update ./chart``` to update the downloaded archives
+- commit any tar archives that were downloaded from the helm dependency update command.
+- commit the requirements.lock that was generated. This prevents deployments from looking for new versions.
+
+
