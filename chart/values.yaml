@@ -165,7 +165,7 @@ rbac:
 ## ref: https://docs.gitlab.com/runner/monitoring/#configuration-of-the-metrics-http-server
 ##
 metrics:
-  enabled: true
+  enabled: false
 
   ## Define a name for the metrics port
   ##
@@ -179,7 +179,7 @@ metrics:
   ## the scraping target. Requires enabling the service resource below.
   ##
   serviceMonitor:
-    enabled: true
+    enabled: false
 
     ## Provide additional labels to the service monitor ressource
     ##

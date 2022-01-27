@@ -1,6 +1,6 @@
 # gitlab-runner
 
-![Version: 0.36.0-bb.0](https://img.shields.io/badge/Version-0.36.0--bb.0-informational?style=flat-square) ![AppVersion: 14.6.0](https://img.shields.io/badge/AppVersion-14.6.0-informational?style=flat-square)
+![Version: 0.36.0-bb.1](https://img.shields.io/badge/Version-0.36.0--bb.1-informational?style=flat-square) ![AppVersion: 14.6.0](https://img.shields.io/badge/AppVersion-14.6.0-informational?style=flat-square)
 
 GitLab Runner
 
@@ -47,10 +47,10 @@ helm install gitlab-runner chart/
 | rbac.clusterWideAccess | bool | `false` |  |
 | rbac.podSecurityPolicy.enabled | bool | `false` |  |
 | rbac.podSecurityPolicy.resourceNames[0] | string | `"gitlab-runner"` |  |
-| metrics.enabled | bool | `true` |  |
+| metrics.enabled | bool | `false` |  |
 | metrics.portName | string | `"metrics"` |  |
 | metrics.port | int | `9252` |  |
-| metrics.serviceMonitor.enabled | bool | `true` |  |
+| metrics.serviceMonitor.enabled | bool | `false` |  |
 | service.enabled | bool | `true` |  |
 | service.type | string | `"ClusterIP"` |  |
 | runners.config | string | `"[[runners]]\n  clone_url = \"http://gitlab-webservice-default.gitlab.svc.cluster.local:8181\"\n  cache_dir = \"/tmp/gitlab-runner/cache\"\n  [runners.kubernetes]\n    namespace = \"{{.Release.Namespace}}\"\n    image = \"registry1.dso.mil/ironbank/redhat/ubi/ubi8:8.4\"\n    helper_image = \"registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner-helper:v14.4.0\"\n    image_pull_secrets = [\"private-registry\"]\n  [runners.kubernetes.pod_labels]\n    \"job_id\" = \"${CI_JOB_ID}\"\n    \"job_name\" = \"${CI_JOB_NAME}\"\n    \"pipeline_id\" = \"${CI_PIPELINE_ID}\"\n"` |  |
@@ -76,7 +76,6 @@ helm install gitlab-runner chart/
 | podLabels | object | `{}` |  |
 | secrets | list | `[]` |  |
 | configMaps | object | `{}` |  |
-| monitoring.enabled | bool | `false` |  |
 
 ## Contributing
 
