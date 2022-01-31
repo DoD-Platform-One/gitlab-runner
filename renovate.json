@@ -22,6 +22,14 @@
         ],
         "depNameTemplate": "ironbank/gitlab/gitlab-runner/gitlab-runner",
         "datasourceTemplate": "docker"
+      },
+      {
+        "fileMatch": ["^chart/Chart\\.yaml$"],
+        "matchStrings": [
+            "- Gitlab Runner:\\s+(?<currentValue>.+)"
+        ],
+        "depNameTemplate": "ironbank/gitlab/gitlab-runner/gitlab-runner",
+        "datasourceTemplate": "docker"
       }
   ]
   }
