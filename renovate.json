@@ -1,35 +1,49 @@
 {
-    "baseBranches": ["main"],
-    "configWarningReuseIssue": false,
-    "dependencyDashboard": "true",
-    "dependencyDashboardHeader": "- [ ] Sync upstream helm chart version with updated dependencies.",
-    "dependencyDashboardTitle": "Renovate: Upgrade Gitlab Runner Package Dependencies",
-    "draftPR": true,
-    "labels": ["gitlabRunner","Big Bang Core","Package Sustainment","kind::chore"],
-    "packageRules": [
-      {
-        "matchDatasources": ["docker"],
-        "groupName": "Ironbank",
-        "registryUrls": ["https://registry1.dso.mil"]
-      }
-    ],
-    "ignorePaths": ["**/chart/deps/**", "**/.gitlab-ci.yml", "chart/requirements.yaml"],
-    "regexManagers": [
-      {
-        "fileMatch": ["^chart/values\\.yaml$"],
-        "matchStrings": [
-          "image:\\s+registry1.dso.mil\/(?<depName>.+):(?<currentValue>.+)"
-        ],
-        "depNameTemplate": "ironbank/gitlab/gitlab-runner/gitlab-runner",
-        "datasourceTemplate": "docker"
-      },
-      {
-        "fileMatch": ["^chart/Chart\\.yaml$"],
-        "matchStrings": [
-          "- Gitlab Runner:\\s+(?<currentValue>.+)"
-        ],
-        "depNameTemplate": "ironbank/gitlab/gitlab-runner/gitlab-runner",
-        "datasourceTemplate": "docker"
-      }
+  "baseBranches": ["main"],
+  "configWarningReuseIssue": false,
+  "dependencyDashboard": "true",
+  "dependencyDashboardHeader": "- [ ] Sync upstream helm chart version with updated dependencies.",
+  "dependencyDashboardTitle": "Renovate: Upgrade Gitlab Runner Package Dependencies",
+  "draftPR": true,
+  "labels": ["gitlabRunner","Big Bang Core","Package Sustainment","kind::chore"],
+  "packageRules": [
+    {
+      "matchDatasources": ["docker"],
+      "groupName": "Ironbank",
+      "registryUrls": ["https://registry1.dso.mil"]
+    }
+  ],
+  "ignorePaths": ["**/chart/deps/**", "**/.gitlab-ci.yml", "chart/requirements.yaml"],
+  "regexManagers": [
+    {
+      "fileMatch": ["^chart/values\\.yaml$"],
+      "matchStrings": [
+        "image:\\s+registry1.dso.mil\/(?<depName>.+):(?<currentValue>.+)"
+      ],
+      "depNameTemplate": "ironbank/gitlab/gitlab-runner/gitlab-runner",
+      "datasourceTemplate": "docker"
+    },
+    {
+      "fileMatch": ["^tests/images\\.txt$"],
+      "matchStrings": [
+        "s*(?<depName>.+):(?<currentValue>.+)"
+      ],
+      "datasourceTemplate": "docker"
+    },
+    {
+      "fileMatch": ["^chart/values\\.yaml$"],
+      "matchStrings": [
+        "image = \"(?<depName>.+):(?<currentValue>.+)\""
+      ],
+      "datasourceTemplate": "docker"
+    },
+    {
+      "fileMatch": ["^chart/Chart\\.yaml$"],
+      "matchStrings": [
+        "- Gitlab Runner:\\s+(?<currentValue>.+)"
+      ],
+      "depNameTemplate": "ironbank/gitlab/gitlab-runner/gitlab-runner",
+      "datasourceTemplate": "docker"
+    }
   ]
-  }
+}
