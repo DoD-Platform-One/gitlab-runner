@@ -1,6 +1,6 @@
 # gitlab-runner
 
-![Version: 0.36.0-bb.2](https://img.shields.io/badge/Version-0.36.0--bb.2-informational?style=flat-square) ![AppVersion: 14.6.0](https://img.shields.io/badge/AppVersion-14.6.0-informational?style=flat-square)
+![Version: 0.37.2-bb.0](https://img.shields.io/badge/Version-0.37.2--bb.0-informational?style=flat-square) ![AppVersion: 14.7.0](https://img.shields.io/badge/AppVersion-14.7.0-informational?style=flat-square)
 
 GitLab Runner
 
@@ -35,13 +35,14 @@ helm install gitlab-runner chart/
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| image | string | `"registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner:v14.6.0"` |  |
+| image | string | `"registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner:v14.7.0"` |  |
 | imagePullPolicy | string | `"IfNotPresent"` |  |
 | gitlabUrl | string | `"http://gitlab-webservice-default.gitlab.svc.cluster.local:8181"` |  |
 | unregisterRunners | bool | `true` |  |
 | terminationGracePeriodSeconds | int | `3600` |  |
 | concurrent | int | `50` |  |
 | checkInterval | int | `30` |  |
+| sessionServer.enabled | bool | `false` |  |
 | rbac.create | bool | `true` |  |
 | rbac.rules | list | `[]` |  |
 | rbac.clusterWideAccess | bool | `false` |  |
