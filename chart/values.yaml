@@ -675,3 +675,6 @@ secrets: []
 ## for a current list.
 configMaps: {}
 
+## BigBang Specific Values
+monitoring:
+  enabled: false
