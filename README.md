@@ -1,6 +1,6 @@
 # gitlab-runner
 
-![Version: 0.37.2-bb.0](https://img.shields.io/badge/Version-0.37.2--bb.0-informational?style=flat-square) ![AppVersion: 14.7.0](https://img.shields.io/badge/AppVersion-14.7.0-informational?style=flat-square)
+![Version: 0.37.2-bb.1](https://img.shields.io/badge/Version-0.37.2--bb.1-informational?style=flat-square) ![AppVersion: 14.7.0](https://img.shields.io/badge/AppVersion-14.7.0-informational?style=flat-square)
 
 GitLab Runner
 
@@ -77,6 +77,7 @@ helm install gitlab-runner chart/
 | podLabels | object | `{}` |  |
 | secrets | list | `[]` |  |
 | configMaps | object | `{}` |  |
+| monitoring.enabled | bool | `false` |  |
 
 ## Contributing
 
