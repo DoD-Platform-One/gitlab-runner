@@ -2,6 +2,15 @@
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.38.1-bb.0] - 2022-03-10
+### Updated
+- Update helm chart to v0.38.1 app version 14.8.2
+- ironbank/gitlab/gitlab-runner/gitlab-runner minor v14.7.0 -> v14.8.2
+- registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner minor v14.7.0 -> v14.8.2
+- registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner-helper minor v14.4.0 -> v14.7.0
+- registry1.dso.mil/ironbank/redhat/ubi/ubi8 minor 8.4 -> 8.5
+- updated tests/images.txt versions
+
 ## [0.37.2-bb.1] - 2022-03-04
 ### Changed
 - Add Grafana Dashboard templates to be picked up by Monitoring package

@@ -1,7 +1,7 @@
 apiVersion: v1
 name: gitlab-runner
-version: 0.37.2-bb.1
-appVersion: 14.7.0
+version: 0.38.1-bb.0
+appVersion: 14.8.2
 description: GitLab Runner
 keywords:
 - git
@@ -16,4 +16,4 @@ maintainers:
   email: support@gitlab.com
 annotations:
   bigbang.dev/applicationVersions: |
-    - Gitlab Runner: v14.7.0
+    - Gitlab Runner: v14.8.2

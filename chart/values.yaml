@@ -9,7 +9,7 @@
 ##       don't forget to change the securityContext;
 ##       these images run on different user IDs.
 ##
-image: registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner:v14.7.0
+image: registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner:v14.8.2
 
 ## Specify a imagePullPolicy for the main runner deployment
 ## 'Always' if imageTag is 'latest', else set to 'IfNotPresent'
@@ -142,7 +142,7 @@ rbac:
   ## - resources: default "*" if missing or empty.
   ## - verbs: default "*" if missing or empty.
   rules: []
-  # - resources: ["pods", "secrets"]
+  # - resources: ["configmaps", "pods", "pods/attach", "secrets", "services"]
   #   verbs: ["get", "list", "watch", "create", "patch", "delete"]
   # - apiGroups: [""]
   #   resources: ["pods/exec"]
@@ -306,8 +306,8 @@ runners:
       cache_dir = "/tmp/gitlab-runner/cache"
       [runners.kubernetes]
         namespace = "{{.Release.Namespace}}"
-        image = "registry1.dso.mil/ironbank/redhat/ubi/ubi8:8.4"
-        helper_image = "registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner-helper:v14.4.0"
+        image = "registry1.dso.mil/ironbank/redhat/ubi/ubi8:8.5"
+        helper_image = "registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner-helper:v14.8.2"
         image_pull_secrets = ["private-registry"]
       [runners.kubernetes.pod_labels]
         "job_id" = "${CI_JOB_ID}"
@@ -359,14 +359,14 @@ runners:
   ## If not specified, Runner will default to true if no tags were specified. In other case it will
   ## default to false.
   ##
-  ## ref: https://docs.gitlab.com/ce/ci/runners/#runner-is-allowed-to-run-untagged-jobs
+  ## ref: https://docs.gitlab.com/ee/ci/runners/configure_runners.html#set-a-runner-to-run-untagged-jobs
   ##
   runUntagged: true
 
   ## Specify whether the runner should only run protected branches.
   ## Defaults to false.
   ##
-  ## ref: https://docs.gitlab.com/ee/ci/runners/#prevent-runners-from-revealing-sensitive-information
+  ## ref: https://docs.gitlab.com/ee/ci/runners/configure_runners.html#prevent-runners-from-revealing-sensitive-information
   ##
   protected: true
 
