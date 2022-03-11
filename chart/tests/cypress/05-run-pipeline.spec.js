@@ -24,7 +24,7 @@ describe('Run Pipeline', () => {
         // pipeline already configured. delete the existing pipeline
         cy.visit('/'+Cypress.env('gitlab_username')+'/'+Cypress.env('gitlab_project')+'/-/pipelines')
         cy.get('a[id="js-code-quality-walkthrough"]').click()
-        cy.get('button[title="Retry"][data-qa-selector="action_button"]').click()
+        cy.get('button[data-qa-selector="job_action_button"]').should('have.class', 'retry').click()
       }
       else { 
         // configure new pipeline
