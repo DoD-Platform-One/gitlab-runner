@@ -16,17 +16,16 @@
   "ignorePaths": ["**/chart/deps/**", "**/.gitlab-ci.yml", "chart/requirements.yaml"],
   "regexManagers": [
     {
-      "fileMatch": ["^chart/values\\.yaml$"],
-      "matchStrings": [
-        "image:\\s+registry1.dso.mil\/(?<depName>.+):(?<currentValue>.+)"
-      ],
-      "depNameTemplate": "ironbank/gitlab/gitlab-runner/gitlab-runner",
-      "datasourceTemplate": "docker"
-    },
-    {
       "fileMatch": ["^tests/images\\.txt$"],
       "matchStrings": [
         "s*(?<depName>.+):(?<currentValue>.+)"
+      ],
+      "datasourceTemplate": "docker"
+    },
+    {
+      "fileMatch": ["^chart/values\\.yaml$"],
+      "matchStrings": [
+        "image:\\s+(?<depName>.+):(?<currentValue>.+)"
       ],
       "datasourceTemplate": "docker"
     },
