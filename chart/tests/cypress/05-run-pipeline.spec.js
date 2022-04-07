@@ -45,7 +45,7 @@ describe('Run Pipeline', () => {
     // Go to pipelines page
     cy.visit('/'+Cypress.env('gitlab_username')+'/'+Cypress.env('gitlab_project')+'/-/pipelines')
     // Wait for pipeline to run and pass. Timeout after 120 seconds
-    cy.get('a[id="js-code-quality-walkthrough"]',{timeout: 120000}).should('contain','passed')
+    cy.get('a[data-qa-selector="pipeline_commit_status"]',{timeout: 120000}).should('contain','passed')
     // wait 2 seconds so that the result can be seen in video
     cy.wait(2000)
   })
