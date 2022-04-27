@@ -2,6 +2,11 @@
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.39.0-bb.1] - 2022-04-26
+### Changed
+- Updated to latest gluon 0.2.9
+- Changed cypress compression to much lower value
+- Moved dependencies into Chart.yaml, deleted requirements.yaml
 
 ## [0.39.0-bb.0] - 2022-04-6
 ### Updated

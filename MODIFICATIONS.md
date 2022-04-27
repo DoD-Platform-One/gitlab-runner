@@ -1,6 +1,7 @@
 # Modifications made to upstream chart
 ## chart/Chart.yaml
 - set custom BigBang chart version 
+- add dependencies yaml for the gluon library
 
 ## chart/values.yaml
 - set image: registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner:vX.X.X
@@ -23,9 +24,6 @@
 
 ## chart/.gitignore
 - comment ```charts/*``` need to include the gluon tgz archive
-
-## chart/requirements.yaml
-- add requirements file for the gluon library
 
 ##  chart/charts/*.tgz
 - run ```helm dependency update ./chart``` to update the downloaded archives
