@@ -1,6 +1,6 @@
 # gitlab-runner
 
-![Version: 0.39.0-bb.1](https://img.shields.io/badge/Version-0.39.0--bb.1-informational?style=flat-square) ![AppVersion: 14.9.1](https://img.shields.io/badge/AppVersion-14.9.1-informational?style=flat-square)
+![Version: 0.39.0-bb.2](https://img.shields.io/badge/Version-0.39.0--bb.2-informational?style=flat-square) ![AppVersion: 14.9.1](https://img.shields.io/badge/AppVersion-14.9.1-informational?style=flat-square)
 
 GitLab Runner
 
@@ -49,7 +49,7 @@ helm install gitlab-runner chart/
 | rbac.podSecurityPolicy.enabled | bool | `false` |  |
 | rbac.podSecurityPolicy.resourceNames[0] | string | `"gitlab-runner"` |  |
 | metrics.enabled | bool | `false` |  |
-| metrics.portName | string | `"metrics"` |  |
+| metrics.portName | string | `"tcp-metrics"` |  |
 | metrics.port | int | `9252` |  |
 | metrics.serviceMonitor.enabled | bool | `false` |  |
 | service.enabled | bool | `true` |  |
