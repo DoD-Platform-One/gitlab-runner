@@ -1,3 +1,9 @@
+## v0.39.0-bb.2 (2022-05-25)
+
+### Changes
+
+- Minor port renaming to support istio mTLS
+
 ## v0.39.0 (2022-03-21)
 
 ### New Features
