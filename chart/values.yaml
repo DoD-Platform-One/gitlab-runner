@@ -678,7 +678,3 @@ configMaps: {}
 ## BigBang Specific Values
 monitoring:
   enabled: false
-istio:
-  enabled: false
-  mtls:
-    mode: STRICT
