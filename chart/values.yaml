@@ -184,7 +184,7 @@ metrics:
 
   ## Define a name for the metrics port
   ##
-  portName: metrics
+  portName: tcp-metrics
 
   ## Provide a port number for the integrated Prometheus metrics exporter
   ##
