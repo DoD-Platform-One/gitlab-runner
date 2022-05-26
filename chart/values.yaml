@@ -306,7 +306,7 @@ runners:
       cache_dir = "/tmp/gitlab-runner/cache"
       [runners.kubernetes]
         namespace = "{{.Release.Namespace}}"
-        image = "registry1.dso.mil/ironbank/redhat/ubi/ubi8:8.5"
+        image = "registry1.dso.mil/ironbank/redhat/ubi/ubi8:8.6"
         helper_image = "registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner-helper:v14.9.1"
         image_pull_secrets = ["private-registry"]
       [runners.kubernetes.pod_labels]
