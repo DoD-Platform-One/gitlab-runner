@@ -10,11 +10,11 @@ describe('Run Pipeline', () => {
     cy.visit('/users/sign_in')
     cy.get('input[id="user_login"]').type(Cypress.env('gitlab_username'))
     cy.get('input[id="user_password"]').type(Cypress.env('gitlab_password'))
-    cy.get('input[type="submit"]').click()
+    cy.get('button[type="submit"][name="button"]').click()
 
     // Disable Auto DevOps
     cy.visit('/'+Cypress.env('gitlab_username')+'/'+Cypress.env('gitlab_project')+'/-/settings/ci_cd#autodevops-settings')
-    cy.get('input[id="project_auto_devops_attributes_enabled"]').uncheck()
+    cy.get('input[id="project_auto_devops_attributes_enabled"]').uncheck({force: true})
     cy.get('input[data-qa-selector="save_changes_button"]').click()
 
     // conditionally configure ci pipeline
@@ -26,7 +26,7 @@ describe('Run Pipeline', () => {
         cy.get('a[id="js-code-quality-walkthrough"]').click()
         cy.get('button[data-qa-selector="job_action_button"]').should('have.class', 'retry').click()
       }
-      else { 
+      else {
         // configure new pipeline
         cy.visit('/'+Cypress.env('gitlab_username')+'/'+Cypress.env('gitlab_project')+'/-/new/main/')
         cy.get('input[id="file_name"]').click().type('.gitlab-ci.yml')

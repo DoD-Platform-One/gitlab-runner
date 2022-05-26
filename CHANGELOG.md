@@ -2,6 +2,10 @@
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.39.0-bb.2] - 2022-05-25
+### Changed
+- Updated to latest ubi8 8.6 
+
 ## [0.39.0-bb.1] - 2022-04-26
 ### Changed
 - Updated to latest gluon 0.2.9
@@ -79,11 +83,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [0.33.1-bb.1] - 2021-10-15
 ### Added
-- add gitlab-runner-helper image to images.txt so that it will get packaged 
+- add gitlab-runner-helper image to images.txt so that it will get packaged
 
 ## [0.33.1-bb.0] - 2021-10-14
 ### Changed
-- upgrade to app version 14.3.1 helm chart version v0.33.1 
+- upgrade to app version 14.3.1 helm chart version v0.33.1
 
 ## [0.32.0-bb.1] - 2021-10-08
 ### Added
