@@ -4,7 +4,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [0.39.0-bb.3] - 2022-05-26
 ### Changed
-- Changed port naming convention for mTLS
+- Minor port name change to support istio mTLS
 
 ## [0.39.0-bb.2] - 2022-05-25
 ### Changed
