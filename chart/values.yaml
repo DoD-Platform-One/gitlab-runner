@@ -9,7 +9,7 @@
 ##       don't forget to change the securityContext;
 ##       these images run on different user IDs.
 ##
-image: registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner:v14.9.1
+image: registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner:v15.0.0
 
 ## Specify a imagePullPolicy for the main runner deployment
 ## 'Always' if imageTag is 'latest', else set to 'IfNotPresent'
@@ -57,6 +57,19 @@ gitlabUrl: http://gitlab-webservice-default.gitlab.svc.cluster.local:8181
 ##
 # runnerToken: ""
 #
+
+## Unregister runner before termination
+##
+## Updating the runner's chart version or configuration will cause the runner container
+## to be terminated and created again. This may cause your Gitlab instance to reference
+## non-existant runners. Un-registering the runner before termination mitigates this issue.
+## ref: https://docs.gitlab.com/runner/commands/README.html#gitlab-runner-unregister
+##
+## Please set unregisterRunners to false if you set unregisterRunner to true as only
+## one preStop action is supported.
+##
+# unregisterRunner: true
+
 ## Unregister all runners before termination
 ##
 ## Updating the runner's chart version or configuration will cause the runner container
@@ -126,6 +139,8 @@ sessionServer:
   # internalPort: 8093
   # externalPort: 9000
   # publicIP: ""
+  # loadBalancerSourceRanges:
+  #   - 1.2.3.4/32
 
 ## For RBAC support:
 rbac:
@@ -307,7 +322,7 @@ runners:
       [runners.kubernetes]
         namespace = "{{.Release.Namespace}}"
         image = "registry1.dso.mil/ironbank/redhat/ubi/ubi8:8.6"
-        helper_image = "registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner-helper:v14.9.1"
+        helper_image = "registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner-helper:v15.0.0"
         image_pull_secrets = ["private-registry"]
       [runners.kubernetes.pod_labels]
         "job_id" = "${CI_JOB_ID}"
@@ -347,13 +362,17 @@ runners:
 
   ## Specify the tags associated with the runner. Comma-separated list of tags.
   ##
-  ## ref: https://docs.gitlab.com/ce/ci/runners/#use-tags-to-limit-the-number-of-jobs-using-the-runner
+  ## ref: https://docs.gitlab.com/ee/ci/runners/configure_runners.html#use-tags-to-control-which-jobs-a-runner-can-run
   ##
   # tags: ""
 
   ## Specify the name for the runner.
   ##
   # name: ""
+
+  ## Specify the maximum timeout (in seconds) that will be set for job when using this Runner
+  ##
+  # maximumTimeout: ""
 
   ## Specify if jobs without tags should be run.
   ## If not specified, Runner will default to true if no tags were specified. In other case it will

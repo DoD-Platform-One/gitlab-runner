@@ -1,3 +1,29 @@
+## v0.41.0 (2022-05-19)
+
+### New features
+
+- Update GitLab Runner version to 15.0.0
+- Add the ability to unregister only one runner !329 (LAKostis @LAKostis)
+- Remove init container and instead project secrets !312
+- Don't repeat chart name if release name starts with the chart name !232 (Ahmadali Shafiee @ahmadalli)
+
+### Maintenance
+
+- Use Helm 3 instead of 2.16.9 on lint/release jobs !342 (Takuya Noguchi @tnir)
+
+## v0.40.0 (2022-04-20)
+
+### New features
+
+- Update GitLab Runner version to 14.10.0
+- Add the possibility to configure maximum timeout that will be set for jobs when using the runner !341 (Adrien Gooris @adrien.gooris)
+
+### Maintenance
+
+- Add a post-release CI job to trigger a deps pipeline in Charts repo !339
+- Add helm install integration test !326
+- Make loadBalancerSourceRanges of Session Server configurable !334 (Matthias Baur @m.baur)
+
 ## v0.39.0 (2022-03-21)
 
 ### New Features

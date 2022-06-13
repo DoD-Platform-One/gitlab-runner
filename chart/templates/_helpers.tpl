@@ -15,7 +15,11 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 {{-     .Values.fullnameOverride | trunc 63 | trimSuffix "-" -}}
 {{-   else -}}
 {{-     $name := default .Chart.Name .Values.nameOverride -}}
-{{-     printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" -}}
+{{-     if hasPrefix $name .Release.Name -}}
+{{-       .Release.Name | trunc 63 | trimSuffix "-" -}}
+{{-     else -}}
+{{-       printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" -}}
+{{-     end -}}
 {{-   end -}}
 {{- end -}}
 
@@ -87,7 +91,19 @@ Define the server session external port, using 8093 as a default value
 {{- end -}}
 
 {{/*
-Unregister runners on pod stop
+Unregister runner on pod stop
+*/}}
+{{- define "gitlab-runner.unregisterRunner" -}}
+{{- if or (and (hasKey .Values "unregisterRunner") .Values.unregisterRunner) (and (not (hasKey .Values "unregisterRunner")) .Values.runnerRegistrationToken) -}}
+lifecycle:
+  preStop:
+    exec:
+      command: ["/entrypoint", "unregister", "--config=/home/gitlab-runner/.gitlab-runner/config.toml"]
+{{- end -}}
+{{- end -}}
+
+{{/*
+Unregister all runners on pod stop
 */}}
 {{- define "gitlab-runner.unregisterRunners" -}}
 {{- if or (and (hasKey .Values "unregisterRunners") .Values.unregisterRunners) (and (not (hasKey .Values "unregisterRunners")) .Values.runnerRegistrationToken) -}}
