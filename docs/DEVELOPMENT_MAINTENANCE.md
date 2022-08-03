@@ -69,6 +69,9 @@ This is a high-level list of modifitations that Big Bang has made to the upstrea
 ## /requirements.lock
 - added by the helm dependency update
 
+## /templates/_helpers.tpl
+- Modifies `gitlab-runner.image` to use the image value if defined, otherwise use registry, repository and tag 
+
 ## /chart/values.yaml
 - GitlabUrl: http://gitlab-webservice-default.gitlab.svc.cluster.local:8181
 - unregisterRunners: true
@@ -83,3 +86,8 @@ This is a high-level list of modifitations that Big Bang has made to the upstrea
 - secret: gitlab-gitlab-runner-secret
 - securityContext: changes to work with IB images
 - resources: set requests and limits to the same values
+- registry: independently customize registry
+- repository: independently customize repository
+- tag: independently customize tag
+- runners.job: independently customize UBI image details
+- runners.helper: independently customize Gitlab Runner Helper image details
