@@ -9,7 +9,11 @@
 ##       don't forget to change the securityContext;
 ##       these images run on different user IDs.
 ##
-image: registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner:v15.0.0
+## If defined, the image config will override registry, repository and tag
+image: null
+registry: registry1.dso.mil
+repository: ironbank/gitlab/gitlab-runner/gitlab-runner
+tag: v15.0.0
 
 ## Specify a imagePullPolicy for the main runner deployment
 ## 'Always' if imageTag is 'latest', else set to 'IfNotPresent'
@@ -310,6 +314,15 @@ service:
 ## Configuration for the Pods that the runner launches for each new job
 ##
 runners:
+  job:
+    registry: registry1.dso.mil
+    repository: ironbank/redhat/ubi/ubi8
+    tag: "8.6"
+  helper:
+    registry: registry1.dso.mil
+    repository: ironbank/gitlab/gitlab-runner/gitlab-runner-helper
+    tag: "v15.0.0"
+
   # runner configuration, where the multi line strings is evaluated as
   # template so you can specify helm values inside of it.
   #
@@ -321,8 +334,8 @@ runners:
       cache_dir = "/tmp/gitlab-runner/cache"
       [runners.kubernetes]
         namespace = "{{.Release.Namespace}}"
-        image = "registry1.dso.mil/ironbank/redhat/ubi/ubi8:8.6"
-        helper_image = "registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner-helper:v15.0.0"
+        image = "{{ printf "%s/%s:%s" .Values.runners.job.registry .Values.runners.job.repository .Values.runners.job.tag }}"
+        helper_image = "{{ printf "%s/%s:%s" .Values.runners.helper.registry .Values.runners.helper.repository .Values.runners.helper.tag }}"
         image_pull_secrets = ["private-registry"]
       [runners.kubernetes.pod_labels]
         "job_id" = "${CI_JOB_ID}"

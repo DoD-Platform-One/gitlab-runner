@@ -1,6 +1,6 @@
 # gitlab-runner
 
-![Version: 0.41.0-bb.0](https://img.shields.io/badge/Version-0.41.0--bb.0-informational?style=flat-square) ![AppVersion: 15.0.0](https://img.shields.io/badge/AppVersion-15.0.0-informational?style=flat-square)
+![Version: 0.41.0-bb.1](https://img.shields.io/badge/Version-0.41.0--bb.1-informational?style=flat-square) ![AppVersion: 15.0.0](https://img.shields.io/badge/AppVersion-15.0.0-informational?style=flat-square)
 
 GitLab Runner
 
@@ -35,7 +35,10 @@ helm install gitlab-runner chart/
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| image | string | `"registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner:v15.0.0"` |  |
+| image | string | `nil` |  |
+| registry | string | `"registry1.dso.mil"` |  |
+| repository | string | `"ironbank/gitlab/gitlab-runner/gitlab-runner"` |  |
+| tag | string | `"v15.0.0"` |  |
 | imagePullPolicy | string | `"IfNotPresent"` |  |
 | gitlabUrl | string | `"http://gitlab-webservice-default.gitlab.svc.cluster.local:8181"` |  |
 | unregisterRunners | bool | `true` |  |
@@ -54,7 +57,13 @@ helm install gitlab-runner chart/
 | metrics.serviceMonitor.enabled | bool | `false` |  |
 | service.enabled | bool | `true` |  |
 | service.type | string | `"ClusterIP"` |  |
-| runners.config | string | `"[[runners]]\n  clone_url = \"http://gitlab-webservice-default.gitlab.svc.cluster.local:8181\"\n  cache_dir = \"/tmp/gitlab-runner/cache\"\n  [runners.kubernetes]\n    namespace = \"{{.Release.Namespace}}\"\n    image = \"registry1.dso.mil/ironbank/redhat/ubi/ubi8:8.6\"\n    helper_image = \"registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner-helper:v15.0.0\"\n    image_pull_secrets = [\"private-registry\"]\n  [runners.kubernetes.pod_labels]\n    \"job_id\" = \"${CI_JOB_ID}\"\n    \"job_name\" = \"${CI_JOB_NAME}\"\n    \"pipeline_id\" = \"${CI_PIPELINE_ID}\"\n"` |  |
+| runners.job.registry | string | `"registry1.dso.mil"` |  |
+| runners.job.repository | string | `"ironbank/redhat/ubi/ubi8"` |  |
+| runners.job.tag | string | `"8.6"` |  |
+| runners.helper.registry | string | `"registry1.dso.mil"` |  |
+| runners.helper.repository | string | `"ironbank/gitlab/gitlab-runner/gitlab-runner-helper"` |  |
+| runners.helper.tag | string | `"v15.0.0"` |  |
+| runners.config | string | `"[[runners]]\n  clone_url = \"http://gitlab-webservice-default.gitlab.svc.cluster.local:8181\"\n  cache_dir = \"/tmp/gitlab-runner/cache\"\n  [runners.kubernetes]\n    namespace = \"{{.Release.Namespace}}\"\n    image = \"{{ printf \"%s/%s:%s\" .Values.runners.job.registry .Values.runners.job.repository .Values.runners.job.tag }}\"\n    helper_image = \"{{ printf \"%s/%s:%s\" .Values.runners.helper.registry .Values.runners.helper.repository .Values.runners.helper.tag }}\"\n    image_pull_secrets = [\"private-registry\"]\n  [runners.kubernetes.pod_labels]\n    \"job_id\" = \"${CI_JOB_ID}\"\n    \"job_name\" = \"${CI_JOB_NAME}\"\n    \"pipeline_id\" = \"${CI_PIPELINE_ID}\"\n"` |  |
 | runners.locked | bool | `false` |  |
 | runners.runUntagged | bool | `true` |  |
 | runners.protected | bool | `true` |  |
