@@ -16,7 +16,7 @@ maintainers:
   email: support@gitlab.com
 annotations:
   bigbang.dev/applicationVersions: |
-    - Gitlab Runner: v15.0.0
+    - Gitlab Runner: v15.2.1
 dependencies:
   - name: gluon
     version: 0.2.9
