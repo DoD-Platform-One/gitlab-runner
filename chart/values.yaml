@@ -13,7 +13,7 @@
 image: null
 registry: registry1.dso.mil
 repository: ironbank/gitlab/gitlab-runner/gitlab-runner
-tag: v15.0.0
+tag: v15.2.1
 
 ## Specify a imagePullPolicy for the main runner deployment
 ## 'Always' if imageTag is 'latest', else set to 'IfNotPresent'
@@ -321,7 +321,7 @@ runners:
   helper:
     registry: registry1.dso.mil
     repository: ironbank/gitlab/gitlab-runner/gitlab-runner-helper
-    tag: "v15.0.0"
+    tag: "v15.2.1"
 
   # runner configuration, where the multi line strings is evaluated as
   # template so you can specify helm values inside of it.
