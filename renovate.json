@@ -6,6 +6,7 @@
   "dependencyDashboardTitle": "Renovate: Upgrade Gitlab Runner Package Dependencies",
   "draftPR": true,
   "labels": ["gitlabRunner","Big Bang Core","Package Sustainment","kind::maintenance"],
+  "commitMessagePrefix": "SKIP UPDATE CHECK",
   "packageRules": [
     {
       "matchDatasources": ["docker"],
