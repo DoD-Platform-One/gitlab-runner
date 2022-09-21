@@ -4,7 +4,7 @@ BigBang makes modifications to the upstream helm chart. The full list of changes
 1. Discover the chart version tag that matches with the application version from the [upstream chart](https://gitlab.com/gitlab-org/charts/gitlab-runner) by looking at the Chart.yaml. Do diff between old and new release tags to become aware of any significant chart changes. A graphical diff tool such as [Meld](https://meldmerge.org/) is useful. You can see where the current helm chart came from by inspecting ```/chart/kptfile```
 1. Read the /CHANGELOG.md from the release tag from upstream [upstream chart](https://gitlab.com/gitlab-org/charts/gitlab-runner). Also, be aware of changes in the Gitlab chart that could affect the runner chart. Take note of any special upgrade instructions, if any.
 1. If Rennovate has not created a development branch and merge request then manually create them.
-1. Merge/Sync the new helm chart with the existing Gitlab Runner package code. A graphical diff tool like [Meld](https://meldmerge.org/) is useful. Reference the "Modifications made to upstream chart" section below. Be careful not to overwrite Big Bang Package changes that need to be kept. Note that some files will have combinations of changes that you will overwite and changes that you keep. Stay alert. The hardest file to update is the ```/chart/values.yaml``` because many defaults are changed.
+1. Merge/Sync the new helm chart with the existing Gitlab Runner package code. A graphical diff tool like [Meld](https://meldmerge.org/) is useful. Reference the "Modifications made to upstream chart" section below. Be careful not to overwrite Big Bang Package changes that need to be kept. Note that some files will have combinations of changes that you will overwrite and changes that you keep. Stay alert. The hardest file to update is the ```/chart/values.yaml``` because many defaults are changed.
 1. Look in ```/chart/Chart.yaml``` at the dependencies and verify that you have the most recent version of the [Bigbang Gluon](https://repo1.dso.mil/platform-one/big-bang/apps/library-charts/gluon/-/tags) library. If not, delete the ```/chart/charts/gluon-x.x.x.tgz``` file and the ```/requirements.lock``` file. You will replace these files in the next step.
 1. Run a helm dependency command to update the chart/charts/*.tgz archives and create a new requirements.lock file. You will commit the tar archives along with the requirements.lock that was generated.
     ```bash
@@ -12,7 +12,7 @@ BigBang makes modifications to the upstream helm chart. The full list of changes
     ```
 1. In ```/chart/values.yaml``` update all the gitlab image tags to the new version. There are 3 images: gitlab-runner, gitlab-runner-helper, and the ubi.
 1. Update the Kptfile to point to the new tag and commit hash of the upstream repo.
-1. Update ```/tests/images.txt``` with the new image tags. This file insures that the images are packaged in the pipelienes.
+1. Update ```/tests/images.txt``` with the new image tags. This file insures that the images are packaged in the pipelines.
 1. Update /CHANGELOG.md with an entry for "upgrade gitlab-runner to app version X.X.X chart version X.X.X-bb.X". Or, whatever description is appropriate.
 1. Update the /README.md following the [gluon library script](https://repo1.dso.mil/platform-one/big-bang/apps/library-charts/gluon/-/blob/master/docs/bb-package-readme.md)
 1. Update /chart/Chart.yaml to the appropriate versions. The annotation version is the actual image tag and should match the ```appVersion``` with a prepended `v`.
@@ -33,10 +33,10 @@ BigBang makes modifications to the upstream helm chart. The full list of changes
 
 
 # Testing new Gitlab Runner version
-1. Follow the testing instructions from the [Gitlab Package documentation](https://repo1.dso.mil/platform-one/big-bang/apps/developer-tools/gitlab/-/blob/main/docs/DEVELOPMENT_MAINTENANCE.md). The details are not repeated here. 
+1. Follow the testing instructions from the [Gitlab Package documentation](https://repo1.dso.mil/platform-one/big-bang/apps/developer-tools/gitlab/-/blob/main/docs/DEVELOPMENT_MAINTENANCE.md). The details are not repeated here.
 
 # Modifications made to upstream chart
-This is a high-level list of modifitations that Big Bang has made to the upstream helm chart. You can use this as as cross-check to make sure that no modifications were lost during the upgrade process.
+This is a high-level list of modifications that Big Bang has made to the upstream helm chart. You can use this as as cross-check to make sure that no modifications were lost during the upgrade process.
 
 ##  /chart/charts/*.tgz
 - The BigBang Gluon library is added to the chart. Run ```helm dependency update ./chart```.
@@ -70,7 +70,7 @@ This is a high-level list of modifitations that Big Bang has made to the upstrea
 - added by the helm dependency update
 
 ## /templates/_helpers.tpl
-- Modifies `gitlab-runner.image` to use the image value if defined, otherwise use registry, repository and tag 
+- Modifies `gitlab-runner.image` to use the image value if defined, otherwise use registry, repository and tag
 
 ## /chart/values.yaml
 - GitlabUrl: http://gitlab-webservice-default.gitlab.svc.cluster.local:8181

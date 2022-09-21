@@ -4,9 +4,9 @@ There is special k8s node configuration required for running rootless podman or 
 ```
 cannot clone: Invalid argument
 user namespaces are not enabled in /proc/sys/user/max_user_namespaces
-Error: Connot connect to the Podman socket, make sure there is a Podman REST API service running.
+Error: Cannot connect to the Podman socket, make sure there is a Podman REST API service running.
 ```
-On nodes where gitlab-runners execute user.max_user_namespaces must be set. 
+On nodes where gitlab-runners execute user.max_user_namespaces must be set.
 ```
 sysctl user.max_user_namespaces=28633
 ```
@@ -24,7 +24,7 @@ Here is an example of an Ansible script
       reload: yes
       sysctl_set: yes
     when: node_pool == "gitlab-runner"
-``` 
+```
 Example pipeline scripts. You will need to pass a storage-diver argument
 ```
 buildah bud --format=docker --storage-driver=vfs "${IMAGE_TAG}" .
