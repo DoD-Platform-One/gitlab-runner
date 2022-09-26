@@ -30,12 +30,7 @@ describe('Run Pipeline', () => {
         // configure new pipeline
         cy.visit('/'+Cypress.env('gitlab_username')+'/'+Cypress.env('gitlab_project')+'/-/new/main/')
         cy.get('input[id="file_name"]').click().type('.gitlab-ci.yml')
-        cy.get('div[class="view-line"]').eq(0).click().type('stages:{enter}')
-        cy.get('div[class="view-line"]').eq(1).click().type('- test{enter}')
-        cy.get('div[class="view-line"]').eq(2).click().type('{backspace}pipeline-test:{enter}')
-        cy.get('div[class="view-line"]').eq(3).click().type('stage: test{enter}')
-        cy.get('div[class="view-line"]').eq(4).click().type('script:{enter}')
-        cy.get('div[class="view-line"]').eq(5).click().type('- echo The pipeline test is successful!{enter}')
+        cy.get('div[class="view-line"]').click().type('stages:{enter}  - test{enter}{backspace}pipeline-test:{enter}  script:{enter}  - echo The pipeline test is successful!{enter}')
         // commit file and start pipeline
         cy.get('button[id="commit-changes"]').click()
       }
