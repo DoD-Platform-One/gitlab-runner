@@ -1,6 +1,6 @@
 # gitlab-runner
 
-![Version: 0.43.1-bb.1](https://img.shields.io/badge/Version-0.43.1--bb.1-informational?style=flat-square) ![AppVersion: 15.2.1](https://img.shields.io/badge/AppVersion-15.2.1-informational?style=flat-square)
+![Version: 0.43.1-bb.2](https://img.shields.io/badge/Version-0.43.1--bb.2-informational?style=flat-square) ![AppVersion: 15.2.1](https://img.shields.io/badge/AppVersion-15.2.1-informational?style=flat-square)
 
 GitLab Runner
 
@@ -74,6 +74,7 @@ helm install gitlab-runner chart/
 | runners.helpers | object | `{}` |  |
 | securityContext.runAsUser | int | `998` |  |
 | securityContext.fsGroup | int | `996` |  |
+| containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | resources.limits.memory | string | `"256Mi"` |  |
 | resources.limits.cpu | string | `"200m"` |  |
 | resources.requests.memory | string | `"256Mi"` |  |

@@ -606,6 +606,11 @@ securityContext:
   # runAsUser: 999
   # fsGroup: 999
 
+containerSecurityContext:
+  capabilities:
+    drop: 
+      - ALL
+
 ## Configure resource requests and limits
 ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
 ##
