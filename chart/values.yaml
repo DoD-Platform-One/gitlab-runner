@@ -1,9 +1,11 @@
 ## GitLab Runner Image
 ##
-## By default it's using gitlab/gitlab-runner:alpine-v{VERSION}
+## By default it's using registry.gitlab.com/gitlab-org/gitlab-runner:alpine-v{VERSION}
 ## where {VERSION} is taken from Chart.yaml from appVersion field
 ##
-## ref: https://hub.docker.com/r/gitlab/gitlab-runner/tags/
+## DEPRECATED: Setting `image: registry.gitlab.com/gitlab-org/gitlab-runner:alpine-v11.6.0` is deprecated
+##
+## ref: https://gitlab.com/gitlab-org/gitlab-runner/container_registry/29383?orderBy=NAME&sort=asc&search[]=alpine-v&search[]=
 ##
 ## Note: If you change the image to the ubuntu release
 ##       don't forget to change the securityContext;
@@ -13,7 +15,7 @@
 image: null
 registry: registry1.dso.mil
 repository: ironbank/gitlab/gitlab-runner/gitlab-runner
-tag: v15.2.1
+tag: v15.3.0
 
 ## Specify a imagePullPolicy for the main runner deployment
 ## 'Always' if imageTag is 'latest', else set to 'IfNotPresent'
@@ -45,13 +47,13 @@ imagePullPolicy: IfNotPresent
 # revisionHistoryLimit: 10
 
 ## The GitLab Server URL (with protocol) that want to register the runner against
-## ref: https://docs.gitlab.com/runner/commands/README.html#gitlab-runner-register
+## ref: https://docs.gitlab.com/runner/commands/index.html#gitlab-runner-register
 ##
 gitlabUrl: http://gitlab-webservice-default.gitlab.svc.cluster.local:8181
 
 ## The Registration Token for adding new Runners to the GitLab Server. This must
 ## be retrieved from your GitLab Instance.
-## ref: https://docs.gitlab.com/ce/ci/runners/README.html
+## ref: https://docs.gitlab.com/ce/ci/runners/index.html
 ##
 # runnerRegistrationToken: ""
 
@@ -65,9 +67,9 @@ gitlabUrl: http://gitlab-webservice-default.gitlab.svc.cluster.local:8181
 ## Unregister runner before termination
 ##
 ## Updating the runner's chart version or configuration will cause the runner container
-## to be terminated and created again. This may cause your Gitlab instance to reference
+## to be terminated and created again. This may cause your GitLab instance to reference
 ## non-existant runners. Un-registering the runner before termination mitigates this issue.
-## ref: https://docs.gitlab.com/runner/commands/README.html#gitlab-runner-unregister
+## ref: https://docs.gitlab.com/runner/commands/index.html#gitlab-runner-unregister
 ##
 ## Please set unregisterRunners to false if you set unregisterRunner to true as only
 ## one preStop action is supported.
@@ -79,9 +81,9 @@ gitlabUrl: http://gitlab-webservice-default.gitlab.svc.cluster.local:8181
 ## Updating the runner's chart version or configuration will cause the runner container
 ## to be terminated and created again. This may cause your Gitlab instance to reference
 ## non-existant runners. Un-registering the runner before termination mitigates this issue.
-## ref: https://docs.gitlab.com/runner/commands/README.html#gitlab-runner-unregister
+## ref: https://docs.gitlab.com/runner/commands/index.html#gitlab-runner-unregister
 ##
-unregisterRunners: true
+# unregisterRunners: true
 
 ## When stopping the runner, give it time to wait for its jobs to terminate.
 ##
@@ -94,7 +96,7 @@ terminationGracePeriodSeconds: 3600
 ## Set the certsSecretName in order to pass custom certficates for GitLab Runner to use
 ## Provide resource name for a Kubernetes Secret Object in the same namespace,
 ## this is used to populate the /home/gitlab-runner/.gitlab-runner/certs/ directory
-## ref: https://docs.gitlab.com/runner/configuration/tls-self-signed.html#supported-options-for-self-signed-certificates
+## ref: https://docs.gitlab.com/runner/configuration/tls-self-signed.html#supported-options-for-self-signed-certificates-targeting-the-gitlab-server
 ##
 # certsSecretName:
 
@@ -131,14 +133,15 @@ checkInterval: 30
 
 ## Specify whether the runner should start the session server.
 ## Defaults to false
-## ref: 
+## ref:
 ##
-## When sessionServer is enabled, the user can either provide a public publicIP 
+## When sessionServer is enabled, the user can either provide a public publicIP
 ## or either rely on the external IP auto discovery
 ## When a serviceAccountName is used with the automounting to the pod disable,
 ## we recommend the usage of the publicIP
 sessionServer:
   enabled: false
+  # annotations: {}
   # timeout: 1800
   # internalPort: 8093
   # externalPort: 9000
@@ -160,9 +163,14 @@ rbac:
   ## - apiGroups: default "" (indicates the core API group) if missing or empty.
   ## - resources: default "*" if missing or empty.
   ## - verbs: default "*" if missing or empty.
+  ##
+  ## Read more about the recommended rules on the following link
+  ##
+  ## ref: https://docs.gitlab.com/runner/executors/kubernetes.html#configuring-executor-service-account
+  ##
   rules: []
   # - resources: ["configmaps", "pods", "pods/attach", "secrets", "services"]
-  #   verbs: ["get", "list", "watch", "create", "patch", "delete"]
+  #   verbs: ["get", "list", "watch", "create", "patch", "update", "delete"]
   # - apiGroups: [""]
   #   resources: ["pods/exec"]
   #   verbs: ["create", "patch", "delete"]
@@ -321,7 +329,7 @@ runners:
   helper:
     registry: registry1.dso.mil
     repository: ironbank/gitlab/gitlab-runner/gitlab-runner-helper
-    tag: "v15.2.1"
+    tag: "v15.3.0"
 
   # runner configuration, where the multi line strings is evaluated as
   # template so you can specify helm values inside of it.
@@ -532,7 +540,7 @@ runners:
     # memoryLimit: 256Mi
     # cpuRequests: 100m
     # memoryRequests: 128Mi
-    # image: "gitlab/gitlab-runner-helper:x86_64-${CI_RUNNER_REVISION}"
+    # image: "registry.gitlab.com/gitlab-org/gitlab-runner-helper:x86_64-${CI_RUNNER_REVISION}"
 
   ## Helper container security context configuration
   ## Refer to https://docs.gitlab.com/runner/executors/kubernetes.html#using-security-context
@@ -593,13 +601,24 @@ runners:
 ## ref: https://kubernetes.io/docs/reference/scheduling
 # schedulerName: "my-custom-scheduler"
 
-## Configure securitycontext
+## Configure securitycontext for the main container
 ## ref: http://kubernetes.io/docs/user-guide/security-context/
 ##
 securityContext:
-  runAsUser: 998
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: false
+  runAsNonRoot: true
+  privileged: false
+  capabilities:
+    drop: ["ALL"]
+
+## Configure securitycontext valid for the whole pod
+## ref: http://kubernetes.io/docs/user-guide/security-context/
+##
+podSecurityContext:
+  runAsUser: 1001
   # runAsGroup: 65533
-  fsGroup: 996
+  fsGroup: 65533
   # supplementalGroups: [65533]
 
   ## Note: values for the ubuntu image:
@@ -692,6 +711,10 @@ podLabels: {}
   #     metricName: gitlab_runner_jobs
   #     targetAverageValue: 400m
 
+## Configure priorityClassName for manager pod. See k8s docs for more info on how pod priority works:
+##  https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/
+priorityClassName: ""
+
 ## Secrets to be additionally mounted to the containers.
 ## All secrets are mounted through init-runner-secrets volume
 ## and placed as readonly at /init-secrets in the init container
@@ -711,6 +734,21 @@ secrets: []
 ## See https://gitlab.com/gitlab-org/charts/gitlab-runner/-/blob/main/templates/configmap.yaml
 ## for a current list.
 configMaps: {}
+
+## Additional volumeMounts to add to the runner container
+##
+volumeMounts: []
+  # Example:
+  # - name: my-volume
+  #   mountPath: /mount/path
+
+## Additional volumes to add to the runner deployment
+##
+volumes: []
+  # Example:
+  # - name: my-volume
+  #   persistentVolumeClaim:
+  #     claimName: my-pvc
 
 ## BigBang Specific Values
 monitoring:

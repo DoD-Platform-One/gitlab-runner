@@ -52,7 +52,13 @@ This is a high-level list of modifications that Big Bang has made to the upstrea
 - add templates for helm tests
 
 ## chart/templates/deployment.yaml
-- remove "/usr/bin/dumb-init", "--", line 64. That path does not exist in IronBank hardened image
+- remove `"/usr/bin/dumb-init", "--",` line 64. That path does not exist in IronBank hardened image
+- ensure the security context is present ~ line 51
+```
+        securityContext:
+          allowPrivilegeEscalation: false
+          {{- toYaml $.Values.containerSecurityContext | nindent 10 }}
+```
 
 ## /chart/tests/cypress/*
 - add cypress tests scripts
