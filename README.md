@@ -1,12 +1,12 @@
 # gitlab-runner
 
-![Version: 0.43.1-bb.2](https://img.shields.io/badge/Version-0.43.1--bb.2-informational?style=flat-square) ![AppVersion: 15.2.1](https://img.shields.io/badge/AppVersion-15.2.1-informational?style=flat-square)
+![Version: 0.44.0-bb.0](https://img.shields.io/badge/Version-0.44.0--bb.0-informational?style=flat-square) ![AppVersion: 15.3.0](https://img.shields.io/badge/AppVersion-15.3.0-informational?style=flat-square)
 
 GitLab Runner
 
 ## Upstream References
 
-* <https://hub.docker.com/r/gitlab/gitlab-runner/>
+* <https://gitlab.com/gitlab-org/gitlab-runner>
 * <https://docs.gitlab.com/runner/>
 
 ## Learn More
@@ -38,10 +38,12 @@ helm install gitlab-runner chart/
 | image | string | `nil` |  |
 | registry | string | `"registry1.dso.mil"` |  |
 | repository | string | `"ironbank/gitlab/gitlab-runner/gitlab-runner"` |  |
-| tag | string | `"v15.2.1"` |  |
+| tag | string | `"v15.3.0"` |  |
 | imagePullPolicy | string | `"IfNotPresent"` |  |
+| probeTimeoutSeconds | int | `1` |  |
+| replicas | int | `1` |  |
+| revisionHistoryLimit | int | `10` |  |
 | gitlabUrl | string | `"http://gitlab-webservice-default.gitlab.svc.cluster.local:8181"` |  |
-| unregisterRunners | bool | `true` |  |
 | terminationGracePeriodSeconds | int | `3600` |  |
 | concurrent | int | `50` |  |
 | checkInterval | int | `30` |  |
@@ -62,7 +64,7 @@ helm install gitlab-runner chart/
 | runners.job.tag | string | `"8.6"` |  |
 | runners.helper.registry | string | `"registry1.dso.mil"` |  |
 | runners.helper.repository | string | `"ironbank/gitlab/gitlab-runner/gitlab-runner-helper"` |  |
-| runners.helper.tag | string | `"v15.2.1"` |  |
+| runners.helper.tag | string | `"v15.3.0"` |  |
 | runners.config | string | `"[[runners]]\n  clone_url = \"http://gitlab-webservice-default.gitlab.svc.cluster.local:8181\"\n  cache_dir = \"/tmp/gitlab-runner/cache\"\n  [runners.kubernetes]\n    namespace = \"{{.Release.Namespace}}\"\n    image = \"{{ printf \"%s/%s:%s\" .Values.runners.job.registry .Values.runners.job.repository .Values.runners.job.tag }}\"\n    helper_image = \"{{ printf \"%s/%s:%s\" .Values.runners.helper.registry .Values.runners.helper.repository .Values.runners.helper.tag }}\"\n    image_pull_secrets = [\"private-registry\"]\n  [runners.kubernetes.pod_labels]\n    \"job_id\" = \"${CI_JOB_ID}\"\n    \"job_name\" = \"${CI_JOB_NAME}\"\n    \"pipeline_id\" = \"${CI_PIPELINE_ID}\"\n"` |  |
 | runners.locked | bool | `false` |  |
 | runners.runUntagged | bool | `true` |  |
@@ -72,8 +74,13 @@ helm install gitlab-runner chart/
 | runners.builds | object | `{}` |  |
 | runners.services | object | `{}` |  |
 | runners.helpers | object | `{}` |  |
-| securityContext.runAsUser | int | `998` |  |
-| securityContext.fsGroup | int | `996` |  |
+| securityContext.allowPrivilegeEscalation | bool | `false` |  |
+| securityContext.readOnlyRootFilesystem | bool | `false` |  |
+| securityContext.runAsNonRoot | bool | `true` |  |
+| securityContext.privileged | bool | `false` |  |
+| securityContext.capabilities.drop[0] | string | `"ALL"` |  |
+| podSecurityContext.runAsUser | int | `100` |  |
+| podSecurityContext.fsGroup | int | `65533` |  |
 | containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | resources.limits.memory | string | `"256Mi"` |  |
 | resources.limits.cpu | string | `"200m"` |  |
@@ -85,8 +92,11 @@ helm install gitlab-runner chart/
 | hostAliases | list | `[]` |  |
 | podAnnotations | object | `{}` |  |
 | podLabels | object | `{}` |  |
+| priorityClassName | string | `""` |  |
 | secrets | list | `[]` |  |
 | configMaps | object | `{}` |  |
+| volumeMounts | list | `[]` |  |
+| volumes | list | `[]` |  |
 | monitoring.enabled | bool | `false` |  |
 
 ## Contributing
