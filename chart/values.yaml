@@ -15,7 +15,7 @@
 image: null
 registry: registry1.dso.mil
 repository: ironbank/gitlab/gitlab-runner/gitlab-runner
-tag: v15.3.0
+tag: v14.4.0
 
 ## Specify a imagePullPolicy for the main runner deployment
 ## 'Always' if imageTag is 'latest', else set to 'IfNotPresent'
@@ -63,18 +63,6 @@ gitlabUrl: http://gitlab-webservice-default.gitlab.svc.cluster.local:8181
 ##
 # runnerToken: ""
 #
-
-## Unregister runner before termination
-##
-## Updating the runner's chart version or configuration will cause the runner container
-## to be terminated and created again. This may cause your GitLab instance to reference
-## non-existant runners. Un-registering the runner before termination mitigates this issue.
-## ref: https://docs.gitlab.com/runner/commands/index.html#gitlab-runner-unregister
-##
-## Please set unregisterRunners to false if you set unregisterRunner to true as only
-## one preStop action is supported.
-##
-# unregisterRunner: true
 
 ## Unregister all runners before termination
 ##
@@ -329,7 +317,7 @@ runners:
   helper:
     registry: registry1.dso.mil
     repository: ironbank/gitlab/gitlab-runner/gitlab-runner-helper
-    tag: "v15.3.0"
+    tag: "v14.4.0"
 
   # runner configuration, where the multi line strings is evaluated as
   # template so you can specify helm values inside of it.

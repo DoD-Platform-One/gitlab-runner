@@ -8,6 +8,7 @@ BigBang makes modifications to the upstream helm chart. The full list of changes
 1. Look in ```/chart/Chart.yaml``` at the dependencies and verify that you have the most recent version of the [Bigbang Gluon](https://repo1.dso.mil/platform-one/big-bang/apps/library-charts/gluon/-/tags) library. If not, delete the ```/chart/charts/gluon-x.x.x.tgz``` file and the ```/requirements.lock``` file. You will replace these files in the next step.
 1. Run a helm dependency command to update the chart/charts/*.tgz archives and create a new requirements.lock file. You will commit the tar archives along with the requirements.lock that was generated.
     ```bash
+    export HELM_EXPERIMENTAL_OCI=1
     helm dependency update ./chart
     ```
 1. In ```/chart/values.yaml``` update all the gitlab image tags to the new version. There are 3 images: gitlab-runner, gitlab-runner-helper, and the ubi.

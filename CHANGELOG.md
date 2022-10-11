@@ -2,6 +2,10 @@
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.45.0-bb.0] - 2022-10-11
+### Updated
+- Update helm chart to v0.45.0 app version 15.4.0 
+
 ## [0.44.0-bb.0] - 2022-09-26
 ### Updated
 - Update helm chart to v0.44.0 app version 15.3.0 
