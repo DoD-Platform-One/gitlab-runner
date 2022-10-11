@@ -1,6 +1,6 @@
 # gitlab-runner
 
-![Version: 0.45.0-bb.0](https://img.shields.io/badge/Version-0.45.0--bb.0-informational?style=flat-square) ![AppVersion: 15.4.0](https://img.shields.io/badge/AppVersion-15.4.0-informational?style=flat-square)
+![Version: 0.45.0-bb.1](https://img.shields.io/badge/Version-0.45.0--bb.1-informational?style=flat-square) ![AppVersion: 15.4.0](https://img.shields.io/badge/AppVersion-15.4.0-informational?style=flat-square)
 
 GitLab Runner
 
@@ -38,7 +38,7 @@ helm install gitlab-runner chart/
 | image | string | `nil` |  |
 | registry | string | `"registry1.dso.mil"` |  |
 | repository | string | `"ironbank/gitlab/gitlab-runner/gitlab-runner"` |  |
-| tag | string | `"v15.3.0"` |  |
+| tag | string | `"v15.4.0"` |  |
 | imagePullPolicy | string | `"IfNotPresent"` |  |
 | gitlabUrl | string | `"http://gitlab-webservice-default.gitlab.svc.cluster.local:8181"` |  |
 | terminationGracePeriodSeconds | int | `3600` |  |
@@ -61,7 +61,7 @@ helm install gitlab-runner chart/
 | runners.job.tag | string | `"8.6"` |  |
 | runners.helper.registry | string | `"registry1.dso.mil"` |  |
 | runners.helper.repository | string | `"ironbank/gitlab/gitlab-runner/gitlab-runner-helper"` |  |
-| runners.helper.tag | string | `"v15.3.0"` |  |
+| runners.helper.tag | string | `"v15.4.0"` |  |
 | runners.config | string | `"[[runners]]\n  clone_url = \"http://gitlab-webservice-default.gitlab.svc.cluster.local:8181\"\n  cache_dir = \"/tmp/gitlab-runner/cache\"\n  [runners.kubernetes]\n    namespace = \"{{.Release.Namespace}}\"\n    image = \"{{ printf \"%s/%s:%s\" .Values.runners.job.registry .Values.runners.job.repository .Values.runners.job.tag }}\"\n    helper_image = \"{{ printf \"%s/%s:%s\" .Values.runners.helper.registry .Values.runners.helper.repository .Values.runners.helper.tag }}\"\n    image_pull_secrets = [\"private-registry\"]\n  [runners.kubernetes.pod_labels]\n    \"job_id\" = \"${CI_JOB_ID}\"\n    \"job_name\" = \"${CI_JOB_NAME}\"\n    \"pipeline_id\" = \"${CI_PIPELINE_ID}\"\n"` |  |
 | runners.locked | bool | `false` |  |
 | runners.runUntagged | bool | `true` |  |
