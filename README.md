@@ -1,6 +1,6 @@
 # gitlab-runner
 
-![Version: 0.44.0-bb.0](https://img.shields.io/badge/Version-0.44.0--bb.0-informational?style=flat-square) ![AppVersion: 15.3.0](https://img.shields.io/badge/AppVersion-15.3.0-informational?style=flat-square)
+![Version: 0.45.0-bb.0](https://img.shields.io/badge/Version-0.45.0--bb.0-informational?style=flat-square) ![AppVersion: 15.4.0](https://img.shields.io/badge/AppVersion-15.4.0-informational?style=flat-square)
 
 GitLab Runner
 
@@ -40,9 +40,6 @@ helm install gitlab-runner chart/
 | repository | string | `"ironbank/gitlab/gitlab-runner/gitlab-runner"` |  |
 | tag | string | `"v15.3.0"` |  |
 | imagePullPolicy | string | `"IfNotPresent"` |  |
-| probeTimeoutSeconds | int | `1` |  |
-| replicas | int | `1` |  |
-| revisionHistoryLimit | int | `10` |  |
 | gitlabUrl | string | `"http://gitlab-webservice-default.gitlab.svc.cluster.local:8181"` |  |
 | terminationGracePeriodSeconds | int | `3600` |  |
 | concurrent | int | `50` |  |
@@ -79,7 +76,7 @@ helm install gitlab-runner chart/
 | securityContext.runAsNonRoot | bool | `true` |  |
 | securityContext.privileged | bool | `false` |  |
 | securityContext.capabilities.drop[0] | string | `"ALL"` |  |
-| podSecurityContext.runAsUser | int | `100` |  |
+| podSecurityContext.runAsUser | int | `1001` |  |
 | podSecurityContext.fsGroup | int | `65533` |  |
 | containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | resources.limits.memory | string | `"256Mi"` |  |
