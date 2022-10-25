@@ -1,11 +1,11 @@
 # How to upgrade the Gitlab Runner Package chart
 BigBang makes modifications to the upstream helm chart. The full list of changes is at the end of  this document.
-1. Rennovate may have aleady made changes in the development branch. If that is the case then just verify that the changes are correct as you go through these steps.
+1. Renovate may have already made changes in the development branch. If that is the case then just verify that the changes are correct as you go through these steps.
 1. Discover the chart version tag that matches with the application version from the [upstream chart](https://gitlab.com/gitlab-org/charts/gitlab-runner) by looking at the Chart.yaml. Do diff between old and new release tags to become aware of any significant chart changes. A graphical diff tool such as [Meld](https://meldmerge.org/) is useful. You can see where the current helm chart came from by inspecting ```/chart/kptfile```
 1. Read the /CHANGELOG.md from the release tag from upstream [upstream chart](https://gitlab.com/gitlab-org/charts/gitlab-runner). Also, be aware of changes in the Gitlab chart that could affect the runner chart. Take note of any special upgrade instructions, if any.
-1. If Rennovate has not created a development branch and merge request then manually create them.
+1. If Renovate has not created a development branch and merge request then manually create them.
 1. Merge/Sync the new helm chart with the existing Gitlab Runner package code. A graphical diff tool like [Meld](https://meldmerge.org/) is useful. Reference the "Modifications made to upstream chart" section below. Be careful not to overwrite Big Bang Package changes that need to be kept. Note that some files will have combinations of changes that you will overwrite and changes that you keep. Stay alert. The hardest file to update is the ```/chart/values.yaml``` because many defaults are changed.
-1. Look in ```/chart/Chart.yaml``` at the dependencies and verify that you have the most recent version of the [Bigbang Gluon](https://repo1.dso.mil/platform-one/big-bang/apps/library-charts/gluon/-/tags) library. If not, delete the ```/chart/charts/gluon-x.x.x.tgz``` file and the ```/requirements.lock``` file. You will replace these files in the next step.
+1. Look in ```/chart/Chart.yaml``` at the dependencies and verify that you have the most recent version of the [Big Bang Gluon](https://repo1.dso.mil/platform-one/big-bang/apps/library-charts/gluon/-/tags) library. If not, delete the ```/chart/charts/gluon-x.x.x.tgz``` file and the ```/requirements.lock``` file. You will replace these files in the next step.
 1. Run a helm dependency command to update the chart/charts/*.tgz archives and create a new requirements.lock file. You will commit the tar archives along with the requirements.lock that was generated.
     ```bash
     export HELM_EXPERIMENTAL_OCI=1
@@ -29,7 +29,7 @@ BigBang makes modifications to the upstream helm chart. The full list of changes
         repository: oci://registry.dso.mil/platform-one/big-bang/apps/library-charts/gluon
     ```
 1. Use a development environment to deploy and test Gitlab Runner. See more detailed testing instructions in [Gitlab Package documentation](https://repo1.dso.mil/platform-one/big-bang/apps/developer-tools/gitlab/-/blob/main/docs/DEVELOPMENT_MAINTENANCE.md). Test with Gitlab Package enabled to make sure the new gitlab-runner version still works with Gitlab. Also test an upgrade by deploying the old version first and then deploying the new version. Verify that the upgrade goes smoothly.
-1. When the Package pipeline runs expect the cypress tests to fail due to UI changes. Note that most of the cypress test files are synced from the [Gitlab Package](https://repo1.dso.mil/platform-one/big-bang/apps/developer-tools/gitlab/-/tree/main/chart/tests/cypress) to avoid having two different versions of the same tests. Gitlab-runner has a fifth `05` test that the Gitlab package does not have. If you sync the first 4 cypress tests from Gitlab you sholud not have any trouble. See the [Gitlab Package documentation](https://repo1.dso.mil/platform-one/big-bang/apps/developer-tools/gitlab/-/blob/main/docs/DEVELOPMENT_MAINTENANCE.md) if you do need to run the cypress tests locally.
+1. When the Package pipeline runs expect the cypress tests to fail due to UI changes. Note that most of the cypress test files are synced from the [Gitlab Package](https://repo1.dso.mil/platform-one/big-bang/apps/developer-tools/gitlab/-/tree/main/chart/tests/cypress) to avoid having two different versions of the same tests. Gitlab-runner has a fifth `05` test that the Gitlab package does not have. If you sync the first 4 cypress tests from Gitlab you should not have any trouble. See the [Gitlab Package documentation](https://repo1.dso.mil/platform-one/big-bang/apps/developer-tools/gitlab/-/blob/main/docs/DEVELOPMENT_MAINTENANCE.md) if you do need to run the cypress tests locally. This test should be able to pass on BOTH clean install and upgrade stages with the appropriate updates.
 1. Update the /README.md again if you have made any additional changes during the upgrade/testing process.
 
 
@@ -98,3 +98,6 @@ This is a high-level list of modifications that Big Bang has made to the upstrea
 - tag: independently customize tag
 - runners.job: independently customize UBI image details
 - runners.helper: independently customize Gitlab Runner Helper image details
+- monitoring.enabled: value added to support BB monitoring
+- bbtests: values added to support CI testing with gluon
+- networkPolicies.enabled: value added to support NPs (for CI testing only)
