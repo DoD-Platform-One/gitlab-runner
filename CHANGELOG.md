@@ -2,6 +2,12 @@
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.45.0-bb.2] - 2022-10-25
+### Fixed
+- Modified Cypress test to handle upgrades appropriately
+### Changed
+- Moved `bbtests` values into the main `chart/values.yaml` to reduce duplication at BB level
+
 ## [0.45.0-bb.1] - 2022-10-11
 ### Updated
 - Correct Iron Bank image version

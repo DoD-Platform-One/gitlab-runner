@@ -23,8 +23,8 @@ describe('Run Pipeline', () => {
       if ($body.find('table[data-qa-selector="file_tree_table"]').length > 0) {
         // pipeline already configured. delete the existing pipeline
         cy.visit('/'+Cypress.env('gitlab_username')+'/'+Cypress.env('gitlab_project')+'/-/pipelines')
-        cy.get('a[id="js-code-quality-walkthrough"]').click()
-        cy.get('button[data-qa-selector="job_action_button"]').should('have.class', 'retry').click()
+        cy.get('a[data-qa-selector="pipeline_commit_status"]').click()
+        cy.get('button[data-testid="ci-action-component"]').first().click()
       }
       else {
         // configure new pipeline
