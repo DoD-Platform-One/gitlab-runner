@@ -1,7 +1,5 @@
 {
   "pluginsFile": false,
   "supportFile": false,
-  "fixturesFolder": false,
-  "chromeWebSecurity": false,
-  "videoCompression": 20
+  "fixturesFolder": false
 }

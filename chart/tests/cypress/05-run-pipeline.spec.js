@@ -15,12 +15,12 @@ describe('Run Pipeline', () => {
     // Disable Auto DevOps
     cy.visit('/'+Cypress.env('gitlab_username')+'/'+Cypress.env('gitlab_project')+'/-/settings/ci_cd#autodevops-settings')
     cy.get('input[id="project_auto_devops_attributes_enabled"]').uncheck({force: true})
-    cy.get('input[data-qa-selector="save_changes_button"]').click()
+    cy.get('button[data-qa-selector="save_changes_button"]').click()
 
     // conditionally configure ci pipeline
     cy.visit('/'+Cypress.env('gitlab_username')+'/'+Cypress.env('gitlab_project'))
     cy.get('body').then($body => {
-      if ($body.find('table[data-qa-selector="file_tree_table"]').length > 0) {
+      if ($body.find('table[data-testid="pipelines-tab-all"]').length > 0) {
         // pipeline already configured. delete the existing pipeline
         cy.visit('/'+Cypress.env('gitlab_username')+'/'+Cypress.env('gitlab_project')+'/-/pipelines')
         cy.get('a[data-qa-selector="pipeline_commit_status"]').click()
@@ -30,9 +30,10 @@ describe('Run Pipeline', () => {
         // configure new pipeline
         cy.visit('/'+Cypress.env('gitlab_username')+'/'+Cypress.env('gitlab_project')+'/-/new/main/')
         cy.get('input[id="file_name"]').click().type('.gitlab-ci.yml')
-        cy.get('div[class="view-line"]').click().type('stages:{enter}  - test{enter}{backspace}pipeline-test:{enter}  script:{enter}  - echo The pipeline test is successful!{enter}')
+        cy.get('div[class="view-line"]').click().type('pipeline-test:{enter}{backspace}  stage: test{enter}{backspace}  script:{enter}{backspace}{backspace}    - echo The pipeline test is successful!{enter}')
         // commit file and start pipeline
-        cy.get('button[id="commit-changes"]').click()
+        cy.scrollTo('bottom')
+        cy.get('button[data-qa-selector="commit_button"]').click()
       }
     })
     // wait 9 seconds for pipeline to get started
