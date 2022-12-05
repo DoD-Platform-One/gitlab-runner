@@ -1,7 +1,7 @@
 apiVersion: v1
 name: gitlab-runner
-version: 0.45.0-bb.3
-appVersion: 15.4.0
+version: 0.47.0-bb.0
+appVersion: 15.6.0
 description: GitLab Runner
 keywords:
 - git
@@ -16,7 +16,7 @@ maintainers:
   email: support@gitlab.com
 annotations:
   bigbang.dev/applicationVersions: |
-    - Gitlab Runner: v15.4.0
+    - Gitlab Runner: v15.6.0
 dependencies:
   - name: gluon
     version: 0.3.1
