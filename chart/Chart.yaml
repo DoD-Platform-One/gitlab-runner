@@ -14,10 +14,17 @@ icon: https://gitlab.com/uploads/-/system/project/avatar/250833/runner_logo.png
 maintainers:
 - name: GitLab Inc.
   email: support@gitlab.com
-annotations:
-  bigbang.dev/applicationVersions: |
-    - Gitlab Runner: v15.6.0
 dependencies:
   - name: gluon
     version: 0.3.1
     repository: oci://registry.dso.mil/platform-one/big-bang/apps/library-charts/gluon
+annotations:
+  bigbang.dev/applicationVersions: |
+    - Gitlab Runner: v15.6.0
+  helm.sh/images: |
+    - name: gitlab-runner
+      image: registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner:v15.6.0
+    - name: gitlab-runner-helper
+      image: registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner-helper:v15.6.0
+    - name: ubi8
+      image: registry1.dso.mil/ironbank/redhat/ubi/ubi8:8.7
