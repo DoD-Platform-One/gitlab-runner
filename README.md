@@ -1,6 +1,6 @@
 # gitlab-runner
 
-![Version: 0.47.0-bb.1](https://img.shields.io/badge/Version-0.47.0--bb.1-informational?style=flat-square) ![AppVersion: 15.6.0](https://img.shields.io/badge/AppVersion-15.6.0-informational?style=flat-square)
+![Version: 0.47.0-bb.2](https://img.shields.io/badge/Version-0.47.0--bb.2-informational?style=flat-square) ![AppVersion: 15.6.0](https://img.shields.io/badge/AppVersion-15.6.0-informational?style=flat-square)
 
 GitLab Runner
 
@@ -101,7 +101,7 @@ helm install gitlab-runner chart/
 | bbtests.cypress.envs.cypress_gitlab_first_name | string | `"testrunner"` |  |
 | bbtests.cypress.envs.cypress_gitlab_last_name | string | `"userrunner"` |  |
 | bbtests.cypress.envs.cypress_gitlab_username | string | `"gitlabrunner_user"` |  |
-| bbtests.cypress.envs.cypress_gitlab_password | string | `"gitlabrunner_pass"` |  |
+| bbtests.cypress.envs.cypress_gitlab_password | string | `"Runner_PaSsw0rd123"` |  |
 | bbtests.cypress.envs.cypress_gitlab_email | string | `"gitlab@bigbang.dev"` |  |
 | bbtests.cypress.envs.cypress_gitlab_project | string | `"runner-hello-world"` |  |
 | bbtests.cypress.secretEnvs[0].name | string | `"cypress_adminpassword"` |  |
