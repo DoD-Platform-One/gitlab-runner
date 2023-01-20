@@ -1,7 +1,7 @@
 apiVersion: v1
 name: gitlab-runner
-version: 0.47.0-bb.2
-appVersion: 15.6.0
+version: 0.48.2-bb.0
+appVersion: 15.7.3
 description: GitLab Runner
 keywords:
 - git
@@ -20,11 +20,11 @@ dependencies:
     repository: oci://registry1.dso.mil/bigbang
 annotations:
   bigbang.dev/applicationVersions: |
-    - Gitlab Runner: v15.6.0
+    - Gitlab Runner: v15.7.3
   helm.sh/images: |
     - name: gitlab-runner
-      image: registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner:v15.6.0
+      image: registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner:v15.7.3
     - name: gitlab-runner-helper
-      image: registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner-helper:v15.6.0
+      image: registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner-helper:v15.7.3
     - name: ubi8
       image: registry1.dso.mil/ironbank/redhat/ubi/ubi8:8.7
