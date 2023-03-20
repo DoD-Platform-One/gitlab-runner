@@ -742,6 +742,13 @@ volumes: []
 monitoring:
   enabled: false
 
+networkPolicies:
+  enabled: false
+  
+# autoRegister requires kyverno deployed in k8s cluster
+autoRegister:
+  enabled: false
+
 bbtests:
   enabled: false
   cypress:
@@ -760,6 +767,3 @@ bbtests:
           secretKeyRef:
             name: gitlab-gitlab-initial-root-password
             key: password
-
-networkPolicies:
-  enabled: false
