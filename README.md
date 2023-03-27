@@ -1,6 +1,6 @@
 # gitlab-runner
 
-![Version: 0.49.1-bb.2](https://img.shields.io/badge/Version-0.49.1--bb.2-informational?style=flat-square) ![AppVersion: 15.8.1](https://img.shields.io/badge/AppVersion-15.8.1-informational?style=flat-square)
+![Version: 0.49.1-bb.3](https://img.shields.io/badge/Version-0.49.1--bb.3-informational?style=flat-square) ![AppVersion: 15.8.1](https://img.shields.io/badge/AppVersion-15.8.1-informational?style=flat-square)
 
 GitLab Runner
 
@@ -94,8 +94,14 @@ helm install gitlab-runner chart/
 | configMaps | object | `{}` |  |
 | volumeMounts | list | `[]` |  |
 | volumes | list | `[]` |  |
+| istio.enabled | bool | `false` |  |
+| istio.injection | string | `"disabled"` |  |
+| istio.mtls | object | `{"mode":"STRICT"}` | Default peer authentication |
+| istio.mtls.mode | string | `"STRICT"` | STRICT = Allow only mutual TLS traffic, PERMISSIVE = Allow both plain text and mutual TLS traffic |
 | monitoring.enabled | bool | `false` |  |
 | networkPolicies.enabled | bool | `false` |  |
+| networkPolicies.controlPlaneCidr | string | `"0.0.0.0/0"` |  |
+| networkPolicies.additionalPolicies | list | `[]` |  |
 | autoRegister.enabled | bool | `false` |  |
 | bbtests.enabled | bool | `false` |  |
 | bbtests.cypress.artifacts | bool | `true` |  |

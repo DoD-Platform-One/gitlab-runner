@@ -7,7 +7,17 @@ runners:
 
 networkPolicies:
   enabled: true
-  
+  additionalPolicies:
+  - name: egress-runner-jobs
+    spec: 
+      podSelector: {}
+      policyTypes:
+      - Egress
+      egress:
+      - to:
+        - ipBlock:
+            cidr: 0.0.0.0/0
+
 # Cypress testing values
 bbtests:
   enabled: true
