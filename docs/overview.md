@@ -94,7 +94,8 @@ gitlab-runner-gitlab-runner-858b5c6796-s694b  1/1     Running   0          156m
 
 #### Network Policies
 
-By default, Gitlab Runner will inherit the [network policies](https://repo1.dso.mil/platform-one/big-bang/apps/developer-tools/gitlab/-/tree/main/chart/templates/bigbang/networkpolicies) from the Gitlab namespace. Until a long-term solution is implemented that works for all Platform One teams, Gitlab Runner users may manually create their own network policies for the Gitlab Runner pods. For example:
+Big Bang 1.X
+By default, Gitlab Runner will inherit the [network policies](https://repo1.dso.mil/big-bang/product/packages/gitlab/-/tree/main/chart/templates/bigbang/networkpolicies) from the Gitlab namespace. Until a long-term solution is implemented that works for all Platform One teams, Gitlab Runner users may manually create their own network policies for the Gitlab Runner pods. For example:
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -115,9 +116,33 @@ spec:
         # ONLY Block requests to AWS metadata IP
         except:
         - 169.254.169.254/32
+
+Big Bang 2.X
+By default, Gitlab Runner egress for runner jobs is locked down. You can dynamicaly create additional network policies with a values override. For example:
+
+```yaml
+networkPolicies:
+  additionalPolicies:
+  # expected use case is to open egress for runner jobs
+  # This is a dev example policy spec and CIDR 0.0.0.0/0 is unsafe for operational environments
+  # requests to controlPlane should also be blocked in an operational policy
+  - name: egress-runner-jobs
+    spec: 
+      podSelector: {}
+      policyTypes:
+      - Egress
+      egress:
+      - to:
+        - ipBlock:
+            cidr: 0.0.0.0/0
+            except:
+            # Block requests to AWS cloud metadata IP
+            - 169.254.169.254/32
+            # Block requests to controlPlane if CIDR not 0.0.0.0/0
+            - "{{ $.Values.networkPolicies.controlPlaneCidr }}"
 ```
 
-**Note:** By default, the Big Bang Gitlab Runner package is configured to pull kubernetes executor images from registry1.dso.mil. Also, the gitlab-runner pod will require egress to the kube-apiserver in order to create pods for CI jobs.
+**Note:** By default, the Big Bang Gitlab Runner package is configured to pull kubernetes executor images from registry1.dso.mil. Also, the gitlab-runner pod will require egress to the kube-apiserver in order to create pods for CI jobs. The networkPolicy templates handle creation of the necessary policy.
 
 #### Troubleshooting Tips
 

@@ -739,13 +739,43 @@ volumes: []
   #     claimName: my-pvc
 
 ## BigBang Specific Values
+istio:
+  # Toggle istio integration
+  enabled: false
+  injection: disabled
+  # -- Default peer authentication
+  mtls:
+    # -- STRICT = Allow only mutual TLS traffic,
+    # PERMISSIVE = Allow both plain text and mutual TLS traffic
+    mode: STRICT
+
 monitoring:
   enabled: false
 
 networkPolicies:
   enabled: false
-  
-# autoRegister requires kyverno deployed in k8s cluster
+  # See `kubectl cluster-info` and then resolve to IP
+  controlPlaneCidr: 0.0.0.0/0
+  additionalPolicies: []
+  # expected use case is to open egress for runner jobs
+  # This is a dev example policy spec and CIDR 0.0.0.0/0 is unsafe for operational environments
+  # requests to controlPlane should also be blocked in an operational policy
+  # - name: egress-runner-jobs
+  #   spec: 
+  #     podSelector: {}
+  #     policyTypes:
+  #     - Egress
+  #     egress:
+  #     - to:
+  #       - ipBlock:
+  #           cidr: 0.0.0.0/0
+  #           except:
+  #           # Block requests to AWS cloud metadata IP
+  #           - 169.254.169.254/32
+  #           # Block requests to controlPlane if CIDR not 0.0.0.0/0
+  #           # - "{{ $.Values.networkPolicies.controlPlaneCidr }}"
+
+# autoRegister requires kyverno deployed in k8s cluster and is intended for an in-cluster Gitlab
 autoRegister:
   enabled: false
 
