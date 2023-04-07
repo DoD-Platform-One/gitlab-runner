@@ -47,6 +47,9 @@ This is a high-level list of modifications that Big Bang has made to the upstrea
 - add Grafana dashboards
 
 ## /chart/templates/bigbang/*
+- Kyverno policies
+- NetworkPolicies
+- Istio peerAuthentications
 - add support for Grafana dashboards
 
 ## /chart/templates/tests/*
