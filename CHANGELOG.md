@@ -1,6 +1,12 @@
 # Changelog
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [0.51.0-bb.0] - 2022-04-05
+### Changed
+- Updated images to 15.10.0
+- Updated chart to 0.51.0
+
 ## [0.49.1-bb.3] - 2022-03-24
 ### Changed
 - added conditional networkPolices if not in gitlab namespace
