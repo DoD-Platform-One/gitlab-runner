@@ -2,6 +2,10 @@
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.51.0-bb.1] - 2022-04-26
+### Changed
+- Fixed bug in network policy ranging
+
 ## [0.51.0-bb.0] - 2022-04-05
 ### Changed
 - Updated images to 15.10.0
