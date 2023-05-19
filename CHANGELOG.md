@@ -2,21 +2,25 @@
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.51.0-bb.1] - 2022-04-26
+## [0.51.0-bb.2] - 2023-05-19
+### Changed
+- Update cypress tests for compatibility with latest gitlab version (6.11.2)
+
+## [0.51.0-bb.1] - 2023-04-26
 ### Changed
 - Fixed bug in network policy ranging
 
-## [0.51.0-bb.0] - 2022-04-05
+## [0.51.0-bb.0] - 2023-04-05
 ### Changed
 - Updated images to 15.10.0
 - Updated chart to 0.51.0
 
-## [0.49.1-bb.3] - 2022-03-24
+## [0.49.1-bb.3] - 2023-03-24
 ### Changed
 - added conditional networkPolices if not in gitlab namespace
 - added conditional istio integration and PeerAuthenticaton policy for metrics monitoring
 
-## [0.49.1-bb.2] - 2022-03-20
+## [0.49.1-bb.2] - 2023-03-20
 ### Changed
 - updated renovate file to update image tag in chart/values.yaml
 
@@ -24,17 +28,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 - Added conditional Kyverno ClusterPolicy to support runner auto registration
 
-## [0.49.1-bb.0] - 2022-02-22
+## [0.49.1-bb.0] - 2023-02-22
 ### Changed
 - Updated images to latest (15.8.1)
 - Updated chart to 0.49.1
 
-## [0.48.2-bb.0] - 2022-01-17
+## [0.48.2-bb.0] - 2023-01-17
 ### Changed
 - Updated images to latest (15.7.3)
 - Updated chart to 0.48.2
 
-## [0.47.0-bb.2] - 2022-01-17
+## [0.47.0-bb.2] - 2023-01-17
 ### Changed
 - Update gluon to new registry1 location + latest version (0.3.2)
 
