@@ -2,6 +2,11 @@
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.52.0-bb.0] - 2023-06-30
+### Changed
+- Update images to 15.11.0
+- Update chart to 0.52.0 base
+
 ## [0.51.0-bb.2] - 2023-05-19
 ### Changed
 - Update cypress tests for compatibility with latest gitlab version (6.11.2)

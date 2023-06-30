@@ -12,10 +12,10 @@
 ##       these images run on different user IDs.
 ##
 ## If defined, the image config will override registry, repository and tag
-image: null
-registry: registry1.dso.mil
-repository: ironbank/gitlab/gitlab-runner/gitlab-runner
-tag: v15.10.0
+image:
+  registry: registry1.dso.mil
+  image: ironbank/gitlab/gitlab-runner/gitlab-runner
+  tag: v15.11.0
 
 ## Specify a imagePullPolicy for the main runner deployment
 ## 'Always' if imageTag is 'latest', else set to 'IfNotPresent'
@@ -54,6 +54,7 @@ gitlabUrl: http://gitlab-webservice-default.gitlab.svc.cluster.local:8181
 ## The Registration Token for adding new Runners to the GitLab Server. This must
 ## be retrieved from your GitLab Instance.
 ## ref: https://docs.gitlab.com/ce/ci/runners/index.html
+## ref: https://docs.gitlab.com/runner/register/
 ##
 # runnerRegistrationToken: ""
 
@@ -124,7 +125,7 @@ checkInterval: 30
 ## ref:
 ##
 ## When sessionServer is enabled, the user can either provide a public publicIP
-## or either rely on the external IP auto discovery
+## or rely on the external IP auto discovery
 ## When a serviceAccountName is used with the automounting to the pod disable,
 ## we recommend the usage of the publicIP
 sessionServer:
@@ -317,7 +318,7 @@ runners:
   helper:
     registry: registry1.dso.mil
     repository: ironbank/gitlab/gitlab-runner/gitlab-runner-helper
-    tag: "v15.10.0"
+    tag: "v15.11.0"
 
   # runner configuration, where the multi line strings is evaluated as
   # template so you can specify helm values inside of it.
@@ -528,7 +529,7 @@ runners:
     # memoryLimit: 256Mi
     # cpuRequests: 100m
     # memoryRequests: 128Mi
-    # image: "registry.gitlab.com/gitlab-org/gitlab-runner-helper:x86_64-${CI_RUNNER_REVISION}"
+    # image: "registry.gitlab.com/gitlab-org/gitlab-runner/gitlab-runner-helper:x86_64-${CI_RUNNER_REVISION}"
 
   ## Helper container security context configuration
   ## Refer to https://docs.gitlab.com/runner/executors/kubernetes.html#using-security-context
