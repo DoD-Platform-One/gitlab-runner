@@ -330,6 +330,7 @@ runners:
       clone_url = "http://gitlab-webservice-default.gitlab.svc.cluster.local:8181"
       cache_dir = "/tmp/gitlab-runner/cache"
       [runners.kubernetes]
+        pull_policy = "always"
         namespace = "{{.Release.Namespace}}"
         image = "{{ printf "%s/%s:%s" .Values.runners.job.registry .Values.runners.job.repository .Values.runners.job.tag }}"
         helper_image = "{{ printf "%s/%s:%s" .Values.runners.helper.registry .Values.runners.helper.repository .Values.runners.helper.tag }}"
