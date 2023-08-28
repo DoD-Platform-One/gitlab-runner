@@ -2,6 +2,10 @@
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.52.0-bb.2] - 2023-08-28
+### Changed
+- Changed the image pull policy to always to ensure the access policies are checked
+
 ## [0.52.0-bb.1] - 2023-07-25
 ### Removed
 - Removed name element on both submit buttons for cypress test 03, 04 and 05
