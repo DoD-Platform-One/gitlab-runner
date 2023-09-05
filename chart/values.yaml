@@ -607,6 +607,7 @@ securityContext:
 ##
 podSecurityContext:
   runAsUser: 1001
+  runAsNonRoot: true
   # runAsGroup: 65533
   fsGroup: 65533
   # supplementalGroups: [65533]
@@ -616,6 +617,7 @@ podSecurityContext:
   # fsGroup: 999
 
 containerSecurityContext:
+  runAsNonRoot: true
   capabilities:
     drop: 
       - ALL
