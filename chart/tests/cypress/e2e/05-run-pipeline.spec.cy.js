@@ -10,7 +10,7 @@ describe('Run Pipeline', () => {
     cy.visit('/users/sign_in')
     cy.get('input[id="user_login"]').type(Cypress.env('gitlab_username'))
     cy.get('input[id="user_password"]').type(Cypress.env('gitlab_password'))
-    cy.get('button[type="submit"]').click()
+    cy.get('button[data-qa-selector="sign_in_button"').click()
 
     // Disable Auto DevOps
     cy.visit('/'+Cypress.env('gitlab_username')+'/'+Cypress.env('gitlab_project')+'/-/settings/ci_cd#autodevops-settings')

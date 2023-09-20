@@ -1,3 +1,13 @@
-{{- include "gluon.tests.cypress-configmap.base" . }}
+{{- include "gluon.tests.cypress-configmap.overrides" (list . "gitlab-runner.cypress-configmap") }}
+{{- define "gitlab-runner.cypress-configmap" }}
+metadata:
+  labels:
+    app: gitlab-runner
+{{- end }}
 ---
-{{- include "gluon.tests.cypress-runner.base" . }}
+{{- include "gluon.tests.cypress-runner.overrides" (list . "gitlab-runner.cypress-runner") -}}
+{{- define "gitlab-runner.cypress-runner" -}}
+metadata:
+  labels:
+    app: gitlab-runner
+{{- end }}
