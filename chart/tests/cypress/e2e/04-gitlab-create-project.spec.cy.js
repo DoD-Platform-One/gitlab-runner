@@ -11,7 +11,7 @@ describe('Create Gitlab Project', () => {
     cy.visit('/users/sign_in')
     cy.get('input[id="user_login"]').type(Cypress.env('gitlab_username'))
     cy.get('input[id="user_password"]').type(Cypress.env('gitlab_password'))
-    cy.get('button[type="submit"]').click()
+    cy.get('button[data-qa-selector="sign_in_button"').click()
     
     // if first login assign Developer role with the joining_team objective
     cy.url().then(($url) => {
