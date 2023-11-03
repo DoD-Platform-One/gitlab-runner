@@ -343,6 +343,7 @@ runners:
         "job_id" = "${CI_JOB_ID}"
         "job_name" = "${CI_JOB_NAME}"
         "pipeline_id" = "${CI_PIPELINE_ID}"
+        "app" = "gitlab-runner"
 
   ## Which executor should be used
   ##
