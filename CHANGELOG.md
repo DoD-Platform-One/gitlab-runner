@@ -2,6 +2,14 @@
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.58.1-bb.0] - 2023-11-09
+### Changed
+- Updated ironbank/gitlab/gitlab-runner/gitlab-runner v15.11.0 -> v16.5.0
+- Updated ironbank/gitlab/gitlab-runner/gitlab-runner-helper v15.11.0 -> v16.5.0
+- Updated registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner v15.11.0 -> v16.5.0
+- Updated registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner-helper v15.11.0 -> v16.5.0
+- Updated gluon 0.4.1 -> 0.4.4
+
 ## [0.52.0-bb.8] - 2023-11-03
 ### Changed
 - Added additional kubernetes label to runner to allow it to work with network policy by default 
