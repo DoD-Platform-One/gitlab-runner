@@ -1,6 +1,6 @@
 # gitlab-runner
 
-![Version: 0.58.1-bb.0](https://img.shields.io/badge/Version-0.58.1--bb.0-informational?style=flat-square) ![AppVersion: 16.5.0](https://img.shields.io/badge/AppVersion-16.5.0-informational?style=flat-square)
+![Version: 0.59.1-bb.0](https://img.shields.io/badge/Version-0.59.1--bb.0-informational?style=flat-square) ![AppVersion: 16.6.0](https://img.shields.io/badge/AppVersion-16.6.0-informational?style=flat-square)
 
 GitLab Runner
 
@@ -38,7 +38,8 @@ helm install gitlab-runner chart/
 |-----|------|---------|-------------|
 | image.registry | string | `"registry1.dso.mil"` |  |
 | image.image | string | `"ironbank/gitlab/gitlab-runner/gitlab-runner"` |  |
-| image.tag | string | `"v16.5.0"` |  |
+| image.tag | string | `"v16.6.0"` |  |
+| useTini | bool | `true` |  |
 | imagePullPolicy | string | `"IfNotPresent"` |  |
 | gitlabUrl | string | `"http://gitlab-webservice-default.gitlab.svc.cluster.local:8181"` |  |
 | terminationGracePeriodSeconds | int | `3600` |  |
@@ -59,10 +60,10 @@ helm install gitlab-runner chart/
 | service.type | string | `"ClusterIP"` |  |
 | runners.job.registry | string | `"registry1.dso.mil"` |  |
 | runners.job.repository | string | `"ironbank/redhat/ubi/ubi8"` |  |
-| runners.job.tag | string | `"8.7"` |  |
+| runners.job.tag | string | `"8.9"` |  |
 | runners.helper.registry | string | `"registry1.dso.mil"` |  |
 | runners.helper.repository | string | `"ironbank/gitlab/gitlab-runner/gitlab-runner-helper"` |  |
-| runners.helper.tag | string | `"v16.5.0"` |  |
+| runners.helper.tag | string | `"v16.6.0"` |  |
 | runners.config | string | `"[[runners]]\n  clone_url = \"http://gitlab-webservice-default.gitlab.svc.cluster.local:8181\"\n  cache_dir = \"/tmp/gitlab-runner/cache\"\n  [runners.kubernetes]\n    pull_policy = \"always\"\n    namespace = \"{{.Release.Namespace}}\"\n    image = \"{{ printf \"%s/%s:%s\" .Values.runners.job.registry .Values.runners.job.repository .Values.runners.job.tag }}\"\n    helper_image = \"{{ printf \"%s/%s:%s\" .Values.runners.helper.registry .Values.runners.helper.repository .Values.runners.helper.tag }}\"\n    image_pull_secrets = [\"private-registry\"]\n  [runners.kubernetes.pod_security_context]\n    run_as_non_root = true\n    run_as_user = 1001\n  [runners.kubernetes.helper_container_security_context]\n    run_as_non_root = true\n    run_as_user = 1001\n  [runners.kubernetes.pod_labels]\n    \"job_id\" = \"${CI_JOB_ID}\"\n    \"job_name\" = \"${CI_JOB_NAME}\"\n    \"pipeline_id\" = \"${CI_PIPELINE_ID}\"\n    \"app\" = \"gitlab-runner\"\n"` |  |
 | runners.configPath | string | `""` |  |
 | runners.locked | bool | `false` |  |
@@ -112,6 +113,10 @@ helm install gitlab-runner chart/
 | networkPolicies.additionalPolicies | list | `[]` |  |
 | autoRegister.enabled | bool | `false` |  |
 | bbtests.enabled | bool | `false` |  |
+| bbtests.resources.requests.cpu | int | `2` |  |
+| bbtests.resources.requests.memory | string | `"6Gi"` |  |
+| bbtests.resources.limits.cpu | int | `2` |  |
+| bbtests.resources.limits.memory | string | `"12Gi"` |  |
 | bbtests.cypress.artifacts | bool | `true` |  |
 | bbtests.cypress.envs.cypress_baseUrl | string | `"http://gitlab-webservice-default.gitlab.svc.cluster.local:8181"` |  |
 | bbtests.cypress.envs.cypress_gitlab_first_name | string | `"testrunner"` |  |

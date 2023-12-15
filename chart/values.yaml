@@ -12,7 +12,12 @@
 image:
   registry: registry1.dso.mil
   image: ironbank/gitlab/gitlab-runner/gitlab-runner
-  tag: v16.5.0
+  tag: v16.6.0
+
+## When using GitLab Runner Helm Chart with gitlab-runner-ubi-images (https://gitlab.com/gitlab-org/ci-cd/gitlab-runner-ubi-images/container_registry)
+## the installation fails because dumb-init is not packaged in the image. However, the tini is present.
+## This configuration will allow gitlab-runner-ubi-images users to explicitly enabled the use of `tini` instead of `dumb-init`
+useTini: true
 
 ## Specify a imagePullPolicy for the main runner deployment
 ## 'Always' if imageTag is 'latest', else set to 'IfNotPresent'
@@ -32,7 +37,7 @@ imagePullPolicy: IfNotPresent
 #   - name: "image-pull-secret"
 
 ## Timeout, in seconds, for liveness and readiness probes of a runner pod.
-# probeTimeoutSeconds: 1
+# probeTimeoutSeconds: 3
 
 ## How many runner pods to launch.
 ##
@@ -146,6 +151,7 @@ rbac:
   # resources: ["pods", "pods/exec", "secrets"]
   # verbs: ["get", "list", "watch", "create", "patch", "delete"]
 
+
   ## Define list of rules to be added to the rbac role permissions.
   ## Each rule supports the keys:
   ## - apiGroups: default "" (indicates the core API group) if missing or empty.
@@ -179,7 +185,7 @@ rbac:
   ## serviceAccountAnnotations:
   ##   eks.amazonaws.com/role-arn: "arn:aws:iam::{{ .Values.global.accountId }}:role/{{ .Values.global.iamRoleName }}"
   ##
-  ## ref: https://docs.aws.amazon.com/eks/latest/userguide/associate-service-account-role.html 
+  ## ref: https://docs.aws.amazon.com/eks/latest/userguide/associate-service-account-role.html
   ##
   # serviceAccountAnnotations: {}
 
@@ -237,7 +243,7 @@ metrics:
 
     ## Supply a tls configuration for the service monitor
     ##
-    ## ref: https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/charts/crds/crds/crd-servicemonitors.yaml 
+    ## ref: https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/charts/crds/crds/crd-servicemonitors.yaml
     ##
     # tlsConfig: {}
 
@@ -323,11 +329,11 @@ runners:
   job:
     registry: registry1.dso.mil
     repository: ironbank/redhat/ubi/ubi8
-    tag: "8.7"
+    tag: "8.9"
   helper:
     registry: registry1.dso.mil
     repository: ironbank/gitlab/gitlab-runner/gitlab-runner-helper
-    tag: "v16.5.0"
+    tag: "v16.6.0"
 
   # runner configuration, where the multi line strings is evaluated as
   # template so you can specify helm values inside of it.
@@ -369,16 +375,11 @@ runners:
   ##
   ## ref: https://docs.gitlab.com/ee/ci/runners/new_creation_workflow.html
   ##
-  ## DEPRECATED: See https://docs.gitlab.com/runner/install/kubernetes.html#additional-configuration
-  # requestConcurrency: 1
-
-  ## Specify whether the runner should be locked to a specific project: true, false. Defaults to true.
-  ##
   locked: false
 
-  ## Specify the tags associated with the runner. Comma-separated list of tags.
+  ## DEPRECATED: Specify the tags associated with the runner. Comma-separated list of tags.
   ##
-  ## ref: https://docs.gitlab.com/ee/ci/runners/configure_runners.html#use-tags-to-control-which-jobs-a-runner-can-run
+  ## ref: https://docs.gitlab.com/ee/ci/runners/new_creation_workflow.html
   ##
   # tags: ""
 
@@ -400,16 +401,9 @@ runners:
 
   ## DEPRECATED: Specify whether the runner should only run protected branches.
   ##
-  ## ref: https://docs.gitlab.com/ee/ci/runners/configure_runners.html#prevent-runners-from-revealing-sensitive-information
+  ## ref: https://docs.gitlab.com/ee/ci/runners/new_creation_workflow.html
   ##
   protected: true
-
-  ## Run all containers with the privileged flag enabled
-  ## This will allow the docker:dind image to run if you need to run Docker
-  ## commands. Please read the docs before turning this on:
-  ## ref: https://docs.gitlab.com/runner/executors/kubernetes.html#using-dockerdind
-  ##
-  # protected: true
 
   ## The name of the secret containing runner-token and runner-registration-token
   secret: gitlab-gitlab-runner-secret
@@ -484,7 +478,6 @@ runners:
     # secretName: google-application-credentials
     ## Use this line for access using Azure with azure-account-name and azure-account-key
     # secretName: azureaccess
-
 
   ## Build Container specific configuration
   ##
@@ -571,6 +564,18 @@ runners:
   # env:
   #   NAME: VALUE
 
+## TopologySpreadConstraints for pod assignment
+## Ref: https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/
+##
+topologySpreadConstraints: {}
+  # Example: The gitlab runner should be evenly spread across zones
+  # - maxSkew: 1
+  #   topologyKey: zone
+  #   whenUnsatisfiable: DoNotSchedule
+  #   labelSelector:
+  #     matchLabels:
+  #       foo: bar
+
 
 ## Specify the name of the scheduler which used to schedule runner pods.
 ## Kubernetes supports multiple scheduler configurations.
@@ -578,7 +583,7 @@ runners:
 # schedulerName: "my-custom-scheduler"
 
 ## Configure securitycontext for the main container
-## ref: https://kubernetes.io/docs/concepts/security/pod-security-standards/ 
+## ref: https://kubernetes.io/docs/concepts/security/pod-security-standards/
 ##
 securityContext:
   allowPrivilegeEscalation: false
@@ -590,8 +595,9 @@ securityContext:
   capabilities:
     drop: ["ALL"]
 
+
 ## Configure securitycontext valid for the whole pod
-## ref: https://kubernetes.io/docs/concepts/security/pod-security-standards/ 
+## ref: https://kubernetes.io/docs/concepts/security/pod-security-standards/
 ##
 podSecurityContext:
   runAsUser: 1001
@@ -790,6 +796,13 @@ autoRegister:
 
 bbtests:
   enabled: false
+  resources:
+    requests:
+      cpu: 2
+      memory: "6Gi"
+    limits:
+      cpu: 2
+      memory: "12Gi"
   cypress:
     artifacts: true
     envs:

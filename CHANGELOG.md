@@ -2,6 +2,14 @@
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.59.1-bb.0] - 2023-11-29
+### Changed
+- Updated chart to 0.59.1
+- Updated images to v16.6.0
+- Update ubi base image ubi8:8.9
+- Fixed syntax in chart/templates/tests/test-gitlab-runners.yaml
+- Increased available cypress test resources in chart/values.yaml
+
 ## [0.58.1-bb.0] - 2023-11-09
 ### Changed
 - Updated ironbank/gitlab/gitlab-runner/gitlab-runner v15.11.0 -> v16.5.0

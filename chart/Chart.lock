@@ -3,4 +3,4 @@ dependencies:
   repository: oci://registry1.dso.mil/bigbang
   version: 0.4.4
 digest: sha256:306ebeeb7af982b73ea4d7ffb6a6467c2be21d957b2f2af92973e859c03c05a9
-generated: "2023-11-09T06:02:11.34392503-07:00"
+generated: "2023-11-30T16:06:45.449833575-07:00"
