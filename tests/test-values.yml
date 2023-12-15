@@ -9,7 +9,7 @@ networkPolicies:
   enabled: true
   additionalPolicies:
   - name: egress-runner-jobs
-    spec: 
+    spec:
       podSelector: {}
       policyTypes:
       - Egress
@@ -21,3 +21,11 @@ networkPolicies:
 # Cypress testing values
 bbtests:
   enabled: true
+  cypress:
+    resources:
+      requests:
+        cpu: 2
+        memory: "8Gi"
+      limits:
+        cpu: 4
+        memory: "16Gi"
