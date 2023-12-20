@@ -1,6 +1,6 @@
 # gitlab-runner
 
-![Version: 0.59.1-bb.0](https://img.shields.io/badge/Version-0.59.1--bb.0-informational?style=flat-square) ![AppVersion: 16.6.0](https://img.shields.io/badge/AppVersion-16.6.0-informational?style=flat-square)
+![Version: 0.59.1-bb.1](https://img.shields.io/badge/Version-0.59.1--bb.1-informational?style=flat-square) ![AppVersion: 16.6.0](https://img.shields.io/badge/AppVersion-16.6.0-informational?style=flat-square)
 
 GitLab Runner
 
@@ -59,8 +59,8 @@ helm install gitlab-runner chart/
 | service.enabled | bool | `true` |  |
 | service.type | string | `"ClusterIP"` |  |
 | runners.job.registry | string | `"registry1.dso.mil"` |  |
-| runners.job.repository | string | `"ironbank/redhat/ubi/ubi8"` |  |
-| runners.job.tag | string | `"8.9"` |  |
+| runners.job.repository | string | `"ironbank/redhat/ubi/ubi9"` |  |
+| runners.job.tag | string | `"9.3"` |  |
 | runners.helper.registry | string | `"registry1.dso.mil"` |  |
 | runners.helper.repository | string | `"ironbank/gitlab/gitlab-runner/gitlab-runner-helper"` |  |
 | runners.helper.tag | string | `"v16.6.0"` |  |
