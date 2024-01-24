@@ -613,7 +613,7 @@ podSecurityContext:
 containerSecurityContext:
   runAsNonRoot: true
 capabilities:
-    drop: 
+    drop:
       - ALL
 
 ## Configure resource requests and limits
@@ -776,7 +776,7 @@ networkPolicies:
   # This is a dev example policy spec and CIDR 0.0.0.0/0 is unsafe for operational environments
   # requests to controlPlane should also be blocked in an operational policy
   # - name: egress-runner-jobs
-  #   spec: 
+  #   spec:
   #     podSelector: {}
   #     policyTypes:
   #     - Egress
@@ -807,11 +807,6 @@ bbtests:
     artifacts: true
     envs:
       cypress_baseUrl: http://gitlab-webservice-default.gitlab.svc.cluster.local:8181
-      cypress_gitlab_first_name: "testrunner"
-      cypress_gitlab_last_name: "userrunner"
-      cypress_gitlab_username: "gitlabrunner_user"
-      cypress_gitlab_password: "Runner_PaSsw0rd123"
-      cypress_gitlab_email: "gitlab@bigbang.dev"
       cypress_gitlab_project: "runner-hello-world"
     secretEnvs:
       - name: cypress_adminpassword
