@@ -1,6 +1,6 @@
 # gitlab-runner
 
-![Version: 0.59.1-bb.2](https://img.shields.io/badge/Version-0.59.1--bb.1-informational?style=flat-square) ![AppVersion: 16.6.0](https://img.shields.io/badge/AppVersion-16.6.0-informational?style=flat-square)
+![Version: 0.59.1-bb.3](https://img.shields.io/badge/Version-0.59.1--bb.3-informational?style=flat-square) ![AppVersion: 16.6.0](https://img.shields.io/badge/AppVersion-16.6.0-informational?style=flat-square)
 
 GitLab Runner
 
@@ -119,7 +119,7 @@ helm install gitlab-runner chart/
 | bbtests.resources.limits.cpu | int | `2` |  |
 | bbtests.resources.limits.memory | string | `"12Gi"` |  |
 | bbtests.cypress.artifacts | bool | `true` |  |
-| bbtests.cypress.envs.cypress_baseUrl | string | `"http://gitlab-webservice-default.gitlab.svc.cluster.local:8181"` |  |
+| bbtests.cypress.envs.cypress_url | string | `"http://gitlab-webservice-default.gitlab.svc.cluster.local:8181"` |  |
 | bbtests.cypress.envs.cypress_gitlab_project | string | `"runner-hello-world"` |  |
 | bbtests.cypress.secretEnvs[0].name | string | `"cypress_adminpassword"` |  |
 | bbtests.cypress.secretEnvs[0].valueFrom.secretKeyRef.name | string | `"gitlab-gitlab-initial-root-password"` |  |
