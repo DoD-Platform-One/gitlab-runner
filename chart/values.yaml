@@ -806,7 +806,7 @@ bbtests:
   cypress:
     artifacts: true
     envs:
-      cypress_baseUrl: http://gitlab-webservice-default.gitlab.svc.cluster.local:8181
+      cypress_url: http://gitlab-webservice-default.gitlab.svc.cluster.local:8181
       cypress_gitlab_project: "runner-hello-world"
     secretEnvs:
       - name: cypress_adminpassword
