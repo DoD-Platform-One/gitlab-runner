@@ -1,7 +1,7 @@
 {
   "bomFormat": "CycloneDX",
   "specVersion": "1.5",
-  "serialNumber": "urn:uuid:c4c6edb8-87c4-41be-ad1a-2e313b353608",
+  "serialNumber": "urn:uuid:bcbf5528-b356-4916-b726-0cd332b56abc",
   "version": 1,
   "metadata": {
     "tools": null,
@@ -9634,11 +9634,11 @@
         },
         {
           "type": "library",
-          "bom-ref": "registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner@v16.6.0:pkg:golang/gitlab.com/gitlab-org/gitlab-runner@v0.0.0-20231116194036-3046fee8e6a2?package-id=680040a24c74751b",
+          "bom-ref": "registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner@v16.6.0:pkg:golang/gitlab.com/gitlab-org/gitlab-runner@16.6.0?package-id=00522e04723f739e",
           "name": "gitlab.com/gitlab-org/gitlab-runner",
-          "version": "v0.0.0-20231116194036-3046fee8e6a2",
-          "cpe": "cpe:2.3:a:gitlab-org:gitlab-runner:v0.0.0-20231116194036-3046fee8e6a2:*:*:*:*:*:*:*",
-          "purl": "pkg:golang/gitlab.com/gitlab-org/gitlab-runner@v0.0.0-20231116194036-3046fee8e6a2",
+          "version": "16.6.0",
+          "cpe": "cpe:2.3:a:gitlab-org:gitlab-runner:16.6.0:*:*:*:*:*:*:*",
+          "purl": "pkg:golang/gitlab.com/gitlab-org/gitlab-runner@16.6.0",
           "properties": [
             {
               "name": "syft:package:foundBy",
@@ -9658,23 +9658,23 @@
             },
             {
               "name": "syft:cpe23",
-              "value": "cpe:2.3:a:gitlab-org:gitlab_runner:v0.0.0-20231116194036-3046fee8e6a2:*:*:*:*:*:*:*"
+              "value": "cpe:2.3:a:gitlab-org:gitlab_runner:16.6.0:*:*:*:*:*:*:*"
             },
             {
               "name": "syft:cpe23",
-              "value": "cpe:2.3:a:gitlab_org:gitlab-runner:v0.0.0-20231116194036-3046fee8e6a2:*:*:*:*:*:*:*"
+              "value": "cpe:2.3:a:gitlab_org:gitlab-runner:16.6.0:*:*:*:*:*:*:*"
             },
             {
               "name": "syft:cpe23",
-              "value": "cpe:2.3:a:gitlab_org:gitlab_runner:v0.0.0-20231116194036-3046fee8e6a2:*:*:*:*:*:*:*"
+              "value": "cpe:2.3:a:gitlab_org:gitlab_runner:16.6.0:*:*:*:*:*:*:*"
             },
             {
               "name": "syft:cpe23",
-              "value": "cpe:2.3:a:gitlab:gitlab-runner:v0.0.0-20231116194036-3046fee8e6a2:*:*:*:*:*:*:*"
+              "value": "cpe:2.3:a:gitlab:gitlab-runner:16.6.0:*:*:*:*:*:*:*"
             },
             {
               "name": "syft:cpe23",
-              "value": "cpe:2.3:a:gitlab:gitlab_runner:v0.0.0-20231116194036-3046fee8e6a2:*:*:*:*:*:*:*"
+              "value": "cpe:2.3:a:gitlab:gitlab_runner:16.6.0:*:*:*:*:*:*:*"
             },
             {
               "name": "syft:location:0:layerID",
@@ -22487,6 +22487,7 @@
         },
         {
           "type": "operating-system",
+          "bom-ref": "registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner@v16.6.0:os:rhel@8.8",
           "name": "rhel",
           "version": "8.8",
           "description": "Red Hat Enterprise Linux 8.8 (Ootpa)",
@@ -29099,11 +29100,11 @@
         },
         {
           "type": "library",
-          "bom-ref": "registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner-helper@v16.6.0:pkg:golang/gitlab.com/gitlab-org/gitlab-runner@v0.0.0-20231116194036-3046fee8e6a2?package-id=28cd04070e997d55",
+          "bom-ref": "registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner-helper@v16.6.0:pkg:golang/gitlab.com/gitlab-org/gitlab-runner@16.6.0?package-id=d8830bb167b25fdb",
           "name": "gitlab.com/gitlab-org/gitlab-runner",
-          "version": "v0.0.0-20231116194036-3046fee8e6a2",
-          "cpe": "cpe:2.3:a:gitlab-org:gitlab-runner:v0.0.0-20231116194036-3046fee8e6a2:*:*:*:*:*:*:*",
-          "purl": "pkg:golang/gitlab.com/gitlab-org/gitlab-runner@v0.0.0-20231116194036-3046fee8e6a2",
+          "version": "16.6.0",
+          "cpe": "cpe:2.3:a:gitlab-org:gitlab-runner:16.6.0:*:*:*:*:*:*:*",
+          "purl": "pkg:golang/gitlab.com/gitlab-org/gitlab-runner@16.6.0",
           "properties": [
             {
               "name": "syft:package:foundBy",
@@ -29123,23 +29124,23 @@
             },
             {
               "name": "syft:cpe23",
-              "value": "cpe:2.3:a:gitlab-org:gitlab_runner:v0.0.0-20231116194036-3046fee8e6a2:*:*:*:*:*:*:*"
+              "value": "cpe:2.3:a:gitlab-org:gitlab_runner:16.6.0:*:*:*:*:*:*:*"
             },
             {
               "name": "syft:cpe23",
-              "value": "cpe:2.3:a:gitlab_org:gitlab-runner:v0.0.0-20231116194036-3046fee8e6a2:*:*:*:*:*:*:*"
+              "value": "cpe:2.3:a:gitlab_org:gitlab-runner:16.6.0:*:*:*:*:*:*:*"
             },
             {
               "name": "syft:cpe23",
-              "value": "cpe:2.3:a:gitlab_org:gitlab_runner:v0.0.0-20231116194036-3046fee8e6a2:*:*:*:*:*:*:*"
+              "value": "cpe:2.3:a:gitlab_org:gitlab_runner:16.6.0:*:*:*:*:*:*:*"
             },
             {
               "name": "syft:cpe23",
-              "value": "cpe:2.3:a:gitlab:gitlab-runner:v0.0.0-20231116194036-3046fee8e6a2:*:*:*:*:*:*:*"
+              "value": "cpe:2.3:a:gitlab:gitlab-runner:16.6.0:*:*:*:*:*:*:*"
             },
             {
               "name": "syft:cpe23",
-              "value": "cpe:2.3:a:gitlab:gitlab_runner:v0.0.0-20231116194036-3046fee8e6a2:*:*:*:*:*:*:*"
+              "value": "cpe:2.3:a:gitlab:gitlab_runner:16.6.0:*:*:*:*:*:*:*"
             },
             {
               "name": "syft:location:0:layerID",
@@ -41495,6 +41496,7 @@
         },
         {
           "type": "operating-system",
+          "bom-ref": "registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner-helper@v16.6.0:os:rhel@8.8",
           "name": "rhel",
           "version": "8.8",
           "description": "Red Hat Enterprise Linux 8.8 (Ootpa)",
@@ -58320,6 +58322,7 @@
         },
         {
           "type": "operating-system",
+          "bom-ref": "registry1.dso.mil/ironbank/redhat/ubi/ubi9@9.3:os:rhel@9.3",
           "name": "rhel",
           "version": "9.3",
           "description": "Red Hat Enterprise Linux 9.3 (Plow)",
