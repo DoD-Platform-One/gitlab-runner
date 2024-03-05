@@ -814,3 +814,6 @@ bbtests:
           secretKeyRef:
             name: gitlab-gitlab-initial-root-password
             key: password
+
+openshift:
+  enabled: false
