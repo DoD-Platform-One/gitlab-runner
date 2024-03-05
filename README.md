@@ -1,6 +1,6 @@
 # gitlab-runner
 
-![Version: 0.59.1-bb.3](https://img.shields.io/badge/Version-0.59.1--bb.3-informational?style=flat-square) ![AppVersion: 16.6.0](https://img.shields.io/badge/AppVersion-16.6.0-informational?style=flat-square)
+![Version: 0.59.1-bb.4](https://img.shields.io/badge/Version-0.59.1--bb.4-informational?style=flat-square) ![AppVersion: 16.6.0](https://img.shields.io/badge/AppVersion-16.6.0-informational?style=flat-square)
 
 GitLab Runner
 
@@ -112,7 +112,7 @@ helm install gitlab-runner chart/
 | networkPolicies.enabled | bool | `false` |  |
 | networkPolicies.controlPlaneCidr | string | `"0.0.0.0/0"` |  |
 | networkPolicies.additionalPolicies | list | `[]` |  |
-| autoRegister.enabled | bool | `false` |  |
+| autoRegister.enabled | bool | `true` |  |
 | bbtests.enabled | bool | `false` |  |
 | bbtests.resources.requests.cpu | int | `2` |  |
 | bbtests.resources.requests.memory | string | `"6Gi"` |  |
@@ -124,6 +124,7 @@ helm install gitlab-runner chart/
 | bbtests.cypress.secretEnvs[0].name | string | `"cypress_adminpassword"` |  |
 | bbtests.cypress.secretEnvs[0].valueFrom.secretKeyRef.name | string | `"gitlab-gitlab-initial-root-password"` |  |
 | bbtests.cypress.secretEnvs[0].valueFrom.secretKeyRef.key | string | `"password"` |  |
+| openshift.enabled | bool | `false` |  |
 
 ## Contributing
 
