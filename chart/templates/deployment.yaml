@@ -17,12 +17,15 @@ metadata:
   {{- end }}
 spec:
   {{- if not .Values.hpa}}
-  replicas: {{ default 1 .Values.replicas }}
+  replicas: {{ .Values.replicas }}
   {{- end}}
   revisionHistoryLimit: {{ default 10 .Values.revisionHistoryLimit }}
   selector:
     matchLabels:
       app: {{ include "gitlab-runner.fullname" . }}
+  {{- with .Values.strategy }}
+  strategy: {{ toYaml . | nindent 4 }}
+  {{- end }}
   template:
     metadata:
       labels:
@@ -67,10 +70,10 @@ spec:
         {{- if .Values.useTini }}
         command: ["/usr/local/bin/tini", "--", "/bin/bash", "/configmaps/entrypoint"]
         {{- else }}
-        command: ["/bin/bash", "/configmaps/entrypoint"]
+        command: ["/bin/bash", "/configmaps/entrypoint"]\
         {{- end }}
         env:
-        {{ include "gitlab-runner.runner-env-vars" . | indent 8 }}
+        {{- include "gitlab-runner.runner-env-vars" . | indent 8 }}
         livenessProbe:
           exec:
             command: ["/bin/bash", "/configmaps/check-live"]
@@ -90,7 +93,7 @@ spec:
         ports:
         - name: {{ .Values.metrics.portName | quote }}
           containerPort: {{ .Values.metrics.port }}
-        {{- if and (eq (default 1.0 .Values.replicas) 1.0) .Values.sessionServer .Values.sessionServer.enabled }}
+        {{- if eq (include "gitlab-runner.isSessionServerAllowed" . ) "true" }}
         - name: session-server
           containerPort: {{ include "gitlab-runner.server-session-internal-port" . }}
           protocol: TCP
@@ -178,4 +181,6 @@ spec:
       hostAliases:
 {{ toYaml .Values.hostAliases | indent 8 }}
     {{- end }}
-
+    {{- if .Values.hostname }}
+      hostname: {{ toYaml .Values.hostname }}
+    {{- end }}
