@@ -1,6 +1,6 @@
 # gitlab-runner
 
-![Version: 0.62.0-bb.0](https://img.shields.io/badge/Version-0.62.0--bb.0-informational?style=flat-square) ![AppVersion: 16.9.0](https://img.shields.io/badge/AppVersion-16.9.0-informational?style=flat-square)
+![Version: 0.63.0-bb.0](https://img.shields.io/badge/Version-0.63.0--bb.0-informational?style=flat-square) ![AppVersion: v16.10.0](https://img.shields.io/badge/AppVersion-v16.10.0-informational?style=flat-square)
 
 GitLab Runner
 
@@ -38,7 +38,7 @@ helm install gitlab-runner chart/
 |-----|------|---------|-------------|
 | image.registry | string | `"registry1.dso.mil"` |  |
 | image.image | string | `"ironbank/gitlab/gitlab-runner/gitlab-runner"` |  |
-| image.tag | string | `"v16.9.0"` |  |
+| image.tag | string | `"v16.10.0"` |  |
 | useTini | bool | `true` |  |
 | imagePullPolicy | string | `"IfNotPresent"` |  |
 | gitlabUrl | string | `"http://gitlab-webservice-default.gitlab.svc.cluster.local:8181"` |  |
@@ -63,7 +63,7 @@ helm install gitlab-runner chart/
 | runners.job.tag | string | `"9.3"` |  |
 | runners.helper.registry | string | `"registry1.dso.mil"` |  |
 | runners.helper.repository | string | `"ironbank/gitlab/gitlab-runner/gitlab-runner-helper"` |  |
-| runners.helper.tag | string | `"v16.9.0"` |  |
+| runners.helper.tag | string | `"v16.10.0"` |  |
 | runners.config | string | `"[[runners]]\n  clone_url = \"http://gitlab-webservice-default.gitlab.svc.cluster.local:8181\"\n  cache_dir = \"/tmp/gitlab-runner/cache\"\n  [runners.kubernetes]\n    pull_policy = \"always\"\n    namespace = \"{{.Release.Namespace}}\"\n    image = \"{{ printf \"%s/%s:%s\" .Values.runners.job.registry .Values.runners.job.repository .Values.runners.job.tag }}\"\n    helper_image = \"{{ printf \"%s/%s:%s\" .Values.runners.helper.registry .Values.runners.helper.repository .Values.runners.helper.tag }}\"\n    image_pull_secrets = [\"private-registry\"]\n  [runners.kubernetes.pod_security_context]\n    run_as_non_root = true\n    run_as_user = 1001\n  [runners.kubernetes.helper_container_security_context]\n    run_as_non_root = true\n    run_as_user = 1001\n  [runners.kubernetes.pod_labels]\n    \"job_id\" = \"${CI_JOB_ID}\"\n    \"job_name\" = \"${CI_JOB_NAME}\"\n    \"pipeline_id\" = \"${CI_PIPELINE_ID}\"\n    \"app\" = \"gitlab-runner\"\n"` |  |
 | runners.configPath | string | `""` |  |
 | runners.locked | bool | `false` |  |
@@ -82,6 +82,7 @@ helm install gitlab-runner chart/
 | securityContext.runAsGroup | int | `1001` |  |
 | securityContext.privileged | bool | `false` |  |
 | securityContext.capabilities.drop[0] | string | `"ALL"` |  |
+| strategy | object | `{}` |  |
 | podSecurityContext.runAsUser | int | `1001` |  |
 | podSecurityContext.runAsNonRoot | bool | `true` |  |
 | podSecurityContext.fsGroup | int | `65533` |  |
@@ -94,6 +95,8 @@ helm install gitlab-runner chart/
 | affinity | object | `{}` |  |
 | nodeSelector | object | `{}` |  |
 | tolerations | list | `[]` |  |
+| extraEnv | object | `{}` |  |
+| extraEnvFrom | object | `{}` |  |
 | hostAliases | list | `[]` |  |
 | deploymentAnnotations | object | `{}` |  |
 | deploymentLabels | object | `{}` |  |
@@ -104,6 +107,7 @@ helm install gitlab-runner chart/
 | configMaps | object | `{}` |  |
 | volumeMounts | list | `[]` |  |
 | volumes | list | `[]` |  |
+| extraObjects | list | `[]` |  |
 | istio.enabled | bool | `false` |  |
 | istio.injection | string | `"disabled"` |  |
 | istio.mtls | object | `{"mode":"STRICT"}` | Default peer authentication |
@@ -124,7 +128,7 @@ helm install gitlab-runner chart/
 | bbtests.cypress.secretEnvs[0].name | string | `"cypress_adminpassword"` |  |
 | bbtests.cypress.secretEnvs[0].valueFrom.secretKeyRef.name | string | `"gitlab-gitlab-initial-root-password"` |  |
 | bbtests.cypress.secretEnvs[0].valueFrom.secretKeyRef.key | string | `"password"` |  |
-| openshift.enabled | bool | `false` |  |
+| openshift | bool | `false` |  |
 
 ## Contributing
 

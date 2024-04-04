@@ -16,7 +16,7 @@ metadata:
     {{- toYaml .Values.deploymentAnnotations | nindent 4 }}
   {{- end }}
 spec:
-  {{- if not .Values.hpa}}
+  {{- if and (not .Values.hpa) (not (eq nil .Values.replicas)) }}
   replicas: {{ .Values.replicas }}
   {{- end}}
   revisionHistoryLimit: {{ default 10 .Values.revisionHistoryLimit }}
@@ -70,7 +70,7 @@ spec:
         {{- if .Values.useTini }}
         command: ["/usr/local/bin/tini", "--", "/bin/bash", "/configmaps/entrypoint"]
         {{- else }}
-        command: ["/bin/bash", "/configmaps/entrypoint"]\
+        command: ["/usr/bin/dumb-init", "--", "/bin/bash", "/configmaps/entrypoint"]
         {{- end }}
         env:
         {{- include "gitlab-runner.runner-env-vars" . | indent 8 }}

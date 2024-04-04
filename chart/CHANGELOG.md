@@ -1,3 +1,19 @@
+## v0.63.0 (2024-03-22)
+
+### New features
+
+- Update GitLab Runner version to v16.10.0
+
+### Bug fixes
+
+- Remove the 'replicas' field from the helm template if not used by user !467 (Alexis Boissiere @alexis974)
+
+## v0.62.1 (2024-03-01)
+
+### New features
+
+- Update GitLab Runner version to v16.9.1
+
 ## v0.62.0 (2024-02-15)
 
 ### New features
