@@ -2,6 +2,10 @@
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.63.0-bb.1] - 2024-04-08
+### Changed
+- Fixed redirect issue with Cypress test 
+
 ## [0.63.0-bb.0] - 2024-04-03
 ### Changed
 - Updated images to v16.10.0

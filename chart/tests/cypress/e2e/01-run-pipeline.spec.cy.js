@@ -29,6 +29,7 @@ describe('Gitlab Runner: Run Pipeline', () => {
       cy.get('button[id="commit-changes"]').click()
     })
     // Go to pipelines page
+    cy.url().should('eq', `${Cypress.env('url')}/root/${Cypress.env('gitlab_project')}/-/blob/main/.gitlab-ci.yml`) 
     cy.visit(`${Cypress.env('url')}/root/${Cypress.env('gitlab_project')}/-/pipelines`)
     // Wait for pipeline to finish
     cy.get('span[data-testid=ci-icon-text]',{timeout: 120000}).should('contain','Passed')
