@@ -1,6 +1,6 @@
 # gitlab-runner
 
-![Version: 0.63.0-bb.2](https://img.shields.io/badge/Version-0.63.0--bb.2-informational?style=flat-square) ![AppVersion: v16.10.0](https://img.shields.io/badge/AppVersion-v16.10.0-informational?style=flat-square)
+![Version: 0.63.0-bb.3](https://img.shields.io/badge/Version-0.63.0--bb.3-informational?style=flat-square) ![AppVersion: v16.10.0](https://img.shields.io/badge/AppVersion-v16.10.0-informational?style=flat-square)
 
 GitLab Runner
 
@@ -118,10 +118,6 @@ helm install gitlab-runner chart/
 | networkPolicies.additionalPolicies | list | `[]` |  |
 | autoRegister.enabled | bool | `false` |  |
 | bbtests.enabled | bool | `false` |  |
-| bbtests.resources.requests.cpu | int | `2` |  |
-| bbtests.resources.requests.memory | string | `"6Gi"` |  |
-| bbtests.resources.limits.cpu | int | `2` |  |
-| bbtests.resources.limits.memory | string | `"12Gi"` |  |
 | bbtests.cypress.artifacts | bool | `true` |  |
 | bbtests.cypress.envs.cypress_url | string | `"http://gitlab-webservice-default.gitlab.svc.cluster.local:8181"` |  |
 | bbtests.cypress.envs.cypress_gitlab_project | string | `"runner-hello-world"` |  |
