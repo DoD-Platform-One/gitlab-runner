@@ -847,13 +847,6 @@ autoRegister:
 
 bbtests:
   enabled: false
-  resources:
-    requests:
-      cpu: 2
-      memory: "6Gi"
-    limits:
-      cpu: 2
-      memory: "12Gi"
   cypress:
     artifacts: true
     envs:
@@ -864,6 +857,6 @@ bbtests:
         valueFrom:
           secretKeyRef:
             name: gitlab-gitlab-initial-root-password
-            key: password
+            key: password          
 
 openshift: false
