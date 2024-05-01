@@ -1,6 +1,6 @@
 # gitlab-runner
 
-![Version: 0.63.0-bb.4](https://img.shields.io/badge/Version-0.63.0--bb.4-informational?style=flat-square) ![AppVersion: v16.10.0](https://img.shields.io/badge/AppVersion-v16.10.0-informational?style=flat-square)
+![Version: 0.63.0-bb.5](https://img.shields.io/badge/Version-0.63.0--bb.5-informational?style=flat-square) ![AppVersion: v16.10.0](https://img.shields.io/badge/AppVersion-v16.10.0-informational?style=flat-square)
 
 GitLab Runner
 
@@ -109,6 +109,9 @@ helm install gitlab-runner chart/
 | volumes | list | `[]` |  |
 | extraObjects | list | `[]` |  |
 | istio.enabled | bool | `false` |  |
+| istio.hardened.enabled | bool | `false` |  |
+| istio.hardened.outboundTrafficPolicyMode | string | `"REGISTRY_ONLY"` |  |
+| istio.hardened.customServiceEntries | list | `[]` |  |
 | istio.injection | string | `"disabled"` |  |
 | istio.mtls | object | `{"mode":"STRICT"}` | Default peer authentication |
 | istio.mtls.mode | string | `"STRICT"` | STRICT = Allow only mutual TLS traffic, PERMISSIVE = Allow both plain text and mutual TLS traffic |
