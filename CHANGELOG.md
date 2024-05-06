@@ -2,6 +2,10 @@
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.63.0-bb.6] - 2024-05-01
+### Added
+- Added Istio Authorization Policies Support
+
 ## [0.63.0-bb.5] - 2024-04-29
 ### Added
 - Templates for Istio Sidecars and ServiceEntries, IstioHardened.md doc, values update
