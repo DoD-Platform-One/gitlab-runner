@@ -51,6 +51,7 @@ This is a high-level list of modifications that Big Bang has made to the upstrea
 - NetworkPolicies
 - Istio peerAuthentications
 - add support for Grafana dashboards
+- Istio authorization policies
 
 ## /chart/templates/tests/*
 - add templates for helm tests
@@ -73,6 +74,7 @@ This is a high-level list of modifications that Big Bang has made to the upstrea
 ## /chart/Chart.yaml
 - The Chart.yaml is updated with BigBang version changes and dependencies
 - Update `apiVersion` from `v1` to `v2` due to the addition of dependencies by BigBang
+- Add the required kubeversion
 
 ## /Kptfile
 - Add the Kptfile to point to the upstream repo

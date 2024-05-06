@@ -1,6 +1,6 @@
 # gitlab-runner
 
-![Version: 0.63.0-bb.5](https://img.shields.io/badge/Version-0.63.0--bb.5-informational?style=flat-square) ![AppVersion: v16.10.0](https://img.shields.io/badge/AppVersion-v16.10.0-informational?style=flat-square)
+![Version: 0.63.0-bb.6](https://img.shields.io/badge/Version-0.63.0--bb.6-informational?style=flat-square) ![AppVersion: v16.10.0](https://img.shields.io/badge/AppVersion-v16.10.0-informational?style=flat-square)
 
 GitLab Runner
 
@@ -19,6 +19,8 @@ GitLab Runner
 * Kubernetes Cluster deployed
 * Kubernetes config installed in `~/.kube/config`
 * Helm installed
+
+Kubernetes: `>=1.29.0-0`
 
 Install Helm
 
@@ -113,6 +115,18 @@ helm install gitlab-runner chart/
 | istio.hardened.outboundTrafficPolicyMode | string | `"REGISTRY_ONLY"` |  |
 | istio.hardened.customServiceEntries | list | `[]` |  |
 | istio.injection | string | `"disabled"` |  |
+| istio.hardened.enabled | bool | `false` |  |
+| istio.hardened.customAuthorizationPolicies | list | `[]` |  |
+| istio.hardened.gitlab.enabled | bool | `true` |  |
+| istio.hardened.gitlab.namespaces[0] | string | `"gitlab"` |  |
+| istio.hardened.monitoring.enabled | bool | `true` |  |
+| istio.hardened.monitoring.namespaces[0] | string | `"monitoring"` |  |
+| istio.hardened.monitoring.principals[0] | string | `"cluster.local/ns/monitoring/sa/monitoring-grafana"` |  |
+| istio.hardened.monitoring.principals[1] | string | `"cluster.local/ns/monitoring/sa/monitoring-monitoring-kube-alertmanager"` |  |
+| istio.hardened.monitoring.principals[2] | string | `"cluster.local/ns/monitoring/sa/monitoring-monitoring-kube-operator"` |  |
+| istio.hardened.monitoring.principals[3] | string | `"cluster.local/ns/monitoring/sa/monitoring-monitoring-kube-prometheus"` |  |
+| istio.hardened.monitoring.principals[4] | string | `"cluster.local/ns/monitoring/sa/monitoring-monitoring-kube-state-metrics"` |  |
+| istio.hardened.monitoring.principals[5] | string | `"cluster.local/ns/monitoring/sa/monitoring-monitoring-prometheus-node-exporter"` |  |
 | istio.mtls | object | `{"mode":"STRICT"}` | Default peer authentication |
 | istio.mtls.mode | string | `"STRICT"` | STRICT = Allow only mutual TLS traffic, PERMISSIVE = Allow both plain text and mutual TLS traffic |
 | monitoring.enabled | bool | `false` |  |
