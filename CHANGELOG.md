@@ -2,6 +2,10 @@
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.63.0-bb.8] - 2024-05-13
+### Removed
+- Removed the kubeversion from chart
+
 ## [0.63.0-bb.7] - 2024-05-08
 ### Changed
 - Fixed bug with Control Plane CIDR for Network Policies. Refacrtored egress network policies for Gitlab Runner.
