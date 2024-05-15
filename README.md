@@ -1,6 +1,6 @@
 # gitlab-runner
 
-![Version: 0.63.0-bb.8](https://img.shields.io/badge/Version-0.63.0--bb.8-informational?style=flat-square) ![AppVersion: v16.10.0](https://img.shields.io/badge/AppVersion-v16.10.0-informational?style=flat-square)
+![Version: 0.63.0-bb.9](https://img.shields.io/badge/Version-0.63.0--bb.9-informational?style=flat-square) ![AppVersion: v16.10.0](https://img.shields.io/badge/AppVersion-v16.10.0-informational?style=flat-square)
 
 GitLab Runner
 
