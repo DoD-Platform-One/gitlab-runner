@@ -8,7 +8,7 @@ runners:
 networkPolicies:
   enabled: true
   controlPlaneCidr: 172.20.0.0/29
-  kubeapiPort: 6443
+  kubeAPIPort: 6443
 
 # Cypress testing values
 bbtests:
