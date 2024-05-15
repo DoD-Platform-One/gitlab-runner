@@ -1,6 +1,6 @@
 # gitlab-runner
 
-![Version: 0.63.0-bb.9](https://img.shields.io/badge/Version-0.63.0--bb.9-informational?style=flat-square) ![AppVersion: v16.10.0](https://img.shields.io/badge/AppVersion-v16.10.0-informational?style=flat-square)
+![Version: 0.63.0-bb.10](https://img.shields.io/badge/Version-0.63.0--bb.10-informational?style=flat-square) ![AppVersion: v16.10.0](https://img.shields.io/badge/AppVersion-v16.10.0-informational?style=flat-square)
 
 GitLab Runner
 
@@ -130,6 +130,7 @@ helm install gitlab-runner chart/
 | monitoring.enabled | bool | `false` |  |
 | networkPolicies.enabled | bool | `false` |  |
 | networkPolicies.controlPlaneCidr | string | `"0.0.0.0/0"` |  |
+| networkPolicies.kubeAPIPort | string | `""` | Kube API Port, defaults to 443 and 6443 within the template but can be set to custom port The port where the Kubernetes API server listens for secure connections.  |
 | networkPolicies.additionalPolicies | list | `[]` |  |
 | autoRegister.enabled | bool | `false` |  |
 | bbtests.enabled | bool | `false` |  |

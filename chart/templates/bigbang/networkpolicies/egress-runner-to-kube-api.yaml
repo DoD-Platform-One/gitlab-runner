@@ -7,7 +7,7 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-      app: gitlab-runner
+      app: gitlab-runner   # runner needs to access kube-api to start jobs
   policyTypes:
     - Egress
   egress:
@@ -16,12 +16,13 @@ spec:
             cidr: {{ default "0.0.0.0/0" .Values.networkPolicies.controlPlaneCidr }}
             {{- if eq (default "0.0.0.0/0" .Values.networkPolicies.controlPlaneCidr) "0.0.0.0/0" }}
             except:
+            # Block requests to AWS cloud metadata IP
               - 169.254.169.254/32
             {{- end }}
     - ports:
-      {{- if .Values.networkPolicies.kubeapiPort }}
+      {{- if .Values.networkPolicies.kubeAPIPort }}
         - protocol: TCP
-          port: {{ .Values.networkPolicies.kubeapiPort }}
+          port: {{ .Values.networkPolicies.kubeAPIPort }}
       {{- else }}
         - protocol: TCP
           port: 443
