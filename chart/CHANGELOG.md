@@ -1,3 +1,15 @@
+## v0.64.0 (2024-04-18)
+
+### New features
+
+- Update GitLab Runner version to v16.11.0
+- Add support for connection_max_age parameter !468
+- Propagate Service Account Name from values !367 (Martin Odstrčilík @martin.odstrcilik)
+
+### Bug fixes
+
+- Fix liveness probe for Runner Pod !466
+
 ## v0.63.0 (2024-03-22)
 
 ### New features

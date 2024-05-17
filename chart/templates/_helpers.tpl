@@ -31,6 +31,17 @@ Create chart name and version as used by the chart label.
 {{- end -}}
 
 {{/*
+Define the name of the service account
+*/}}
+{{- define "gitlab-runner.serviceAccount" -}}
+{{- if .Values.rbac.create -}}
+{{- default (include "gitlab-runner.fullname" .) .Values.rbac.generatedServiceAccountName | quote -}}
+{{- else -}}
+{{- .Values.rbac.serviceAccountName | quote -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
 Define the name of the secret containing the tokens
 */}}
 {{- define "gitlab-runner.secret" -}}
