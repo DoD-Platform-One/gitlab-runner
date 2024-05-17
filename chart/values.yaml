@@ -12,7 +12,7 @@
 image:
   registry: registry1.dso.mil
   image: ironbank/gitlab/gitlab-runner/gitlab-runner
-  tag: v16.10.0
+  tag: v16.11.0
 
 ## When using GitLab Runner Helm Chart with gitlab-runner-ubi-images (https://gitlab.com/gitlab-org/ci-cd/gitlab-runner-ubi-images/container_registry)
 ## the installation fails because dumb-init is not packaged in the image. However, the tini is present.
@@ -118,7 +118,12 @@ checkInterval: 30
 ##
 # sentryDsn:
 
-## A custom bash script that will be executed prior to the invocation
+## Configure GitLab Runner's maximum connection age for TLS keepalive connections.
+## ref https://docs.gitlab.com/runner/configuration/advanced-configuration.html#the-global-section
+##
+# connectionMaxAge: "15m"
+
+## A custom bash script that will be executed prior to the invocation of the
 ## gitlab-runner process
 #
 #preEntrypointScript: |
@@ -145,12 +150,9 @@ sessionServer:
 ## For RBAC support:
 rbac:
   create: true
-
-  ## Define specific rbac permissions.
-  ## DEPRECATED: see .Values.rbac.rules
-  # resources: ["pods", "pods/exec", "secrets"]
-  # verbs: ["get", "list", "watch", "create", "patch", "delete"]
-
+  ## Define the generated serviceAccountName when create is set to true
+  ## It defaults to "gitlab-runner.fullname" if not provided
+  generatedServiceAccountName: ""
 
   ## Define list of rules to be added to the rbac role permissions.
   ## Each rule supports the keys:
@@ -329,11 +331,11 @@ runners:
   job:
     registry: registry1.dso.mil
     repository: ironbank/redhat/ubi/ubi9
-    tag: "9.3"
+    tag: "9.4"
   helper:
     registry: registry1.dso.mil
     repository: ironbank/gitlab/gitlab-runner/gitlab-runner-helper
-    tag: "v16.10.0"
+    tag: "v16.11.0"
 
   # runner configuration, where the multi line strings is evaluated as
   # template so you can specify helm values inside of it.
