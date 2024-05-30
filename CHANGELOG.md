@@ -2,6 +2,11 @@
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.65.0-bb.0] - 2024-05-24
+### Changed
+- Updated registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner 16.11.0 -> 17.0.0
+- Updated registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner-helper 16.11.1 -> 17.0.0
+
 ## [0.64.0-bb.0] - 2024-05-02
 ### Changed
 - Updated gluon 0.4.10 -> 0.5.0

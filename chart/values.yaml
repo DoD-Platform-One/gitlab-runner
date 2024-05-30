@@ -12,7 +12,7 @@
 image:
   registry: registry1.dso.mil
   image: ironbank/gitlab/gitlab-runner/gitlab-runner
-  tag: v16.11.0
+  tag: v17.0.0
 
 ## When using GitLab Runner Helm Chart with gitlab-runner-ubi-images (https://gitlab.com/gitlab-org/ci-cd/gitlab-runner-ubi-images/container_registry)
 ## the installation fails because dumb-init is not packaged in the image. However, the tini is present.
@@ -71,7 +71,7 @@ gitlabUrl: http://gitlab-webservice-default.gitlab.svc.cluster.local:8181
 ## non-existant runners. Un-registering the runner before termination mitigates this issue.
 ## ref: https://docs.gitlab.com/runner/commands/index.html#gitlab-runner-unregister
 ##
-# unregisterRunners: true
+unregisterRunners: true
 
 ## When stopping the runner, give it time to wait for its jobs to terminate.
 ##
@@ -101,7 +101,7 @@ shutdown_timeout: 0
 ## Defines in seconds how often to check GitLab for a new builds
 ## ref: https://docs.gitlab.com/runner/configuration/advanced-configuration.html#the-global-section
 ##
-checkInterval: 30
+checkInterval: 3
 
 ## Configure GitLab Runner's logging level. Available values are: debug, info, warn, error, fatal, panic
 ## ref: https://docs.gitlab.com/runner/configuration/advanced-configuration.html#the-global-section
@@ -335,7 +335,7 @@ runners:
   helper:
     registry: registry1.dso.mil
     repository: ironbank/gitlab/gitlab-runner/gitlab-runner-helper
-    tag: "v16.11.0"
+    tag: "v17.0.0"
 
   # runner configuration, where the multi line strings is evaluated as
   # template so you can specify helm values inside of it.
@@ -377,7 +377,7 @@ runners:
   ##
   ## ref: https://docs.gitlab.com/ee/ci/runners/new_creation_workflow.html
   ##
-  locked: false
+  locked: true
 
   ## DEPRECATED: Specify the tags associated with the runner. Comma-separated list of tags.
   ##
@@ -399,13 +399,13 @@ runners:
   ##
   ## ref: https://docs.gitlab.com/ee/ci/runners/new_creation_workflow.html
   ##
-  runUntagged: true
+  # runUntagged: true
 
   ## DEPRECATED: Specify whether the runner should only run protected branches.
   ##
   ## ref: https://docs.gitlab.com/ee/ci/runners/new_creation_workflow.html
   ##
-  protected: true
+  # protected: true
 
   ## The name of the secret containing runner-token and runner-registration-token
   secret: gitlab-gitlab-runner-secret
