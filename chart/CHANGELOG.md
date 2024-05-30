@@ -1,3 +1,23 @@
+## v0.65.0 (2024-05-23)
+
+### New features
+
+- Update GitLab Runner version to v17.0.0
+
+### Maintenance
+
+- Default to https in values.yaml !470
+
+### Other changes
+
+- chore: set the checkInterval value the same as in the main documents. !472 (Michel Santello @michel.santello)
+
+## v0.64.1 (2024-05-03)
+
+### New features
+
+- Update GitLab Runner version to v16.11.1
+
 ## v0.64.0 (2024-04-18)
 
 ### New features
