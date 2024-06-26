@@ -11,6 +11,7 @@ GitLab Runner
 * <https://docs.gitlab.com/runner/>
 
 ## Learn More
+
 * [Application Overview](docs/overview.md)
 * [Other Documentation](docs/)
 
@@ -22,12 +23,13 @@ GitLab Runner
 
 Install Helm
 
-https://helm.sh/docs/intro/install/
+<https://helm.sh/docs/intro/install/>
 
 ## Deployment
 
 * Clone down the repository
 * cd into directory
+
 ```bash
 helm install gitlab-runner chart/
 ```
