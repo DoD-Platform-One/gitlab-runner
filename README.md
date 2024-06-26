@@ -1,6 +1,6 @@
 # gitlab-runner
 
-![Version: 0.65.0-bb.0](https://img.shields.io/badge/Version-0.65.0--bb.0-informational?style=flat-square) ![AppVersion: 17.0.0](https://img.shields.io/badge/AppVersion-17.0.0-informational?style=flat-square)
+![Version: 0.65.0-bb.1](https://img.shields.io/badge/Version-0.65.0--bb.1-informational?style=flat-square) ![AppVersion: 17.0.0](https://img.shields.io/badge/AppVersion-17.0.0-informational?style=flat-square)
 
 GitLab Runner
 
@@ -44,6 +44,7 @@ helm install gitlab-runner chart/
 | useTini | bool | `true` |  |
 | imagePullPolicy | string | `"IfNotPresent"` |  |
 | gitlabUrl | string | `"http://gitlab-webservice-default.gitlab.svc.cluster.local:8181"` |  |
+| unregisterRunners | bool | `true` |  |
 | terminationGracePeriodSeconds | int | `3600` |  |
 | concurrent | int | `50` |  |
 | shutdown_timeout | int | `0` |  |
@@ -69,9 +70,7 @@ helm install gitlab-runner chart/
 | runners.helper.tag | string | `"v17.0.0"` |  |
 | runners.config | string | `"[[runners]]\n  clone_url = \"http://gitlab-webservice-default.gitlab.svc.cluster.local:8181\"\n  cache_dir = \"/tmp/gitlab-runner/cache\"\n  [runners.kubernetes]\n    pull_policy = \"always\"\n    namespace = \"{{.Release.Namespace}}\"\n    image = \"{{ printf \"%s/%s:%s\" .Values.runners.job.registry .Values.runners.job.repository .Values.runners.job.tag }}\"\n    helper_image = \"{{ printf \"%s/%s:%s\" .Values.runners.helper.registry .Values.runners.helper.repository .Values.runners.helper.tag }}\"\n    image_pull_secrets = [\"private-registry\"]\n  [runners.kubernetes.pod_security_context]\n    run_as_non_root = true\n    run_as_user = 1001\n  [runners.kubernetes.helper_container_security_context]\n    run_as_non_root = true\n    run_as_user = 1001\n  [runners.kubernetes.pod_labels]\n    \"job_id\" = \"${CI_JOB_ID}\"\n    \"job_name\" = \"${CI_JOB_NAME}\"\n    \"pipeline_id\" = \"${CI_PIPELINE_ID}\"\n    \"app\" = \"gitlab-runner\"\n"` |  |
 | runners.configPath | string | `""` |  |
-| runners.locked | bool | `false` |  |
-| runners.runUntagged | bool | `true` |  |
-| runners.protected | bool | `true` |  |
+| runners.locked | bool | `true` |  |
 | runners.secret | string | `"gitlab-gitlab-runner-secret"` |  |
 | runners.cache | object | `{}` |  |
 | runners.builds | object | `{}` |  |
