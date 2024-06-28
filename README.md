@@ -1,6 +1,6 @@
 # gitlab-runner
 
-![Version: 0.65.0-bb.1](https://img.shields.io/badge/Version-0.65.0--bb.1-informational?style=flat-square) ![AppVersion: 17.0.0](https://img.shields.io/badge/AppVersion-17.0.0-informational?style=flat-square)
+![Version: 0.65.0-bb.2](https://img.shields.io/badge/Version-0.65.0--bb.2-informational?style=flat-square) ![AppVersion: 17.0.0](https://img.shields.io/badge/AppVersion-17.0.0-informational?style=flat-square)
 
 GitLab Runner
 
@@ -11,7 +11,6 @@ GitLab Runner
 * <https://docs.gitlab.com/runner/>
 
 ## Learn More
-
 * [Application Overview](docs/overview.md)
 * [Other Documentation](docs/)
 
@@ -23,13 +22,12 @@ GitLab Runner
 
 Install Helm
 
-<https://helm.sh/docs/intro/install/>
+https://helm.sh/docs/intro/install/
 
 ## Deployment
 
 * Clone down the repository
 * cd into directory
-
 ```bash
 helm install gitlab-runner chart/
 ```
@@ -111,11 +109,10 @@ helm install gitlab-runner chart/
 | volumes | list | `[]` |  |
 | extraObjects | list | `[]` |  |
 | istio.enabled | bool | `false` |  |
+| istio.injection | string | `"disabled"` |  |
 | istio.hardened.enabled | bool | `false` |  |
 | istio.hardened.outboundTrafficPolicyMode | string | `"REGISTRY_ONLY"` |  |
 | istio.hardened.customServiceEntries | list | `[]` |  |
-| istio.injection | string | `"disabled"` |  |
-| istio.hardened.enabled | bool | `false` |  |
 | istio.hardened.customAuthorizationPolicies | list | `[]` |  |
 | istio.hardened.gitlab.enabled | bool | `true` |  |
 | istio.hardened.gitlab.namespaces[0] | string | `"gitlab"` |  |
