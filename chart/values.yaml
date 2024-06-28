@@ -810,6 +810,7 @@ extraObjects: []
 istio:
   # Toggle istio integration
   enabled: false
+  injection: disabled
   hardened:
     enabled: false
     outboundTrafficPolicyMode: "REGISTRY_ONLY"
@@ -827,9 +828,6 @@ istio:
       #         protocol: TLS
       #         name: https
       #     resolution: DNS
-  injection: disabled
-  hardened:
-    enabled: false
     customAuthorizationPolicies: []
     # - name: "allow-nothing"
     #   enabled: true
