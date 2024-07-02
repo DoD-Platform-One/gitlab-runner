@@ -2,6 +2,14 @@
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.65.0-bb.3] - 2024-07-01
+
+### Fixed
+
+- Removed the allow nothing policy
+- Moved the authorization policies
+- Updated the istio hardened doc
+
 ## [0.65.0-bb.2] - 2024-06-21
 ### Fixed
 - Removed duplicate istio.hardened entry in chart/values.yaml
