@@ -2,6 +2,17 @@
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.66.0-bb.0] - 2024-07-17
+
+## Changed
+
+- Upgrade gitlab runner from 17.0.0 to 17.1.0:
+    - Make lifecycle options configurable in the deployment [upstream !473](https://gitlab.com/gitlab-org/charts/gitlab-runner/-/merge_requests/473)
+    - Add dedicated ServiceAccount configuration [upstream !415](https://gitlab.com/gitlab-org/charts/gitlab-runner/-/merge_requests/415/commits)
+    - Updated registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner 17.0.0 -> 17.1.0
+    - Updated registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner-helper 17.0.0 -> 17.1.0
+
+
 ## [0.65.0-bb.3] - 2024-07-01
 
 ### Fixed
