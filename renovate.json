@@ -7,6 +7,7 @@
   "enabledManagers": ["regex", "helmv3"],
   "labels": ["gitlabRunner","Big Bang Core","Package Sustainment","kind::maintenance"],
   "commitMessagePrefix": "SKIP UPDATE CHECK",
+  "postUpdateOptions": ["helmUpdateSubChartArchives"],
   "packageRules": [
     {
       "matchDatasources": ["docker"],
