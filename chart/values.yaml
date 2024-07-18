@@ -12,7 +12,7 @@
 image:
   registry: registry1.dso.mil
   image: ironbank/gitlab/gitlab-runner/gitlab-runner
-  tag: v17.0.0
+  tag: v17.1.0
 
 ## When using GitLab Runner Helm Chart with gitlab-runner-ubi-images (https://gitlab.com/gitlab-org/ci-cd/gitlab-runner-ubi-images/container_registry)
 ## the installation fails because dumb-init is not packaged in the image. However, the tini is present.
@@ -149,9 +149,13 @@ sessionServer:
 
 ## For RBAC support:
 rbac:
+  ## Specifies whether a Role and RoleBinding should be created
+  ## If this value is set to `true`, `serviceAccount.create` should also be set to either `true` or `false`
+  ##
   create: true
   ## Define the generated serviceAccountName when create is set to true
   ## It defaults to "gitlab-runner.fullname" if not provided
+  ## DEPRECATED: Please use `serviceAccount.name` instead
   generatedServiceAccountName: ""
 
   ## Define list of rules to be added to the rbac role permissions.
@@ -179,6 +183,7 @@ rbac:
   clusterWideAccess: false
 
   ## Use the following Kubernetes Service Account name if RBAC is disabled in this Helm chart (see rbac.create)
+  ## DEPRECATED: Please use `serviceAccount.name` instead
   ##
   # serviceAccountName: default
 
@@ -189,7 +194,9 @@ rbac:
   ##
   ## ref: https://docs.aws.amazon.com/eks/latest/userguide/associate-service-account-role.html
   ##
-  # serviceAccountAnnotations: {}
+  ## DEPRECATED: Please use `serviceAccount.annotations` instead
+  ##
+  # serviceAccountAnnotations: { }
 
   ## Use podSecurity Policy
   ## ref: https://kubernetes.io/docs/concepts/policy/pod-security-policy/
@@ -202,7 +209,34 @@ rbac:
   ##
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#add-imagepullsecrets-to-a-service-account
   ##
-  # imagePullSecrets: []
+  ## DEPRECATED: Please use `serviceAccount.imagePullSecrets` instead
+  ##
+  imagePullSecrets: []
+
+## Configure ServiceAccount
+##
+serviceAccount:
+  ## Specifies whether a ServiceAccount should be created
+  ##
+  ## TODO: Set default to `false`
+  # create: false
+  ## The name of the ServiceAccount to use.
+  ## If not set and create is `true`, a name is generated using the `gitlab-runner.fullname`` template
+  ##
+  name: ""
+  ## Additional custom annotations for the ServiceAccount, useful for annotations such as eks.amazonaws.com/role-arn.
+  ## Values may refer other values as the _tpl_ function is implicitly applied. Mind the quotes when using this, e.g.
+  ## serviceAccountAnnotations:
+  ##   eks.amazonaws.com/role-arn: "arn:aws:iam::{{ .Values.global.accountId }}:role/{{ .Values.global.iamRoleName }}"
+  ##
+  ## ref: https://docs.aws.amazon.com/eks/latest/userguide/specify-service-account-role.html
+  ##
+  annotations: { }
+  ## Specify one or more imagePullSecrets used for pulling the runner image
+  ##
+  ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#add-imagepullsecrets-to-a-service-account
+  ##
+  imagePullSecrets: [ ]
 
 ## Configure integrated Prometheus metrics exporter
 ##
@@ -335,7 +369,7 @@ runners:
   helper:
     registry: registry1.dso.mil
     repository: ironbank/gitlab/gitlab-runner/gitlab-runner-helper
-    tag: "v17.0.0"
+    tag: "v17.1.0"
 
   # runner configuration, where the multi line strings is evaluated as
   # template so you can specify helm values inside of it.
@@ -710,6 +744,14 @@ deploymentAnnotations: {}
 deploymentLabels: {}
   # Example:
   # owner.team: <my_cool_team>
+
+## Lifecycle options to be added to deployment
+##  
+deploymentLifecycle: {}
+  # Example
+  # preStop:
+  #   exec:
+  #     command: ["/bin/sh", "-c", "echo 'shutting down'"] 
 
 ## Set hostname for runner pods
 #hostname: my-gitlab-runner
