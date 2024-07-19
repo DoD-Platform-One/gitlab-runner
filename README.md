@@ -10,6 +10,10 @@ GitLab Runner
 * <https://gitlab.com/gitlab-org/gitlab-runner>
 * <https://docs.gitlab.com/runner/>
 
+### Upstream Release Notes
+
+The [upstream chart's release notes](https://gitlab.com/gitlab-org/charts/gitlab-runner/-/blob/main/CHANGELOG.md) may help when reviewing this package.
+
 ## Learn More
 * [Application Overview](docs/overview.md)
 * [Other Documentation](docs/)
