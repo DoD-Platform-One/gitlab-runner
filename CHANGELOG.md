@@ -4,14 +4,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [0.66.0-bb.0] - 2024-07-17
 
-## Changed
+### Changed
 
 - Upgrade gitlab runner from 17.0.0 to 17.1.0:
     - Make lifecycle options configurable in the deployment [upstream !473](https://gitlab.com/gitlab-org/charts/gitlab-runner/-/merge_requests/473)
     - Add dedicated ServiceAccount configuration [upstream !415](https://gitlab.com/gitlab-org/charts/gitlab-runner/-/merge_requests/415/commits)
     - Updated registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner 17.0.0 -> 17.1.0
     - Updated registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner-helper 17.0.0 -> 17.1.0
-
 
 ## [0.65.0-bb.3] - 2024-07-01
 
@@ -23,10 +22,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [0.65.0-bb.2] - 2024-06-21
 ### Fixed
+
 - Removed duplicate istio.hardened entry in chart/values.yaml
 
 ## [0.65.0-bb.1] - 2024-06-20
 ### Fixed
+
 - Updated authorizationPolicy to properly reflect matchLabel selector and port for metrics
 
 ## [0.65.0-bb.0] - 2024-05-24
