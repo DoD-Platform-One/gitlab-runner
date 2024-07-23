@@ -1,3 +1,11 @@
+# Files that require bigbang integration testing
+
+### See [bb MR testing](./docs/test-package-against-bb.md) for details regarding testing changes against bigbang umbrella chart.
+
+There are certain integrations within the bigbang ecosystem and this package that require additional testing outside of the specific package tests ran during CI.  This is a requirement when files within those integrations are changed, as to avoid causing breaks up through the bigbang umbrella.  Currently, these include changes to the istio implementation within gitlab-runner (see: [istio templates](./chart/templates/bigbang/istio/), [network policy templates](./chart/templates/bigbang/networkpolicies/), [service entry templates](./chart/templates/bigbang/serviceentries/)), and kyverno (see: [kyverno custom entries](./chart/templates/bigbang/kyverno/). 
+
+Be sure to also test against monitoring locally as it is integrated by default with these high-impact service control packages, and needs to be validated using the necessary chart values beneath `istio.hardened` block with `monitoring.enabled` set to true as part of your dev-overrides.yaml 
+
 # How to upgrade the Gitlab Runner Package chart
 BigBang makes modifications to the upstream helm chart. The full list of changes is at the end of  this document.
 1. Renovate may have already made changes in the development branch. If that is the case then just verify that the changes are correct as you go through these steps.
