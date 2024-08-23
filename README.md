@@ -1,6 +1,7 @@
+<!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # gitlab-runner
 
-![Version: 0.66.0-bb.0](https://img.shields.io/badge/Version-0.66.0--bb.0-informational?style=flat-square) ![AppVersion: 17.1.0](https://img.shields.io/badge/AppVersion-17.1.0-informational?style=flat-square)
+![Version: 0.66.0-bb.1](https://img.shields.io/badge/Version-0.66.0--bb.1-informational?style=flat-square) ![AppVersion: 17.1.0](https://img.shields.io/badge/AppVersion-17.1.0-informational?style=flat-square)
 
 GitLab Runner
 
@@ -12,7 +13,8 @@ GitLab Runner
 
 ### Upstream Release Notes
 
-The [upstream chart's release notes](https://gitlab.com/gitlab-org/charts/gitlab-runner/-/blob/main/CHANGELOG.md) may help when reviewing this package.
+- [Find our upstream chart's CHANGELOG here](https://gitlab.com/gitlab-org/charts/gitlab-runner/-/blob/0-66-stable/CHANGELOG.md)
+- [and our upstream application release notes here](https://gitlab.com/gitlab-org/charts/gitlab-runner/-/blob/main/CHANGELOG.md?ref_type=heads#v0660-2024-06-20)
 
 ## Learn More
 * [Application Overview](docs/overview.md)
@@ -141,6 +143,7 @@ helm install gitlab-runner chart/
 | networkPolicies.kubeAPIPort | string | `""` | Kube API Port, defaults to 443 and 6443 within the template but can be set to custom port The port where the Kubernetes API server listens for secure connections.  |
 | networkPolicies.additionalPolicies | list | `[]` |  |
 | autoRegister.enabled | bool | `false` |  |
+| autoRegister.selectorLabels | object | `{}` |  |
 | bbtests.enabled | bool | `false` |  |
 | bbtests.cypress.artifacts | bool | `true` |  |
 | bbtests.cypress.envs.cypress_url | string | `"http://gitlab-webservice-default.gitlab.svc.cluster.local:8181"` |  |
@@ -153,3 +156,8 @@ helm install gitlab-runner chart/
 ## Contributing
 
 Please see the [contributing guide](./CONTRIBUTING.md) if you are interested in contributing.
+
+---
+
+_This file is programatically generated using `helm-docs` and some BigBang-specific templates. The `gluon` repository has [instructions for regenerating package READMEs](https://repo1.dso.mil/big-bang/product/packages/gluon/-/blob/master/docs/bb-package-readme.md)._
+

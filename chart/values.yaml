@@ -927,6 +927,19 @@ networkPolicies:
 # autoRegister requires kyverno deployed in k8s cluster and is intended for an in-cluster Gitlab
 autoRegister:
   enabled: false
+# selectorLabels is available to define a specific label to utilize kyverno clusterPolicy to copy the
+# secret for runner registration to any additional namespace matching this key: value label.
+# Leaving this unset will default to the namespace selector matchLabel kubernetes.io/metadata.name: "{{ .Release.Namespace }}". 
+# YAML constraints require a map to iterate over for multiple entries, see below example, which copies the runner secret to 
+# namespaces with the labels `kubernetes.io/metadata.name: namespace1` and `kubernetes.io/metadata.name: namespace2` for use:
+# selectorLabels:
+#   - matchLabels:
+#       kubernetes.io/metadata.name: namespace1
+#   - matchLabels:
+#       kubernetes.io/metadata.name: namespace2
+
+  selectorLabels: {}
+
 
 bbtests:
   enabled: false
