@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # gitlab-runner
 
-![Version: 0.66.0-bb.1](https://img.shields.io/badge/Version-0.66.0--bb.1-informational?style=flat-square) ![AppVersion: 17.1.0](https://img.shields.io/badge/AppVersion-17.1.0-informational?style=flat-square)
+![Version: 0.67.1-bb.0](https://img.shields.io/badge/Version-0.67.1--bb.0-informational?style=flat-square) ![AppVersion: 17.2.1](https://img.shields.io/badge/AppVersion-17.2.1-informational?style=flat-square)
 
 GitLab Runner
 
@@ -13,8 +13,8 @@ GitLab Runner
 
 ### Upstream Release Notes
 
-- [Find our upstream chart's CHANGELOG here](https://gitlab.com/gitlab-org/charts/gitlab-runner/-/blob/0-66-stable/CHANGELOG.md)
-- [and our upstream application release notes here](https://gitlab.com/gitlab-org/charts/gitlab-runner/-/blob/main/CHANGELOG.md?ref_type=heads#v0660-2024-06-20)
+- [Find our upstream chart's CHANGELOG here](https://gitlab.com/gitlab-org/charts/gitlab-runner/-/blob/v0.67.1/CHANGELOG.md)
+- [and our upstream application release notes here](https://gitlab.com/gitlab-org/charts/gitlab-runner/-/blob/v0.67.1/CHANGELOG.md?ref_type=tags#v0671-2024-07-26)
 
 ## Learn More
 * [Application Overview](docs/overview.md)
@@ -44,9 +44,11 @@ helm install gitlab-runner chart/
 |-----|------|---------|-------------|
 | image.registry | string | `"registry1.dso.mil"` |  |
 | image.image | string | `"ironbank/gitlab/gitlab-runner/gitlab-runner"` |  |
-| image.tag | string | `"v17.1.0"` |  |
+| image.tag | string | `"v17.2.1"` |  |
 | useTini | bool | `true` |  |
 | imagePullPolicy | string | `"IfNotPresent"` |  |
+| livenessProbe | object | `{}` |  |
+| readinessProbe | object | `{}` |  |
 | gitlabUrl | string | `"http://gitlab-webservice-default.gitlab.svc.cluster.local:8181"` |  |
 | unregisterRunners | bool | `true` |  |
 | terminationGracePeriodSeconds | int | `3600` |  |
@@ -54,6 +56,7 @@ helm install gitlab-runner chart/
 | shutdown_timeout | int | `0` |  |
 | checkInterval | int | `3` |  |
 | sessionServer.enabled | bool | `false` |  |
+| sessionServer.serviceType | string | `"LoadBalancer"` |  |
 | rbac.create | bool | `true` |  |
 | rbac.generatedServiceAccountName | string | `""` |  |
 | rbac.rules | list | `[]` |  |
@@ -75,7 +78,7 @@ helm install gitlab-runner chart/
 | runners.job.tag | string | `"9.4"` |  |
 | runners.helper.registry | string | `"registry1.dso.mil"` |  |
 | runners.helper.repository | string | `"ironbank/gitlab/gitlab-runner/gitlab-runner-helper"` |  |
-| runners.helper.tag | string | `"v17.1.0"` |  |
+| runners.helper.tag | string | `"v17.2.1"` |  |
 | runners.config | string | `"[[runners]]\n  clone_url = \"http://gitlab-webservice-default.gitlab.svc.cluster.local:8181\"\n  cache_dir = \"/tmp/gitlab-runner/cache\"\n  [runners.kubernetes]\n    pull_policy = \"always\"\n    namespace = \"{{.Release.Namespace}}\"\n    image = \"{{ printf \"%s/%s:%s\" .Values.runners.job.registry .Values.runners.job.repository .Values.runners.job.tag }}\"\n    helper_image = \"{{ printf \"%s/%s:%s\" .Values.runners.helper.registry .Values.runners.helper.repository .Values.runners.helper.tag }}\"\n    image_pull_secrets = [\"private-registry\"]\n  [runners.kubernetes.pod_security_context]\n    run_as_non_root = true\n    run_as_user = 1001\n  [runners.kubernetes.helper_container_security_context]\n    run_as_non_root = true\n    run_as_user = 1001\n  [runners.kubernetes.pod_labels]\n    \"job_id\" = \"${CI_JOB_ID}\"\n    \"job_name\" = \"${CI_JOB_NAME}\"\n    \"pipeline_id\" = \"${CI_PIPELINE_ID}\"\n    \"app\" = \"gitlab-runner\"\n"` |  |
 | runners.configPath | string | `""` |  |
 | runners.locked | bool | `true` |  |

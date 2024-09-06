@@ -12,7 +12,7 @@
 image:
   registry: registry1.dso.mil
   image: ironbank/gitlab/gitlab-runner/gitlab-runner
-  tag: v17.1.0
+  tag: v17.2.1
 
 ## When using GitLab Runner Helm Chart with gitlab-runner-ubi-images (https://gitlab.com/gitlab-org/ci-cd/gitlab-runner-ubi-images/container_registry)
 ## the installation fails because dumb-init is not packaged in the image. However, the tini is present.
@@ -37,7 +37,21 @@ imagePullPolicy: IfNotPresent
 #   - name: "image-pull-secret"
 
 ## Timeout, in seconds, for liveness and readiness probes of a runner pod.
-# probeTimeoutSeconds: 3
+# probeTimeoutSeconds: 4
+
+## Configure the livenessProbe
+livenessProbe: {}
+#   initialDelaySeconds: 60
+#   periodSeconds: 10
+#   successThreshold: 1
+#   failureThreshold: 3
+
+## Configure the readinessProbe
+readinessProbe: {}
+#   initialDelaySeconds: 60
+#   periodSeconds: 10
+#   successThreshold: 1
+#   failureThreshold: 3
 
 ## How many runner pods to launch.
 ##
@@ -143,9 +157,16 @@ sessionServer:
   # timeout: 1800
   # internalPort: 8093
   # externalPort: 9000
+
+  #In case sessionServer.serviceType is NodePort. If not defined, auto NodePort will be assigned.
+  # nodePort: 30093
+
   # publicIP: ""
   # loadBalancerSourceRanges:
   #   - 1.2.3.4/32
+
+  #Valid values: ClusterIP, Headless, NodePort, LoadBalancer
+  serviceType: LoadBalancer
 
 ## For RBAC support:
 rbac:
@@ -369,7 +390,7 @@ runners:
   helper:
     registry: registry1.dso.mil
     repository: ironbank/gitlab/gitlab-runner/gitlab-runner-helper
-    tag: "v17.1.0"
+    tag: "v17.2.1"
 
   # runner configuration, where the multi line strings is evaluated as
   # template so you can specify helm values inside of it.
@@ -746,12 +767,12 @@ deploymentLabels: {}
   # owner.team: <my_cool_team>
 
 ## Lifecycle options to be added to deployment
-##  
+##
 deploymentLifecycle: {}
   # Example
   # preStop:
   #   exec:
-  #     command: ["/bin/sh", "-c", "echo 'shutting down'"] 
+  #     command: ["/bin/sh", "-c", "echo 'shutting down'"]
 
 ## Set hostname for runner pods
 #hostname: my-gitlab-runner
