@@ -1,0 +1,16 @@
+{{- if .Values.metrics.enabled }}
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+  name: monitoring-metrics-{{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  selector:
+    matchLabels:
+      app: gitlab-runner
+  action: ALLOW
+  rules:
+    - to:
+      - operation:
+          ports: [{{ .Values.metrics.port | quote }}]
+{{- end }}

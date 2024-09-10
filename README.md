@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # gitlab-runner
 
-![Version: 0.67.1-bb.0](https://img.shields.io/badge/Version-0.67.1--bb.0-informational?style=flat-square) ![AppVersion: 17.2.1](https://img.shields.io/badge/AppVersion-17.2.1-informational?style=flat-square)
+![Version: 0.67.1-bb.1](https://img.shields.io/badge/Version-0.67.1--bb.1-informational?style=flat-square) ![AppVersion: 17.2.1](https://img.shields.io/badge/AppVersion-17.2.1-informational?style=flat-square)
 
 GitLab Runner
 
