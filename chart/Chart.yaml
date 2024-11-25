@@ -20,6 +20,7 @@ dependencies:
     version: 0.5.4
     repository: oci://registry1.dso.mil/bigbang
 annotations:
+  bigbang.dev/maintenanceTrack: bb_integrated
   bigbang.dev/upstreamReleaseNotesMarkdown: |
     - [Find our upstream chart's CHANGELOG here](https://gitlab.com/gitlab-org/charts/gitlab-runner/-/blob/v0.67.1/CHANGELOG.md)
     - [and our upstream application release notes here](https://gitlab.com/gitlab-org/charts/gitlab-runner/-/blob/v0.67.1/CHANGELOG.md?ref_type=tags#v0671-2024-07-26)

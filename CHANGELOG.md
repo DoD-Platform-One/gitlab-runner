@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - Fix changelog notes
 - Add AuthorizationPolicy for metrics port targets
+- Added the maintenance track annotation and badge
 
 ## [0.67.1-bb.0] - 2024-09-04
 
