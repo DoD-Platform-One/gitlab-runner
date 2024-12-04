@@ -1,3 +1,12 @@
+// Overrides from gluon commands.js
+Cypress.Commands.add('deleteGitlabProject', (url, username, projectName) => {
+  cy.visit(`${url}/${username}/${projectName}/edit`)
+  cy.get('section[data-testid="advanced-settings-content"]').click()
+  cy.get('button[data-testid="delete-button"]').click()
+  cy.get('input[data-testid="confirm-name-field"]').type(`${username}/${projectName}`)
+  cy.get('button[data-testid="confirm-delete-button"]').click()
+})
+
 Cypress.on('uncaught:exception', (err, runnable) => {
   // returning false here prevents Cypress from failing the test
   // gitlab throws this error in the console which by default fails the cypress test

@@ -30,7 +30,7 @@ The gitlab-runner pod is deployed in the gitlab namespace via a Helm chart.
 Gitlab Runner is configured to run as a globally shared runner.  Any repository in the gitlab installation will have this runner available for CI/CD pipelines. This runner automatically registers with the gitlab installation upon installation.
 
 This globally shared gitlab-runner pod can be seen in any repository CI/CD Settings page eg:
-https://code.bigbang.dev/GROUP/PROJECT/-/settings/ci_cd
+<https://code.bigbang.dev/GROUP/PROJECT/-/settings/ci_cd>
 
 The runner uses the IronBank RedHat UBI8 image to run jobs.
 
@@ -60,7 +60,7 @@ Reference: [GitLab Runner monitoring](https://docs.gitlab.com/runner/monitoring/
 
 ##### Verification
 
-To verify that the metrics are working, open a browser to your prometheus endpoint (e.g. https://prometheus.bigbang.dev).  Under `Status`, select `Targets`.  You should find `monitoring/gitlab-gitlab-runner/0` (if using Big Bang) or the name of your Service Monitor as a target and the State should be `UP`.
+To verify that the metrics are working, open a browser to your prometheus endpoint (e.g. <https://prometheus.bigbang.dev>).  Under `Status`, select `Targets`.  You should find `monitoring/gitlab-gitlab-runner/0` (if using Big Bang) or the name of your Service Monitor as a target and the State should be `UP`.
 
 #### Elastic
 

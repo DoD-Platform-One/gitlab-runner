@@ -2,6 +2,18 @@
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.68.1-bb.0] - 2024-12-04
+
+### Changed
+
+- gluon 0.5.4 -> 0.5.10
+- ironbank/gitlab/gitlab-runner/gitlab-runner (source) 17.2.1 -> 17.3.1
+- ironbank/gitlab/gitlab-runner/gitlab-runner (source) v17.2.1 -> v17.3.1
+- ironbank/gitlab/gitlab-runner/gitlab-runner-helper (source) v17.2.1 -> v17.3.1
+- registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner (source) v17.2.1 -> v17.3.1
+- registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner-helper (source) v17.2.1 -> v17.3.1
+- registry1.dso.mil/ironbank/redhat/ubi/ubi9 (source) 9.4 -> 9.5
+
 ## [0.67.1-bb.1] - 2024-09-09
 
 ### Changed
@@ -22,17 +34,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Changed
 
-- Update kyverno cluster policy to handle the runner secret sync to multiple external namespaces 
+- Update kyverno cluster policy to handle the runner secret sync to multiple external namespaces
 
 ## [0.66.0-bb.0] - 2024-07-17
 
 ### Changed
 
 - Upgrade gitlab runner from 17.0.0 to 17.1.0:
-    - Make lifecycle options configurable in the deployment [upstream !473](https://gitlab.com/gitlab-org/charts/gitlab-runner/-/merge_requests/473)
-    - Add dedicated ServiceAccount configuration [upstream !415](https://gitlab.com/gitlab-org/charts/gitlab-runner/-/merge_requests/415/commits)
-    - Updated registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner 17.0.0 -> 17.1.0
-    - Updated registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner-helper 17.0.0 -> 17.1.0
+  - Make lifecycle options configurable in the deployment [upstream !473](https://gitlab.com/gitlab-org/charts/gitlab-runner/-/merge_requests/473)
+  - Add dedicated ServiceAccount configuration [upstream !415](https://gitlab.com/gitlab-org/charts/gitlab-runner/-/merge_requests/415/commits)
+  - Updated registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner 17.0.0 -> 17.1.0
+  - Updated registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner-helper 17.0.0 -> 17.1.0
 
 ## [0.65.0-bb.3] - 2024-07-01
 
@@ -43,11 +55,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Updated the istio hardened doc
 
 ## [0.65.0-bb.2] - 2024-06-21
+
 ### Fixed
 
 - Removed duplicate istio.hardened entry in chart/values.yaml
 
 ## [0.65.0-bb.1] - 2024-06-20
+
 ### Fixed
 
 - Updated authorizationPolicy to properly reflect matchLabel selector and port for metrics
