@@ -7,8 +7,6 @@ metadata:
   labels:
     grafana_dashboard: "1"
 data:
-  gitlab-ci-pipelines_rev1.json: |
-    {{ .Files.Get "dashboards/gitlab-ci-pipelines_rev1.json"  | nindent 4 }}
   gitlab-ci-metrics_rev1.json: |
     {{ .Files.Get "dashboards/gitlab-runner-metrics_rev1.json"  | nindent 4 }}
 {{- end }}
