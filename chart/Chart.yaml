@@ -1,7 +1,7 @@
 apiVersion: v2
 name: gitlab-runner
-version: 0.68.1-bb.2
-appVersion: 17.3.1
+version: 0.70.4-bb.0
+appVersion: 17.5.4
 description: GitLab Runner
 keywords:
 - git
@@ -17,18 +17,18 @@ maintainers:
   email: support@gitlab.com
 dependencies:
   - name: gluon
-    version: 0.5.10
+    version: 0.5.12
     repository: oci://registry1.dso.mil/bigbang
 annotations:
   bigbang.dev/maintenanceTrack: bb_integrated
   bigbang.dev/upstreamReleaseNotesMarkdown: |
-    - [Find our upstream chart's CHANGELOG here](https://gitlab.com/gitlab-org/charts/gitlab-runner/-/blob/v0.67.1/CHANGELOG.md)
-    - [and our upstream application release notes here](https://gitlab.com/gitlab-org/charts/gitlab-runner/-/blob/v0.67.1/CHANGELOG.md?ref_type=tags#v0671-2024-07-26)
+    - [Find our upstream chart's CHANGELOG here](https://gitlab.com/gitlab-org/charts/gitlab-runner/-/blob/v0.70.4/CHANGELOG.md)
+    - [and our upstream application release notes here](https://gitlab.com/gitlab-org/charts/gitlab-runner/-/blob/v0.70.4/CHANGELOG.md?ref_type=tags#v0704-2024-11-20)
   bigbang.dev/applicationVersions: |
-    - Gitlab Runner: v17.3.1
+    - Gitlab Runner: v17.5.4
   helm.sh/images: |
     - name: gitlab-runner
-      image: registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner:v17.3.1
+      image: registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner:v17.5.4
     - name: gitlab-runner-helper
       image: registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner-helper:v17.3.1
     - name: ubi9

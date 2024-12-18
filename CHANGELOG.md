@@ -2,6 +2,15 @@
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.70.4-bb.0] - 2024-12-17
+
+### Changed
+
+- Update GitLab Runner version to v17.5.4
+- Update Gluon version to 0.5.12
+- Update Gitlab Runner helm chart to v0.70.4
+- Update Ubi9 to 9.5
+
 ## [0.68.1-bb.2] - 2024-12-11
 
 ### Changed
