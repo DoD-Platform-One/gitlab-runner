@@ -12,7 +12,7 @@
 image:
   registry: registry1.dso.mil
   image: ironbank/gitlab/gitlab-runner/gitlab-runner
-  tag: v17.3.1
+  tag: v17.5.4
 
 ## When using GitLab Runner Helm Chart with gitlab-runner-ubi-images (https://gitlab.com/gitlab-org/ci-cd/gitlab-runner-ubi-images/container_registry)
 ## the installation fails because dumb-init is not packaged in the image. However, the tini is present.
@@ -73,8 +73,8 @@ gitlabUrl: http://gitlab-webservice-default.gitlab.svc.cluster.local:8181
 # runnerRegistrationToken: ""
 
 ## The Runner Token for adding new Runners to the GitLab Server. This must
-## be retrieved from your GitLab Instance. It is token of already registered runner.
-## ref: (we don't yet have docs for that, but we want to use existing token)
+## be retrieved from your GitLab instance. It is the token of an already registered runner.
+## ref: (we don't have docs for that yet, but we want to use an existing token)
 ##
 # runnerToken: ""
 #
@@ -86,6 +86,11 @@ gitlabUrl: http://gitlab-webservice-default.gitlab.svc.cluster.local:8181
 ## non-existant runners. Un-registering the runner before termination mitigates this issue.
 ## ref: https://docs.gitlab.com/runner/commands/index.html#gitlab-runner-unregister
 ##
+## This property ensures that all the Runners present in the local config.toml are unregistered when the chart is uninstalled
+## - If the token is prefixed with `glrt-` (meaning the runner was created in the UI or API),
+##   the unregisterRunners property deletes the runner manager, not the runner.
+##   The runner manager is identified by the runner and the machine that contains the config.toml.
+## - If the runner was registered with a registration token (deprecated), the runner is deleted.
 unregisterRunners: true
 
 ## When stopping the runner, give it time to wait for its jobs to terminate.
@@ -96,7 +101,7 @@ unregisterRunners: true
 ## ref: https://docs.gitlab.com/runner/commands/#signals
 terminationGracePeriodSeconds: 3600
 
-## Set the certsSecretName in order to pass custom certficates for GitLab Runner to use
+## Set the certsSecretName in order to pass custom certficates for GitLab Runner to use.
 ## Provide resource name for a Kubernetes Secret Object in the same namespace,
 ## this is used to populate the /home/gitlab-runner/.gitlab-runner/certs/ directory
 ## ref: https://docs.gitlab.com/runner/configuration/tls-self-signed.html#supported-options-for-self-signed-certificates-targeting-the-gitlab-server
@@ -113,7 +118,7 @@ concurrent: 50
 ##
 shutdown_timeout: 0
 
-## Defines in seconds how often to check GitLab for a new builds
+## Defines in seconds how often to check GitLab for new builds
 ## ref: https://docs.gitlab.com/runner/configuration/advanced-configuration.html#the-global-section
 ##
 checkInterval: 3
@@ -149,8 +154,8 @@ checkInterval: 3
 ## ref:
 ##
 ## When sessionServer is enabled, the user can either provide a public publicIP
-## or rely on the external IP auto discovery
-## When a serviceAccountName is used with the automounting to the pod disable,
+## or rely on the external IP auto discovery.
+## When a serviceAccountName is used with the automounting to the pod disabled,
 ## we recommend the usage of the publicIP
 sessionServer:
   enabled: false
@@ -168,6 +173,12 @@ sessionServer:
 
   #Valid values: ClusterIP, Headless, NodePort, LoadBalancer
   serviceType: LoadBalancer
+
+  # if enabled, sessionServer.publicIP variable should be set to the host e.g. runner1.example.com
+  ingress:
+    enabled: false
+    className: ""
+    annotations: {}
 
 ## For RBAC support:
 rbac:
@@ -188,17 +199,27 @@ rbac:
   ##
   ## Read more about the recommended rules on the following link
   ##
-  ## ref: https://docs.gitlab.com/runner/executors/kubernetes.html#configure-runner-api-permissions
+  ## ref: https://docs.gitlab.com/runner/executors/kubernetes/index.html#configure-runner-api-permissions
   ##
   rules: []
-  # - resources: ["configmaps", "events", "pods", "pods/attach", "pods/exec", "secrets", "services"]
-  #   verbs: ["get", "list", "watch", "create", "patch", "update", "delete"]
-  # - apiGroups: [""]
-  #   resources: ["pods/exec"]
-  #   verbs: ["create", "patch", "delete"]
-  # - apiGroups: [""]
-  #   resources: ["pods/log"]
-  #   verbs: ["get"]
+    # - resources: ["events"]
+    #   verbs: ["list", "watch"]
+    # - resources: ["namespaces"]
+    #   verbs: ["create", "delete"]
+    # - resources: ["pods"]
+    #   verbs: ["create","delete","get"]
+    # - apiGroups: [""]
+    #   resources: ["pods/attach","pods/exec"]
+    #   verbs: ["get","create","patch","delete"]
+    # - apiGroups: [""]
+    #   resources: ["pods/log"]
+    #   verbs: ["get","list"]
+    # - resources: ["secrets"]
+    #   verbs: ["create","delete","get","update"]
+    # - resources: ["serviceaccounts"]
+    #   verbs: ["get"]
+    # - resources: ["services"]
+    #   verbs: ["create","get"]
 
   ## Run the gitlab-bastion container with the ability to deploy/manage containers of jobs
   ## cluster-wide or only within namespace
@@ -210,7 +231,7 @@ rbac:
   # serviceAccountName: default
 
   ## Specify annotations for Service Accounts, useful for annotations such as eks.amazonaws.com/role-arn.
-  ## Values may refer other values as the _tpl_ function is implicitly applied. Mind the quotes when using this, e.g.
+  ## Values may refer to other values as the _tpl_ function is implicitly applied. Mind the quotes when using this, e.g.
   ## serviceAccountAnnotations:
   ##   eks.amazonaws.com/role-arn: "arn:aws:iam::{{ .Values.global.accountId }}:role/{{ .Values.global.iamRoleName }}"
   ##
@@ -225,7 +246,7 @@ rbac:
   podSecurityPolicy:
     enabled: false
     resourceNames:
-    - gitlab-runner
+      - gitlab-runner
 
   ## Specify one or more imagePullSecrets used for pulling the runner image
   ##
@@ -253,12 +274,12 @@ serviceAccount:
   ##
   ## ref: https://docs.aws.amazon.com/eks/latest/userguide/specify-service-account-role.html
   ##
-  annotations: { }
+  annotations: {}
   ## Specify one or more imagePullSecrets used for pulling the runner image
   ##
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#add-imagepullsecrets-to-a-service-account
   ##
-  imagePullSecrets: [ ]
+  imagePullSecrets: []
 
 ## Configure integrated Prometheus metrics exporter
 ##
@@ -368,12 +389,12 @@ service:
   ##
   # metrics:
 
-    ## Specify the node port under which the prometheus metrics of the runner are made
-    ## available.
-    ##
-    ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#nodeport
-    ##
-    # nodePort: ""
+  ## Specify the node port under which the prometheus metrics of the runner are made
+  ## available.
+  ##
+  ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#nodeport
+  ##
+  # nodePort: ""
 
   ## Provide a list of additional ports to be exposed by this service
   ##
@@ -445,7 +466,7 @@ runners:
   ##
   # name: ""
 
-  ## DEPRECATED:Specify the maximum timeout (in seconds) that will be set for job when using this Runner
+  ## DEPRECATED: Specify the maximum timeout (in seconds) that will be set for job when using this Runner
   ##
   ## ref: https://docs.gitlab.com/ee/ci/runners/new_creation_workflow.html
   ##
@@ -695,9 +716,16 @@ resources:
     cpu: 200m
 
 ## Affinity for pod assignment
-## Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
+## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
 ##
 affinity: {}
+
+## RuntimeClass name for pod assignment
+## ref: https://kubernetes.io/docs/concepts/containers/runtime-class/
+##
+runtimeClassName: ""
+  # Example: Once RuntimeClasses are configured for the cluster, you can specify it.
+  # runtimeClassName: myclass
 
 ## Node labels for pod assignment
 ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/
@@ -708,7 +736,7 @@ nodeSelector: {}
   # node-role.kubernetes.io/worker: "true"
 
 ## List of node taints to tolerate (requires Kubernetes >= 1.6)
-## Ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
+## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
 ##
 tolerations: []
   # Example: Regular worker nodes may have a taint, thus you need to tolerate the taint
@@ -786,24 +814,27 @@ podAnnotations: {}
 
 ## Labels to be added to manager pod
 ##
+## Supports templating
 podLabels: {}
   # Example:
   # owner.team: <my_cool_team>
+  # owner.team: "{{ .Values.team }}"
+  # tags.{{ .Values.tag }}/env: "{{ .Values.environment }}"
 
 ## HPA support for custom metrics:
 ## This section enables runners to autoscale based on defined custom metrics.
-## In order to use this functionality, Need to enable a custom metrics API server by
+## In order to use this functionality, you need to enable a custom metrics API server by
 ## implementing "custom.metrics.k8s.io" using supported third party adapter
 ## Example: https://github.com/directxman12/k8s-prometheus-adapter
 ##
-#hpa: {}
-  # minReplicas: 1
-  # maxReplicas: 10
-  # metrics:
-  # - type: Pods
-  #   pods:
-  #     metricName: gitlab_runner_jobs
-  #     targetAverageValue: 400m
+# hpa: {}
+#   minReplicas: 1
+#   maxReplicas: 10
+#   metrics:
+#   - type: Pods
+#     pods:
+#       metricName: gitlab_runner_jobs
+#       targetAverageValue: 400m
 
 ## Configure priorityClassName for manager pod. See k8s docs for more info on how pod priority works:
 ##  https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/
@@ -849,7 +880,7 @@ volumes: []
   #   persistentVolumeClaim:
   #     claimName: my-pvc
 
-# Array of extra K8s manifests to deploy
+## Array of extra K8s manifests to deploy
 ##
 extraObjects: []
 # - apiVersion: external-secrets.io/v1beta1

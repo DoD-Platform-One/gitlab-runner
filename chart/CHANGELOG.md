@@ -1,3 +1,58 @@
+## v0.70.4 (2024-11-20)
+
+### New features
+
+- Update GitLab Runner version to v17.5.4
+
+## v0.70.3 (2024-11-01)
+
+### New features
+
+- Update GitLab Runner version to v17.5.3
+
+## v0.70.2 (2024-10-23)
+
+### New features
+
+- Update GitLab Runner version to v17.5.2
+
+## v0.70.1 (2024-10-18)
+
+### New features
+
+- Update GitLab Runner version to v17.5.1
+
+## v0.70.0 (2024-10-17)
+
+### New features
+
+- Update GitLab Runner version to v17.5.0
+- Add podlabels interpolation [!492](https://gitlab.com/gitlab-org/charts/gitlab-runner/-/merge_requests/492) (Ivan Katliarchuk @Ikatliarchuk)
+
+### Other changes
+
+- Add Ingress support for Session Server [!490](https://gitlab.com/gitlab-org/charts/gitlab-runner/-/merge_requests/490) (Ummet Civi @ummetcivi)
+
+## v0.69.0 (2024-09-19)
+
+### New features
+
+- Update GitLab Runner version to v17.4.0
+
+### Bug fixes
+
+- Add env vars if secret is provided [!489](https://gitlab.com/gitlab-org/charts/gitlab-runner/-/merge_requests/489)
+- Revert the system_id generation [!488](https://gitlab.com/gitlab-org/charts/gitlab-runner/-/merge_requests/488)
+- Use a more generic approach to APISERVER calls [!487](https://gitlab.com/gitlab-org/charts/gitlab-runner/-/merge_requests/487) (Zadjad Rezai @zadjadr)
+
+### Maintenance
+
+- Enable by default the `unregisterRunners` property and document its behavior [!441](https://gitlab.com/gitlab-org/charts/gitlab-runner/-/merge_requests/441)
+
+### Other changes
+
+- runtimeClassName for deployments [!485](https://gitlab.com/gitlab-org/charts/gitlab-runner/-/merge_requests/485) (Piotr Roszatycki @dex4er-user)
+
 ## v0.68.1 (2024-08-21)
 
 ### New features
