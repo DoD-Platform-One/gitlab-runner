@@ -2,6 +2,12 @@
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.70.4-bb.1] - 2024-12-19
+
+### Changed
+
+- Add deploymentLabels (app.kubernetes.io/name and app.kubernetes.io/version) interpolation.
+
 ## [0.70.4-bb.0] - 2024-12-17
 
 ### Changed
