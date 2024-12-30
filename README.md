@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # gitlab-runner
 
-![Version: 0.70.4-bb.0](https://img.shields.io/badge/Version-0.70.4--bb.0-informational?style=flat-square) ![AppVersion: 17.5.4](https://img.shields.io/badge/AppVersion-17.5.4-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
+![Version: 0.70.4-bb.1](https://img.shields.io/badge/Version-0.70.4--bb.1-informational?style=flat-square) ![AppVersion: 17.5.4](https://img.shields.io/badge/AppVersion-17.5.4-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
 GitLab Runner
 
@@ -13,19 +13,19 @@ GitLab Runner
 
 ## Upstream Release Notes
 
-- [Find our upstream chart's CHANGELOG here](https://gitlab.com/gitlab-org/charts/gitlab-runner/-/blob/v0.70.4/CHANGELOG.md)
-- [and our upstream application release notes here](https://gitlab.com/gitlab-org/charts/gitlab-runner/-/blob/v0.70.4/CHANGELOG.md?ref_type=tags#v0704-2024-11-20)
+* [Find our upstream chart's CHANGELOG here](https://gitlab.com/gitlab-org/charts/gitlab-runner/-/blob/v0.70.4/CHANGELOG.md)
+* [and our upstream application release notes here](https://gitlab.com/gitlab-org/charts/gitlab-runner/-/blob/v0.70.4/CHANGELOG.md?ref_type=tags#v0704-2024-11-20)
 
 ## Learn More
 
-- [Application Overview](docs/overview.md)
-- [Other Documentation](docs/)
+* [Application Overview](docs/overview.md)
+* [Other Documentation](docs/)
 
 ## Pre-Requisites
 
-- Kubernetes Cluster deployed
-- Kubernetes config installed in `~/.kube/config`
-- Helm installed
+* Kubernetes Cluster deployed
+* Kubernetes config installed in `~/.kube/config`
+* Helm installed
 
 Install Helm
 
@@ -33,8 +33,8 @@ https://helm.sh/docs/intro/install/
 
 ## Deployment
 
-- Clone down the repository
-- cd into directory
+* Clone down the repository
+* cd into directory
 
 ```bash
 helm install gitlab-runner chart/

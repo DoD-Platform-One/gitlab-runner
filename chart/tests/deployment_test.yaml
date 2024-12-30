@@ -234,3 +234,54 @@ tests:
       - equal:
           path: spec.template.metadata.labels["tags.k8s.io/service"]
           value: gitlab-runner
+
+  - it: should not set deploymentLabels
+    release:
+      name: hello-gitlab
+    chart:
+      version: 1.0.1
+    template: deployment.yaml
+    asserts:
+      - matchSnapshot:
+          path: metadata
+      - equal:
+          path: metadata.labels
+          value:
+            app: hello-gitlab-gitlab-runner
+            chart: gitlab-runner-1.0.1
+            heritage: Helm
+            release: hello-gitlab
+
+  - it: should set deploymentLabels without template variables
+    set:
+      deploymentLabels:
+        owner.team: my-team
+        gitlab.com: reserved
+    template: deployment.yaml
+    asserts:
+      - equal:
+          path: metadata.labels["owner.team"]
+          value: my-team
+      - equal:
+          path: metadata.labels["gitlab.com"]
+          value: reserved
+
+  - it: should set deploymentLabels with template variables
+    set:
+      team: gitlab-team
+      tag: finops.io
+      deploymentLabels:
+        owner.team: "{{ .Values.team }}"
+        tags.{{ .Values.tag }}/env: "sandbox"
+        tags.k8s.io/service: gitlab-runner
+    template: deployment.yaml
+    asserts:
+      - equal:
+          path: metadata.labels["owner.team"]
+          value: gitlab-team
+      - equal:
+          path: metadata.labels["tags.finops.io/env"]
+          value: sandbox
+      - equal:
+          path: metadata.labels["tags.k8s.io/service"]
+          value: gitlab-runner
