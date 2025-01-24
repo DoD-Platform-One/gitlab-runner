@@ -1,31 +1,31 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # gitlab-runner
 
-![Version: 0.70.4-bb.1](https://img.shields.io/badge/Version-0.70.4--bb.1-informational?style=flat-square) ![AppVersion: 17.5.4](https://img.shields.io/badge/AppVersion-17.5.4-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
+![Version: 0.73.0-bb.0](https://img.shields.io/badge/Version-0.73.0--bb.0-informational?style=flat-square) ![AppVersion: 17.8.0](https://img.shields.io/badge/AppVersion-17.8.0-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
 GitLab Runner
 
 ## Upstream References
 
-* <https://gitlab.com/gitlab-org/charts/gitlab-runner>
-* <https://gitlab.com/gitlab-org/gitlab-runner>
-* <https://docs.gitlab.com/runner/>
+- <https://gitlab.com/gitlab-org/charts/gitlab-runner>
+- <https://gitlab.com/gitlab-org/gitlab-runner>
+- <https://docs.gitlab.com/runner/>
 
 ## Upstream Release Notes
 
-* [Find our upstream chart's CHANGELOG here](https://gitlab.com/gitlab-org/charts/gitlab-runner/-/blob/v0.70.4/CHANGELOG.md)
-* [and our upstream application release notes here](https://gitlab.com/gitlab-org/charts/gitlab-runner/-/blob/v0.70.4/CHANGELOG.md?ref_type=tags#v0704-2024-11-20)
+- [Find our upstream chart's CHANGELOG here](https://gitlab.com/gitlab-org/charts/gitlab-runner/-/blob/v0.70.4/CHANGELOG.md)
+- [and our upstream application release notes here](https://gitlab.com/gitlab-org/charts/gitlab-runner/-/blob/v0.70.4/CHANGELOG.md?ref_type=tags#v0704-2024-11-20)
 
 ## Learn More
 
-* [Application Overview](docs/overview.md)
-* [Other Documentation](docs/)
+- [Application Overview](docs/overview.md)
+- [Other Documentation](docs/)
 
 ## Pre-Requisites
 
-* Kubernetes Cluster deployed
-* Kubernetes config installed in `~/.kube/config`
-* Helm installed
+- Kubernetes Cluster deployed
+- Kubernetes config installed in `~/.kube/config`
+- Helm installed
 
 Install Helm
 
@@ -33,8 +33,8 @@ https://helm.sh/docs/intro/install/
 
 ## Deployment
 
-* Clone down the repository
-* cd into directory
+- Clone down the repository
+- cd into directory
 
 ```bash
 helm install gitlab-runner chart/
@@ -46,7 +46,7 @@ helm install gitlab-runner chart/
 |-----|------|---------|-------------|
 | image.registry | string | `"registry1.dso.mil"` |  |
 | image.image | string | `"ironbank/gitlab/gitlab-runner/gitlab-runner"` |  |
-| image.tag | string | `"v17.5.4"` |  |
+| image.tag | string | `"v17.8.0"` |  |
 | useTini | bool | `true` |  |
 | imagePullPolicy | string | `"IfNotPresent"` |  |
 | livenessProbe | object | `{}` |  |
@@ -80,10 +80,10 @@ helm install gitlab-runner chart/
 | service.type | string | `"ClusterIP"` |  |
 | runners.job.registry | string | `"registry1.dso.mil"` |  |
 | runners.job.repository | string | `"ironbank/redhat/ubi/ubi9"` |  |
-| runners.job.tag | string | `"9.4"` |  |
+| runners.job.tag | string | `"9.5"` |  |
 | runners.helper.registry | string | `"registry1.dso.mil"` |  |
 | runners.helper.repository | string | `"ironbank/gitlab/gitlab-runner/gitlab-runner-helper"` |  |
-| runners.helper.tag | string | `"v17.3.1"` |  |
+| runners.helper.tag | string | `"v17.8.0"` |  |
 | runners.config | string | `"[[runners]]\n  clone_url = \"http://gitlab-webservice-default.gitlab.svc.cluster.local:8181\"\n  cache_dir = \"/tmp/gitlab-runner/cache\"\n  [runners.kubernetes]\n    pull_policy = \"always\"\n    namespace = \"{{.Release.Namespace}}\"\n    image = \"{{ printf \"%s/%s:%s\" .Values.runners.job.registry .Values.runners.job.repository .Values.runners.job.tag }}\"\n    helper_image = \"{{ printf \"%s/%s:%s\" .Values.runners.helper.registry .Values.runners.helper.repository .Values.runners.helper.tag }}\"\n    image_pull_secrets = [\"private-registry\"]\n  [runners.kubernetes.pod_security_context]\n    run_as_non_root = true\n    run_as_user = 1001\n  [runners.kubernetes.helper_container_security_context]\n    run_as_non_root = true\n    run_as_user = 1001\n  [runners.kubernetes.pod_labels]\n    \"job_id\" = \"${CI_JOB_ID}\"\n    \"job_name\" = \"${CI_JOB_NAME}\"\n    \"pipeline_id\" = \"${CI_PIPELINE_ID}\"\n    \"app\" = \"gitlab-runner\"\n"` |  |
 | runners.configPath | string | `""` |  |
 | runners.locked | bool | `true` |  |

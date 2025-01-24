@@ -12,7 +12,7 @@
 image:
   registry: registry1.dso.mil
   image: ironbank/gitlab/gitlab-runner/gitlab-runner
-  tag: v17.5.4
+  tag: v17.8.0
 
 ## When using GitLab Runner Helm Chart with gitlab-runner-ubi-images (https://gitlab.com/gitlab-org/ci-cd/gitlab-runner-ubi-images/container_registry)
 ## the installation fails because dumb-init is not packaged in the image. However, the tini is present.
@@ -174,11 +174,25 @@ sessionServer:
   #Valid values: ClusterIP, Headless, NodePort, LoadBalancer
   serviceType: LoadBalancer
 
+  ## Specify the services external traffic policy
+  ##
+  ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#traffic-policies
+  ##
+  # externalTrafficPolicy:
+
+  ## Specify the services internal traffic policy
+  ##
+  ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#traffic-policies
+  ##
+  # internalTrafficPolicy:
+
   # if enabled, sessionServer.publicIP variable should be set to the host e.g. runner1.example.com
   ingress:
     enabled: false
     className: ""
     annotations: {}
+    tls:
+      - secretName: gitlab-runner-session-server
 
 ## For RBAC support:
 rbac:
@@ -402,17 +416,29 @@ service:
   ##
   # additionalPorts: []
 
+  ## Specify the services external traffic policy
+  ##
+  ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#traffic-policies
+  ##
+  # externalTrafficPolicy:
+
+  ## Specify the services internal traffic policy
+  ##
+  ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#traffic-policies
+  ##
+  # internalTrafficPolicy:
+
 ## Configuration for the Pods that the runner launches for each new job
 ##
 runners:
   job:
     registry: registry1.dso.mil
     repository: ironbank/redhat/ubi/ubi9
-    tag: "9.4"
+    tag: "9.5"
   helper:
     registry: registry1.dso.mil
     repository: ironbank/gitlab/gitlab-runner/gitlab-runner-helper
-    tag: "v17.3.1"
+    tag: "v17.8.0"
 
   # runner configuration, where the multi line strings is evaluated as
   # template so you can specify helm values inside of it.
