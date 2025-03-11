@@ -35,7 +35,8 @@ describe('Gitlab Runner: Run Pipeline', () => {
       cy.get('div[class="view-line"]').click().type('pipeline-test:{enter}{backspace}  stage: test{enter}{backspace}  script:{enter}{backspace}{backspace}    - echo The pipeline test is successful!{enter}')
       // commit file and start pipeline
       cy.scrollTo('bottom')
-      cy.get('button[id="commit-changes"]').click()
+      cy.get('button[data-testid="blob-edit-header-commit-button"]').click()
+      cy.get('button[data-testid="commit-change-modal-commit-button').click()
     })
     // Go to pipelines page
     cy.url().should('eq', `${Cypress.env('url')}/root/${Cypress.env('gitlab_project')}/-/blob/main/.gitlab-ci.yml`) 
