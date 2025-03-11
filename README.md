@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # gitlab-runner
 
-![Version: 0.73.0-bb.0](https://img.shields.io/badge/Version-0.73.0--bb.0-informational?style=flat-square) ![AppVersion: 17.8.0](https://img.shields.io/badge/AppVersion-17.8.0-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
+![Version: 0.73.0-bb.1](https://img.shields.io/badge/Version-0.73.0--bb.1-informational?style=flat-square) ![AppVersion: 17.8.0](https://img.shields.io/badge/AppVersion-17.8.0-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
 GitLab Runner
 
@@ -62,6 +62,7 @@ helm install gitlab-runner chart/
 | sessionServer.ingress.enabled | bool | `false` |  |
 | sessionServer.ingress.className | string | `""` |  |
 | sessionServer.ingress.annotations | object | `{}` |  |
+| sessionServer.ingress.tls[0].secretName | string | `"gitlab-runner-session-server"` |  |
 | rbac.create | bool | `true` |  |
 | rbac.generatedServiceAccountName | string | `""` |  |
 | rbac.rules | list | `[]` |  |
