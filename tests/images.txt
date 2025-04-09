@@ -1,2 +1,2 @@
-registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner-helper:v17.8.0
+registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner-helper:v17.10.0
 registry1.dso.mil/ironbank/redhat/ubi/ubi9:9.5
