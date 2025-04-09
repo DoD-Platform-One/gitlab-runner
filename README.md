@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # gitlab-runner
 
-![Version: 0.73.0-bb.3](https://img.shields.io/badge/Version-0.73.0--bb.3-informational?style=flat-square) ![AppVersion: 17.8.0](https://img.shields.io/badge/AppVersion-17.8.0-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
+![Version: 0.75.1-bb.0](https://img.shields.io/badge/Version-0.75.1--bb.0-informational?style=flat-square) ![AppVersion: 17.10.1](https://img.shields.io/badge/AppVersion-17.10.1-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
 GitLab Runner
 
@@ -46,7 +46,7 @@ helm install gitlab-runner chart/
 |-----|------|---------|-------------|
 | image.registry | string | `"registry1.dso.mil"` |  |
 | image.image | string | `"ironbank/gitlab/gitlab-runner/gitlab-runner"` |  |
-| image.tag | string | `"v17.8.0"` |  |
+| image.tag | string | `"v17.10.0"` |  |
 | useTini | bool | `true` |  |
 | imagePullPolicy | string | `"IfNotPresent"` |  |
 | livenessProbe | object | `{}` |  |
@@ -84,7 +84,7 @@ helm install gitlab-runner chart/
 | runners.job.tag | string | `"9.5"` |  |
 | runners.helper.registry | string | `"registry1.dso.mil"` |  |
 | runners.helper.repository | string | `"ironbank/gitlab/gitlab-runner/gitlab-runner-helper"` |  |
-| runners.helper.tag | string | `"v17.8.0"` |  |
+| runners.helper.tag | string | `"v17.10.0"` |  |
 | runners.config | string | `"[[runners]]\n  clone_url = \"http://gitlab-webservice-default.gitlab.svc.cluster.local:8181\"\n  cache_dir = \"/tmp/gitlab-runner/cache\"\n  [runners.kubernetes]\n    pull_policy = \"always\"\n    namespace = \"{{.Release.Namespace}}\"\n    image = \"{{ printf \"%s/%s:%s\" .Values.runners.job.registry .Values.runners.job.repository .Values.runners.job.tag }}\"\n    helper_image = \"{{ printf \"%s/%s:%s\" .Values.runners.helper.registry .Values.runners.helper.repository .Values.runners.helper.tag }}\"\n    image_pull_secrets = [\"private-registry\"]\n  [runners.kubernetes.pod_security_context]\n    run_as_non_root = true\n    run_as_user = 1001\n  [runners.kubernetes.helper_container_security_context]\n    run_as_non_root = true\n    run_as_user = 1001\n  [runners.kubernetes.pod_labels]\n    \"job_id\" = \"${CI_JOB_ID}\"\n    \"job_name\" = \"${CI_JOB_NAME}\"\n    \"pipeline_id\" = \"${CI_PIPELINE_ID}\"\n    \"app\" = \"gitlab-runner\"\n"` |  |
 | runners.configPath | string | `""` |  |
 | runners.locked | bool | `true` |  |
@@ -162,6 +162,7 @@ helm install gitlab-runner chart/
 | bbtests.cypress.secretEnvs[0].valueFrom.secretKeyRef.name | string | `"gitlab-gitlab-initial-root-password"` |  |
 | bbtests.cypress.secretEnvs[0].valueFrom.secretKeyRef.key | string | `"password"` |  |
 | openshift | bool | `false` |  |
+| extraContainers | list | `[]` |  |
 
 ## Contributing
 

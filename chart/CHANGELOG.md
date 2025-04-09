@@ -1,3 +1,32 @@
+## v0.75.1 (2025-03-27)
+
+### New features
+
+- Update GitLab Runner version to v17.10.1
+
+## v0.75.0 (2025-03-14)
+
+### New features
+
+- Update GitLab Runner version to v17.10.0
+
+## v0.74.0 (2025-02-20)
+
+### New features
+
+- Update GitLab Runner version to v17.9.0
+- Add extra containers [!494](https://gitlab.com/gitlab-org/charts/gitlab-runner/-/merge_requests/494)
+
+### Bug fixes
+
+- Improve authentication token detection [!513](https://gitlab.com/gitlab-org/charts/gitlab-runner/-/merge_requests/513)
+
+### Maintenance
+
+- Update liveness and readiness probe doc [!512](https://gitlab.com/gitlab-org/charts/gitlab-runner/-/merge_requests/512)
+- Increase default period for livenessProbe [!511](https://gitlab.com/gitlab-org/charts/gitlab-runner/-/merge_requests/511)
+- Run CI jobs in kubernetes [!504](https://gitlab.com/gitlab-org/charts/gitlab-runner/-/merge_requests/504)
+
 ## v0.73.0 (2025-01-10)
 
 ### New features

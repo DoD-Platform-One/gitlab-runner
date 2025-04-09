@@ -5,7 +5,7 @@ metadata:
 upstream:
   type: git
   git:
-    commit: be1a0eb680212e6a5b1abde573242524b6602138
+    commit: 7e9cf7dd16d99a7a97896477746aba7fe71cd74e
     repo: https://gitlab.com/gitlab-org/charts/gitlab-runner
     directory: /
-    ref: v0.73.0
+    ref: v0.75.1
