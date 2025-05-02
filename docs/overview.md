@@ -23,7 +23,9 @@
 ### Application Overview
 
 GitLab Runner is the open source project that is used to run your jobs and send the results back to GitLab. It is used in conjunction with GitLab CI/CD, the open-source continuous integration service included with GitLab that coordinates the jobs.
-The gitlab-runner pod is deployed in the gitlab namespace via a Helm chart.
+The gitlab-runner pod is deployed via a Helm chart into its own dedicated **`gitlab-runner`** namespace for improved security and isolation.
+
+**Note:** If using the `autoRegister.enabled=true` feature (default when enabling via Big Bang umbrella values), **Kyverno is required**. A Kyverno policy (`sync-gitlab-runner-secret`) is used to automatically copy the necessary registration token secret from the `gitlab` namespace to the `gitlab-runner` namespace. See the [Global Shared Gitlab Runner](#global-shared-gitlab-runner) section for more details.
 
 ### Daily Application Use
 
@@ -79,12 +81,25 @@ To verify that the metrics are working, open a browser to your prometheus endpoi
 
 #### Global Shared Gitlab Runner
 
-On a default installation, there will be a single pod loaded in the format `gitlab-runner-gitlab-runner-#` in the `gitlab` namespace as shown below.
+On a default installation, there will be a single pod loaded in the format `gitlab-runner-gitlab-runner-#` in the **`gitlab-runner`** namespace as shown below.
 
 ```bash
+# Example from gitlab-runner namespace
 NAME                                          READY   STATUS    RESTARTS   AGE
-gitlab-runner-gitlab-runner-858b5c6796-s694b  1/1     Running   0          156m
+gitlab-runner-gitlab-runner-7d48f9cc9c-abcde  1/1     Running   0          42m
 ```
+
+**Important Note on Namespace and Auto-Registration:**
+As mentioned in the Application Overview, GitLab Runner resides in its own `gitlab-runner` namespace, separate from the main GitLab components in the `gitlab` namespace. This enhances security.
+
+For the runner to automatically register with GitLab (`autoRegister.enabled=true`), it needs access to the registration token stored in the `gitlab-gitlab-runner-secret` within the `gitlab` namespace. Since Kubernetes namespaces provide isolation, direct access is blocked.
+
+Big Bang solves this using a **Kyverno ClusterPolicy** named `sync-gitlab-runner-secret`. This policy automatically:
+1. Detects the `gitlab-runner` namespace.
+2. Clones the `gitlab-gitlab-runner-secret` from the `gitlab` namespace into the `gitlab-runner` namespace.
+3. Keeps the cloned secret synchronized with the original.
+
+This ensures the runner in the `gitlab-runner` namespace can securely obtain the token needed for registration without compromising namespace isolation. **Kyverno must be installed and functional for auto-registration to work.**
 
 #### Useful Queries
 
@@ -94,31 +109,7 @@ gitlab-runner-gitlab-runner-858b5c6796-s694b  1/1     Running   0          156m
 
 #### Network Policies
 
-Big Bang 1.X
-By default, Gitlab Runner will inherit the [network policies](https://repo1.dso.mil/big-bang/product/packages/gitlab/-/tree/main/chart/templates/bigbang/networkpolicies) from the Gitlab namespace. Until a long-term solution is implemented that works for all Platform One teams, Gitlab Runner users may manually create their own network policies for the Gitlab Runner pods. For example:
-
-```yaml
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
-  name: runner-allow-egress
-  namespace: gitlab
-spec:
-  policyTypes:
-  - Egress
-  podSelector:
-    matchLabels:
-      app: gitlab-runner-gitlab-runner
-  egress:
-  - to:
-    - ipBlock:
-        cidr: 0.0.0.0/0
-        # ONLY Block requests to AWS metadata IP
-        except:
-        - 169.254.169.254/32
-
-Big Bang 2.X
-By default, Gitlab Runner egress for runner jobs is locked down. You can dynamicaly create additional network policies with a values override. For example:
+By default, Gitlab Runner egress for runner jobs is locked down within its dedicated `gitlab-runner` namespace. You can dynamically create additional network policies with a values override. For example:
 
 ```yaml
 networkPolicies:
@@ -146,5 +137,9 @@ networkPolicies:
 
 #### Troubleshooting Tips
 
-The gitlab-runner is configured to clone the repository from the gitlab webservice via the "clone_url" setting so the runner clones from the same endpoint it uses to register with the gitlab webservice API which is the gitlab-webservice kubernetes service in the gitlab namespace.
-If gitlab webservice is behind HTTPS ingress then within the values.yaml file "certSecretName" can be populated with certificate and key files if there are certificate issues when cloning.
+- The gitlab-runner is configured to clone the repository from the gitlab webservice via the "clone_url" setting. This setting typically points to the GitLab instance's external URL or internal service name (e.g., `gitlab-webservice.gitlab.svc...`). The runner also uses this endpoint (or the one specified in `gitlabUrl`) to register with the GitLab API.
+- If the GitLab instance (webservice) is behind HTTPS ingress and uses a certificate not trusted by the runner's environment (e.g., a self-signed or private CA), certificate issues can occur during cloning or registration. In such cases, the `certsSecretName` value in `values.yaml` can be populated with the name of a secret containing the necessary CA certificate (`ca.crt`) and optionally client certificates (`tls.crt`, `tls.key`). The runner will mount these certificates to establish trust.
+- **Registration Failure:** If the runner fails to register (often seen as errors in the runner pod logs about failing to connect or register), and you have `autoRegister.enabled=true`, verify the following:
+    - Kyverno is installed and running correctly in the cluster.
+    - The Kyverno `ClusterPolicy` named `sync-gitlab-runner-secret` exists and is active.
+    - Check if the `gitlab-gitlab-runner-secret` has been successfully created/synced into the `gitlab-runner` namespace (`kubectl get secret gitlab-gitlab-runner-secret -n gitlab-runner`). If this secret is missing, the runner cannot get the token to register. Investigate Kyverno policy status and logs.
