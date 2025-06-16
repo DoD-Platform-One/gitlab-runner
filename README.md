@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # gitlab-runner
 
-![Version: 0.75.1-bb.2](https://img.shields.io/badge/Version-0.75.1--bb.2-informational?style=flat-square) ![AppVersion: 17.10.1](https://img.shields.io/badge/AppVersion-17.10.1-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
+![Version: 0.77.2-bb.0](https://img.shields.io/badge/Version-0.77.2--bb.0-informational?style=flat-square) ![AppVersion: v18.0.2](https://img.shields.io/badge/AppVersion-v18.0.2-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
 GitLab Runner
 
@@ -29,7 +29,7 @@ GitLab Runner
 
 Install Helm
 
-https://helm.sh/docs/intro/install/
+<https://helm.sh/docs/intro/install/>
 
 ## Deployment
 
@@ -46,7 +46,7 @@ helm install gitlab-runner chart/
 |-----|------|---------|-------------|
 | image.registry | string | `"registry1.dso.mil"` |  |
 | image.image | string | `"ironbank/gitlab/gitlab-runner/gitlab-runner"` |  |
-| image.tag | string | `"v17.10.0"` |  |
+| image.tag | string | `"v18.0.2"` |  |
 | useTini | bool | `true` |  |
 | imagePullPolicy | string | `"IfNotPresent"` |  |
 | livenessProbe | object | `{}` |  |
@@ -77,6 +77,7 @@ helm install gitlab-runner chart/
 | metrics.portName | string | `"tcp-metrics"` |  |
 | metrics.port | int | `9252` |  |
 | metrics.serviceMonitor.enabled | bool | `false` |  |
+| metrics.serviceMonitor.namespace | string | `""` |  |
 | service.enabled | bool | `true` |  |
 | service.type | string | `"ClusterIP"` |  |
 | runners.job.registry | string | `"registry1.dso.mil"` |  |
@@ -84,10 +85,9 @@ helm install gitlab-runner chart/
 | runners.job.tag | string | `"9.5"` |  |
 | runners.helper.registry | string | `"registry1.dso.mil"` |  |
 | runners.helper.repository | string | `"ironbank/gitlab/gitlab-runner/gitlab-runner-helper"` |  |
-| runners.helper.tag | string | `"v17.10.0"` |  |
+| runners.helper.tag | string | `"v18.0.2"` |  |
 | runners.config | string | `"[[runners]]\n  clone_url = \"http://gitlab-webservice-default.gitlab.svc.cluster.local:8181\"\n  cache_dir = \"/tmp/gitlab-runner/cache\"\n  [runners.kubernetes]\n    pull_policy = \"always\"\n    namespace = \"{{.Release.Namespace}}\"\n    image = \"{{ printf \"%s/%s:%s\" .Values.runners.job.registry .Values.runners.job.repository .Values.runners.job.tag }}\"\n    helper_image = \"{{ printf \"%s/%s:%s\" .Values.runners.helper.registry .Values.runners.helper.repository .Values.runners.helper.tag }}\"\n    image_pull_secrets = [\"private-registry\"]\n  [runners.kubernetes.pod_security_context]\n    run_as_non_root = true\n    run_as_user = 1001\n  [runners.kubernetes.helper_container_security_context]\n    run_as_non_root = true\n    run_as_user = 1001\n  [runners.kubernetes.pod_labels]\n    \"job_id\" = \"${CI_JOB_ID}\"\n    \"job_name\" = \"${CI_JOB_NAME}\"\n    \"pipeline_id\" = \"${CI_PIPELINE_ID}\"\n    \"app\" = \"gitlab-runner\"\n"` |  |
 | runners.configPath | string | `""` |  |
-| runners.locked | bool | `true` |  |
 | runners.secret | string | `"gitlab-gitlab-runner-secret"` |  |
 | runners.cache | object | `{}` |  |
 | runners.builds | object | `{}` |  |
@@ -150,7 +150,7 @@ helm install gitlab-runner chart/
 | monitoring.enabled | bool | `false` |  |
 | networkPolicies.enabled | bool | `false` |  |
 | networkPolicies.controlPlaneCidr | string | `"0.0.0.0/0"` |  |
-| networkPolicies.kubeAPIPort | string | `""` | Kube API Port, defaults to 443 and 6443 within the template but can be set to custom port The port where the Kubernetes API server listens for secure connections.  |
+| networkPolicies.kubeAPIPort | string | `""` | Kube API Port, defaults to 443 and 6443 within the template but can be set to custom port The port where the Kubernetes API server listens for secure connections. |
 | networkPolicies.additionalPolicies | list | `[]` |  |
 | autoRegister.enabled | bool | `false` |  |
 | autoRegister.selectorLabels | object | `{}` |  |
@@ -171,4 +171,3 @@ Please see the [contributing guide](./CONTRIBUTING.md) if you are interested in 
 ---
 
 _This file is programatically generated using `helm-docs` and some BigBang-specific templates. The `gluon` repository has [instructions for regenerating package READMEs](https://repo1.dso.mil/big-bang/product/packages/gluon/-/blob/master/docs/bb-package-readme.md)._
-

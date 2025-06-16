@@ -95,6 +95,7 @@ As mentioned in the Application Overview, GitLab Runner resides in its own `gitl
 For the runner to automatically register with GitLab (`autoRegister.enabled=true`), it needs access to the registration token stored in the `gitlab-gitlab-runner-secret` within the `gitlab` namespace. Since Kubernetes namespaces provide isolation, direct access is blocked.
 
 Big Bang solves this using a **Kyverno ClusterPolicy** named `sync-gitlab-runner-secret`. This policy automatically:
+
 1. Detects the `gitlab-runner` namespace.
 2. Clones the `gitlab-gitlab-runner-secret` from the `gitlab` namespace into the `gitlab-runner` namespace.
 3. Keeps the cloned secret synchronized with the original.
@@ -140,6 +141,6 @@ networkPolicies:
 - The gitlab-runner is configured to clone the repository from the gitlab webservice via the "clone_url" setting. This setting typically points to the GitLab instance's external URL or internal service name (e.g., `gitlab-webservice.gitlab.svc...`). The runner also uses this endpoint (or the one specified in `gitlabUrl`) to register with the GitLab API.
 - If the GitLab instance (webservice) is behind HTTPS ingress and uses a certificate not trusted by the runner's environment (e.g., a self-signed or private CA), certificate issues can occur during cloning or registration. In such cases, the `certsSecretName` value in `values.yaml` can be populated with the name of a secret containing the necessary CA certificate (`ca.crt`) and optionally client certificates (`tls.crt`, `tls.key`). The runner will mount these certificates to establish trust.
 - **Registration Failure:** If the runner fails to register (often seen as errors in the runner pod logs about failing to connect or register), and you have `autoRegister.enabled=true`, verify the following:
-    - Kyverno is installed and running correctly in the cluster.
-    - The Kyverno `ClusterPolicy` named `sync-gitlab-runner-secret` exists and is active.
-    - Check if the `gitlab-gitlab-runner-secret` has been successfully created/synced into the `gitlab-runner` namespace (`kubectl get secret gitlab-gitlab-runner-secret -n gitlab-runner`). If this secret is missing, the runner cannot get the token to register. Investigate Kyverno policy status and logs.
+  - Kyverno is installed and running correctly in the cluster.
+  - The Kyverno `ClusterPolicy` named `sync-gitlab-runner-secret` exists and is active.
+  - Check if the `gitlab-gitlab-runner-secret` has been successfully created/synced into the `gitlab-runner` namespace (`kubectl get secret gitlab-gitlab-runner-secret -n gitlab-runner`). If this secret is missing, the runner cannot get the token to register. Investigate Kyverno policy status and logs.
