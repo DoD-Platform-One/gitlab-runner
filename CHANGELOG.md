@@ -2,33 +2,47 @@
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.77.2-bb.0] (2025-06-06)
+
+### Changed
+
+- registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner v17.10.0 -> v18.0.2
+- registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner-helper v17.10.0 -> v18.0.2
+
 ## [0.75.1-bb.2] (2025-05-09)
+
 ### Changed
 
 - gluon 0.5.17 -> 0.5.19
 
 ## [0.75.1-bb.1] (2025-05-01)
+
 ### Changed
 
 - gluon 0.5.15 -> 0.5.17
 
 ## [0.75.0-bb.0] (2025-04-04)
+
 ### Changed
+
 - gluon 0.5.14 -> 0.5.15
 - registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner v17.8.0 -> v17.10.0
 - registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner-helper v17.8.0 -> v17.10.0
 
 ## [0.73.0-bb.3] - 2025-03-25
+
 ### Changed
 
 - Enabled dyanmic network policy support
 
 ## [0.73.0-bb.2] - 2025-03-25
+
 ### Changed
 
 - Changed NetworkPolicy resources to match the deployed gitlab runner pods using their full name.
 
 ## [0.73.0-bb.1] - 2025-03-06
+
 ### Changed
 
 - Changed cypress test to use  data-testid
@@ -43,7 +57,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - ironbank/gitlab/gitlab-runner/gitlab-runner-helper (source) v17.5.4 -> v17.8.0
 - registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner (source) v17.5.4 -> v17.8.0
 - registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner-helper (source) v17.5.4 -> v17.8.0
-
 
 ## [0.70.4-bb.1] - 2024-12-19
 

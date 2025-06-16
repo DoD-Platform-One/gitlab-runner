@@ -1,8 +1,37 @@
-## v0.75.1 (2025-03-27)
+## v0.77.2 (2025-05-22)
 
 ### New features
 
-- Update GitLab Runner version to v17.10.1
+- Update GitLab Runner version to v18.0.2
+
+## v0.77.1 (2025-05-16)
+
+### New features
+
+- Update GitLab Runner version to v18.0.1
+
+## v0.77.0 (2025-05-09)
+
+### New features
+
+- Update GitLab Runner version to v18.0.0
+- implement configurable ServiceMonitor namespace [!503](https://gitlab.com/gitlab-org/charts/gitlab-runner/-/merge_requests/503) (Aleksandar Pesic @peske)
+
+### Maintenance
+
+- Remove registration token and deprecated property from values.yaml [!515](https://gitlab.com/gitlab-org/charts/gitlab-runner/-/merge_requests/515)
+
+## v0.76.1 (2025-05-05)
+
+### New features
+
+- Update GitLab Runner version to v17.11.1
+
+## v0.76.0 (2025-04-17)
+
+### New features
+
+- Update GitLab Runner version to v17.11.0
 
 ## v0.75.0 (2025-03-14)
 
