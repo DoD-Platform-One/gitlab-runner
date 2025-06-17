@@ -1,4 +1,4 @@
-{{- if .Values.metrics.enabled }}
+{{- if .Values.upstream.metrics.enabled }}
 apiVersion: security.istio.io/v1
 kind: AuthorizationPolicy
 metadata:
@@ -12,5 +12,5 @@ spec:
   rules:
     - to:
       - operation:
-          ports: [{{ .Values.metrics.port | quote }}]
+          ports: [{{ .Values.upstream.metrics.port | quote }}]
 {{- end }}

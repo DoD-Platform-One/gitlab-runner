@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # gitlab-runner
 
-![Version: 0.77.2-bb.0](https://img.shields.io/badge/Version-0.77.2--bb.0-informational?style=flat-square) ![AppVersion: v18.0.2](https://img.shields.io/badge/AppVersion-v18.0.2-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
+![Version: 0.77.2-bb.1](https://img.shields.io/badge/Version-0.77.2--bb.1-informational?style=flat-square) ![AppVersion: v18.0.2](https://img.shields.io/badge/AppVersion-v18.0.2-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
 GitLab Runner
 
@@ -29,7 +29,7 @@ GitLab Runner
 
 Install Helm
 
-<https://helm.sh/docs/intro/install/>
+https://helm.sh/docs/intro/install/
 
 ## Deployment
 
@@ -44,91 +44,71 @@ helm install gitlab-runner chart/
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| image.registry | string | `"registry1.dso.mil"` |  |
-| image.image | string | `"ironbank/gitlab/gitlab-runner/gitlab-runner"` |  |
-| image.tag | string | `"v18.0.2"` |  |
-| useTini | bool | `true` |  |
-| imagePullPolicy | string | `"IfNotPresent"` |  |
-| livenessProbe | object | `{}` |  |
-| readinessProbe | object | `{}` |  |
-| gitlabUrl | string | `"http://gitlab-webservice-default.gitlab.svc.cluster.local:8181"` |  |
-| unregisterRunners | bool | `true` |  |
-| terminationGracePeriodSeconds | int | `3600` |  |
-| concurrent | int | `50` |  |
-| shutdown_timeout | int | `0` |  |
-| checkInterval | int | `3` |  |
-| sessionServer.enabled | bool | `false` |  |
-| sessionServer.serviceType | string | `"LoadBalancer"` |  |
-| sessionServer.ingress.enabled | bool | `false` |  |
-| sessionServer.ingress.className | string | `""` |  |
-| sessionServer.ingress.annotations | object | `{}` |  |
-| sessionServer.ingress.tls[0].secretName | string | `"gitlab-runner-session-server"` |  |
-| rbac.create | bool | `true` |  |
-| rbac.generatedServiceAccountName | string | `""` |  |
-| rbac.rules | list | `[]` |  |
-| rbac.clusterWideAccess | bool | `false` |  |
-| rbac.podSecurityPolicy.enabled | bool | `false` |  |
-| rbac.podSecurityPolicy.resourceNames[0] | string | `"gitlab-runner"` |  |
-| rbac.imagePullSecrets | list | `[]` |  |
-| serviceAccount.name | string | `""` |  |
-| serviceAccount.annotations | object | `{}` |  |
-| serviceAccount.imagePullSecrets | list | `[]` |  |
-| metrics.enabled | bool | `false` |  |
-| metrics.portName | string | `"tcp-metrics"` |  |
-| metrics.port | int | `9252` |  |
-| metrics.serviceMonitor.enabled | bool | `false` |  |
-| metrics.serviceMonitor.namespace | string | `""` |  |
-| service.enabled | bool | `true` |  |
-| service.type | string | `"ClusterIP"` |  |
-| runners.job.registry | string | `"registry1.dso.mil"` |  |
-| runners.job.repository | string | `"ironbank/redhat/ubi/ubi9"` |  |
-| runners.job.tag | string | `"9.5"` |  |
-| runners.helper.registry | string | `"registry1.dso.mil"` |  |
-| runners.helper.repository | string | `"ironbank/gitlab/gitlab-runner/gitlab-runner-helper"` |  |
-| runners.helper.tag | string | `"v18.0.2"` |  |
-| runners.config | string | `"[[runners]]\n  clone_url = \"http://gitlab-webservice-default.gitlab.svc.cluster.local:8181\"\n  cache_dir = \"/tmp/gitlab-runner/cache\"\n  [runners.kubernetes]\n    pull_policy = \"always\"\n    namespace = \"{{.Release.Namespace}}\"\n    image = \"{{ printf \"%s/%s:%s\" .Values.runners.job.registry .Values.runners.job.repository .Values.runners.job.tag }}\"\n    helper_image = \"{{ printf \"%s/%s:%s\" .Values.runners.helper.registry .Values.runners.helper.repository .Values.runners.helper.tag }}\"\n    image_pull_secrets = [\"private-registry\"]\n  [runners.kubernetes.pod_security_context]\n    run_as_non_root = true\n    run_as_user = 1001\n  [runners.kubernetes.helper_container_security_context]\n    run_as_non_root = true\n    run_as_user = 1001\n  [runners.kubernetes.pod_labels]\n    \"job_id\" = \"${CI_JOB_ID}\"\n    \"job_name\" = \"${CI_JOB_NAME}\"\n    \"pipeline_id\" = \"${CI_PIPELINE_ID}\"\n    \"app\" = \"gitlab-runner\"\n"` |  |
-| runners.configPath | string | `""` |  |
-| runners.secret | string | `"gitlab-gitlab-runner-secret"` |  |
-| runners.cache | object | `{}` |  |
-| runners.builds | object | `{}` |  |
-| runners.services | object | `{}` |  |
-| runners.helpers | object | `{}` |  |
-| topologySpreadConstraints | object | `{}` |  |
-| securityContext.allowPrivilegeEscalation | bool | `false` |  |
-| securityContext.readOnlyRootFilesystem | bool | `false` |  |
-| securityContext.runAsNonRoot | bool | `true` |  |
-| securityContext.runAsUser | int | `1001` |  |
-| securityContext.runAsGroup | int | `1001` |  |
-| securityContext.privileged | bool | `false` |  |
-| securityContext.capabilities.drop[0] | string | `"ALL"` |  |
-| strategy | object | `{}` |  |
-| podSecurityContext.runAsUser | int | `1001` |  |
-| podSecurityContext.runAsNonRoot | bool | `true` |  |
-| podSecurityContext.fsGroup | int | `65533` |  |
-| containerSecurityContext.runAsNonRoot | bool | `true` |  |
-| capabilities.drop[0] | string | `"ALL"` |  |
-| resources.limits.memory | string | `"256Mi"` |  |
-| resources.limits.cpu | string | `"200m"` |  |
-| resources.requests.memory | string | `"256Mi"` |  |
-| resources.requests.cpu | string | `"200m"` |  |
-| affinity | object | `{}` |  |
-| runtimeClassName | string | `""` |  |
-| nodeSelector | object | `{}` |  |
-| tolerations | list | `[]` |  |
-| extraEnv | object | `{}` |  |
-| extraEnvFrom | object | `{}` |  |
-| hostAliases | list | `[]` |  |
-| deploymentAnnotations | object | `{}` |  |
-| deploymentLabels | object | `{}` |  |
-| deploymentLifecycle | object | `{}` |  |
-| podAnnotations | object | `{}` |  |
-| podLabels | object | `{}` |  |
-| priorityClassName | string | `""` |  |
-| secrets | list | `[]` |  |
-| configMaps | object | `{}` |  |
-| volumeMounts | list | `[]` |  |
-| volumes | list | `[]` |  |
-| extraObjects | list | `[]` |  |
+| upstream.image.registry | string | `"registry1.dso.mil"` |  |
+| upstream.image.image | string | `"ironbank/gitlab/gitlab-runner/gitlab-runner"` |  |
+| upstream.image.tag | string | `"v18.0.2"` |  |
+| upstream.useTini | bool | `true` |  |
+| upstream.imagePullPolicy | string | `"IfNotPresent"` |  |
+| upstream.livenessProbe | object | `{}` |  |
+| upstream.readinessProbe | object | `{}` |  |
+| upstream.gitlabUrl | string | `"http://gitlab-webservice-default.gitlab.svc.cluster.local:8181"` |  |
+| upstream.secret | string | `"gitlab-gitlab-runner-secret"` |  |
+| upstream.metrics.enabled | bool | `false` |  |
+| upstream.metrics.portName | string | `"tcp-metrics"` |  |
+| upstream.metrics.port | int | `9252` |  |
+| upstream.metrics.serviceMonitor.enabled | bool | `false` |  |
+| upstream.metrics.serviceMonitor.namespace | string | `""` |  |
+| upstream.service.enabled | bool | `true` |  |
+| upstream.service.type | string | `"ClusterIP"` |  |
+| upstream.runners.job.registry | string | `"registry1.dso.mil"` |  |
+| upstream.runners.job.repository | string | `"ironbank/redhat/ubi/ubi9"` |  |
+| upstream.runners.job.tag | string | `"9.5"` |  |
+| upstream.runners.helper.registry | string | `"registry1.dso.mil"` |  |
+| upstream.runners.helper.repository | string | `"ironbank/gitlab/gitlab-runner/gitlab-runner-helper"` |  |
+| upstream.runners.helper.tag | string | `"v18.0.2"` |  |
+| upstream.runners.config | string | `"[[runners]]\n  clone_url = \"http://gitlab-webservice-default.gitlab.svc.cluster.local:8181\"\n  cache_dir = \"/tmp/gitlab-runner/cache\"\n  [runners.kubernetes]\n    pull_policy = \"always\"\n    namespace = \"{{.Release.Namespace}}\"\n    image = \"{{ printf \"%s/%s:%s\" .Values.runners.job.registry .Values.runners.job.repository .Values.runners.job.tag }}\"\n    helper_image = \"{{ printf \"%s/%s:%s\" .Values.runners.helper.registry .Values.runners.helper.repository .Values.runners.helper.tag }}\"\n    image_pull_secrets = [\"private-registry\"]\n  [runners.kubernetes.pod_security_context]\n    run_as_non_root = true\n    run_as_user = 1001\n  [runners.kubernetes.helper_container_security_context]\n    run_as_non_root = true\n    run_as_user = 1001\n  [runners.kubernetes.pod_labels]\n    \"job_id\" = \"${CI_JOB_ID}\"\n    \"job_name\" = \"${CI_JOB_NAME}\"\n    \"pipeline_id\" = \"${CI_PIPELINE_ID}\"\n    \"app\" = \"gitlab-runner\"\n"` |  |
+| upstream.runners.configPath | string | `""` |  |
+| upstream.runners.secret | string | `"gitlab-gitlab-runner-secret"` |  |
+| upstream.runners.cache | object | `{}` |  |
+| upstream.runners.builds | object | `{}` |  |
+| upstream.runners.services | object | `{}` |  |
+| upstream.runners.helpers | object | `{}` |  |
+| upstream.topologySpreadConstraints | object | `{}` |  |
+| upstream.securityContext.allowPrivilegeEscalation | bool | `false` |  |
+| upstream.securityContext.readOnlyRootFilesystem | bool | `false` |  |
+| upstream.securityContext.runAsNonRoot | bool | `true` |  |
+| upstream.securityContext.runAsUser | int | `1001` |  |
+| upstream.securityContext.runAsGroup | int | `1001` |  |
+| upstream.securityContext.privileged | bool | `false` |  |
+| upstream.securityContext.capabilities.drop[0] | string | `"ALL"` |  |
+| upstream.strategy | object | `{}` |  |
+| upstream.podSecurityContext.runAsUser | int | `1001` |  |
+| upstream.podSecurityContext.runAsNonRoot | bool | `true` |  |
+| upstream.podSecurityContext.fsGroup | int | `65533` |  |
+| upstream.containerSecurityContext.runAsNonRoot | bool | `true` |  |
+| upstream.capabilities.drop[0] | string | `"ALL"` |  |
+| upstream.resources.limits.memory | string | `"256Mi"` |  |
+| upstream.resources.limits.cpu | string | `"200m"` |  |
+| upstream.resources.requests.memory | string | `"256Mi"` |  |
+| upstream.resources.requests.cpu | string | `"200m"` |  |
+| upstream.affinity | object | `{}` |  |
+| upstream.runtimeClassName | string | `""` |  |
+| upstream.nodeSelector | object | `{}` |  |
+| upstream.tolerations | list | `[]` |  |
+| upstream.extraEnv | object | `{}` |  |
+| upstream.extraEnvFrom | object | `{}` |  |
+| upstream.hostAliases | list | `[]` |  |
+| upstream.deploymentAnnotations | object | `{}` |  |
+| upstream.deploymentLabels | object | `{}` |  |
+| upstream.deploymentLifecycle | object | `{}` |  |
+| upstream.podAnnotations | object | `{}` |  |
+| upstream.podLabels | object | `{}` |  |
+| upstream.priorityClassName | string | `""` |  |
+| upstream.secrets | list | `[]` |  |
+| upstream.configMaps | object | `{}` |  |
+| upstream.volumeMounts | list | `[]` |  |
+| upstream.volumes | list | `[]` |  |
+| upstream.extraObjects | list | `[]` |  |
 | istio.enabled | bool | `false` |  |
 | istio.injection | string | `"disabled"` |  |
 | istio.hardened.enabled | bool | `false` |  |
@@ -171,3 +151,4 @@ Please see the [contributing guide](./CONTRIBUTING.md) if you are interested in 
 ---
 
 _This file is programatically generated using `helm-docs` and some BigBang-specific templates. The `gluon` repository has [instructions for regenerating package READMEs](https://repo1.dso.mil/big-bang/product/packages/gluon/-/blob/master/docs/bb-package-readme.md)._
+
