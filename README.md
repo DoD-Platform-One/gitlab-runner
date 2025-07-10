@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # gitlab-runner
 
-![Version: 0.77.2-bb.1](https://img.shields.io/badge/Version-0.77.2--bb.1-informational?style=flat-square) ![AppVersion: v18.0.2](https://img.shields.io/badge/AppVersion-v18.0.2-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
+![Version: 0.77.2-bb.2](https://img.shields.io/badge/Version-0.77.2--bb.2-informational?style=flat-square) ![AppVersion: v18.0.2](https://img.shields.io/badge/AppVersion-v18.0.2-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
 GitLab Runner
 
@@ -52,7 +52,27 @@ helm install gitlab-runner chart/
 | upstream.livenessProbe | object | `{}` |  |
 | upstream.readinessProbe | object | `{}` |  |
 | upstream.gitlabUrl | string | `"http://gitlab-webservice-default.gitlab.svc.cluster.local:8181"` |  |
-| upstream.secret | string | `"gitlab-gitlab-runner-secret"` |  |
+| upstream.unregisterRunners | bool | `true` |  |
+| upstream.terminationGracePeriodSeconds | int | `3600` |  |
+| upstream.concurrent | int | `50` |  |
+| upstream.shutdown_timeout | int | `0` |  |
+| upstream.checkInterval | int | `3` |  |
+| upstream.sessionServer.enabled | bool | `false` |  |
+| upstream.sessionServer.serviceType | string | `"LoadBalancer"` |  |
+| upstream.sessionServer.ingress.enabled | bool | `false` |  |
+| upstream.sessionServer.ingress.className | string | `""` |  |
+| upstream.sessionServer.ingress.annotations | object | `{}` |  |
+| upstream.sessionServer.ingress.tls[0].secretName | string | `"gitlab-runner-session-server"` |  |
+| upstream.rbac.create | bool | `true` |  |
+| upstream.rbac.generatedServiceAccountName | string | `""` |  |
+| upstream.rbac.rules | list | `[]` |  |
+| upstream.rbac.clusterWideAccess | bool | `false` |  |
+| upstream.rbac.podSecurityPolicy.enabled | bool | `false` |  |
+| upstream.rbac.podSecurityPolicy.resourceNames[0] | string | `"gitlab-runner"` |  |
+| upstream.rbac.imagePullSecrets | list | `[]` |  |
+| upstream.serviceAccount.name | string | `""` |  |
+| upstream.serviceAccount.annotations | object | `{}` |  |
+| upstream.serviceAccount.imagePullSecrets | list | `[]` |  |
 | upstream.metrics.enabled | bool | `false` |  |
 | upstream.metrics.portName | string | `"tcp-metrics"` |  |
 | upstream.metrics.port | int | `9252` |  |
