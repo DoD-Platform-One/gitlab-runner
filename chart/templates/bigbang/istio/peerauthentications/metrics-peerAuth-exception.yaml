@@ -10,7 +10,7 @@ spec:
     mode: {{ .Values.istio.mtls.mode }}
   selector:
     matchLabels:
-      app: {{ printf "%s-upstream" (include "gitlab-runner.fullname" .) }}
+      app: gitlab-runner
   portLevelMtls:
     "9252":
       mode: PERMISSIVE
