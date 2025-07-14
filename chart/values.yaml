@@ -10,6 +10,8 @@
 ##       these images run on different user IDs.
 ##
 upstream:
+  ## declaring fullnameoverride to keep application name as gitlab-runner because passthrough changes the name to gitlab-runner-upstream which is leading to runner failure
+  fullnameOverride: "gitlab-runner"
   image:
     registry: registry1.dso.mil
     image: ironbank/gitlab/gitlab-runner/gitlab-runner
@@ -433,7 +435,7 @@ upstream:
     job:
       registry: registry1.dso.mil
       repository: ironbank/redhat/ubi/ubi9
-      tag: "9.5"
+      tag: "9.6"
     helper:
       registry: registry1.dso.mil
       repository: ironbank/gitlab/gitlab-runner/gitlab-runner-helper

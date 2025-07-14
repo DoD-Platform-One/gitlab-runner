@@ -7,7 +7,7 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-      app: {{ printf "%s-upstream" (include "gitlab-runner.fullname" .) }}
+      app: {{ include "gitlab-runner.fullname" . }}
   policyTypes:
     - Egress
   egress:

@@ -2,6 +2,12 @@
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.77.2-bb.3] (2025-07-08)
+### Changed
+
+- gluon 0.5.19 -> 0.6.3
+- registry1.dso.mil/ironbank/redhat/ubi/ubi9 (source) 9.5 -> 9.6
+
 ## [0.77.2-bb.2] (2025-07-10)
 
 ### Changed
