@@ -1,52 +1,87 @@
 {
-  "baseBranches": ["main"],
+  "baseBranches": [
+    "main"
+  ],
   "configWarningReuseIssue": false,
-  "dependencyDashboard": "true",
+  "dependencyDashboard": true,
   "dependencyDashboardTitle": "Renovate: Upgrade Gitlab Runner Package Dependencies",
   "draftPR": true,
-  "enabledManagers": ["regex", "helmv3"],
-  "labels": ["gitlabRunner","Big Bang Core","Package Sustainment","kind::maintenance"],
+  "enabledManagers": [
+    "custom.regex",
+    "helmv3"
+  ],
+  "labels": [
+    "gitlabRunner",
+    "Big Bang Core",
+    "Package Sustainment",
+    "kind::maintenance"
+  ],
   "commitMessagePrefix": "SKIP UPDATE CHECK",
-  "postUpdateOptions": ["helmUpdateSubChartArchives"],
+  "postUpdateOptions": [
+    "helmUpdateSubChartArchives"
+  ],
   "packageRules": [
     {
-      "matchDatasources": ["docker"],
+      "matchDatasources": [
+        "docker"
+      ],
       "groupName": "Ironbank",
-      "registryUrls": ["https://registry1.dso.mil"]
+      "registryUrls": [
+        "https://registry1.dso.mil"
+      ]
     }
   ],
-  "ignorePaths": ["**/chart/deps/**", "**/.gitlab-ci.yml", "chart/requirements.yaml"],
-  "regexManagers": [
+  "ignorePaths": [
+    "**/chart/deps/**",
+    "**/.gitlab-ci.yml",
+    "chart/requirements.yaml"
+  ],
+  "customManagers": [
     {
-      "fileMatch": ["^tests/images\\.txt$"],
+      "customType": "regex",
+      "fileMatch": [
+        "^tests/images\\.txt$"
+      ],
       "matchStrings": [
         "s*(?<depName>.+):(?<currentValue>.+)"
       ],
       "datasourceTemplate": "docker"
     },
     {
-      "fileMatch": ["^chart/values\\.yaml$"],
+      "customType": "regex",
+      "fileMatch": [
+        "^chart/values\\.yaml$"
+      ],
       "matchStrings": [
         "image:.+\\s+registry:.+\\s+repository:.(?<depName>.+)\\s+tag:\\s+(?<currentValue>.+)"
       ],
       "datasourceTemplate": "docker"
     },
     {
-      "fileMatch": ["^chart/values\\.yaml$"],
+      "customType": "regex",
+      "fileMatch": [
+        "^chart/values\\.yaml$"
+      ],
       "matchStrings": [
         "helper:\\s+registry:.+\\s+repository:.(?<depName>.+)\\s+tag:\\s+\"(?<currentValue>.+)\""
       ],
       "datasourceTemplate": "docker"
     },
     {
-      "fileMatch": ["^chart/values\\.yaml$"],
+      "customType": "regex",
+      "fileMatch": [
+        "^chart/values\\.yaml$"
+      ],
       "matchStrings": [
         "image = \"(?<depName>.+):(?<currentValue>.+)\""
       ],
       "datasourceTemplate": "docker"
     },
     {
-      "fileMatch": ["^chart/Chart\\.yaml$"],
+      "customType": "regex",
+      "fileMatch": [
+        "^chart/Chart\\.yaml$"
+      ],
       "matchStrings": [
         "- Gitlab Runner:\\s+(?<currentValue>.+)"
       ],
@@ -54,16 +89,22 @@
       "datasourceTemplate": "docker"
     },
     {
-      "fileMatch": ["^chart/Chart\\.yaml$"],
+      "customType": "regex",
+      "fileMatch": [
+        "^chart/Chart\\.yaml$"
+      ],
       "matchStrings": [
         "image:[^\\S\\r\\n]+(?<depName>.+):(?<currentValue>.+)"
       ],
       "datasourceTemplate": "docker"
     },
     {
-      "fileMatch": ["^chart/Chart\\.yaml$"],
+      "customType": "regex",
+      "fileMatch": [
+        "^chart/Chart\\.yaml$"
+      ],
       "matchStrings": [
-          "appVersion:[^\\S\\r\\n]+(?<currentValue>.+)"
+        "appVersion:[^\\S\\r\\n]+(?<currentValue>.+)"
       ],
       "depNameTemplate": "ironbank/gitlab/gitlab-runner/gitlab-runner",
       "datasourceTemplate": "docker"
