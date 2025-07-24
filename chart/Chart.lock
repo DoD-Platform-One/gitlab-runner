@@ -1,9 +1,9 @@
 dependencies:
 - name: gitlab-runner
   repository: https://charts.gitlab.io
-  version: 0.77.2
+  version: 0.79.0
 - name: gluon
   repository: oci://registry1.dso.mil/bigbang
   version: 0.7.0
-digest: sha256:f4bea500ea46b88f95c842162bc45972b3539ceda3b18af5ba163e99973e00b1
-generated: "2025-07-18T06:22:18.633624867Z"
+digest: sha256:8ef471f5adf53a41bce193260001066e7ae6da510bbfe2b7ccbd120df9fe6a3f
+generated: "2025-07-22T15:51:24.329417108Z"
