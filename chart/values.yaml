@@ -15,7 +15,7 @@ upstream:
   image:
     registry: registry1.dso.mil
     image: ironbank/gitlab/gitlab-runner/gitlab-runner
-    tag: v18.0.2
+    tag: v18.2.0
   
   ## When using GitLab Runner Helm Chart with gitlab-runner-ubi-images (https://gitlab.com/gitlab-org/ci-cd/gitlab-runner-ubi-images/container_registry)
   ## the installation fails because dumb-init is not packaged in the image. However, the tini is present.
@@ -439,7 +439,7 @@ upstream:
     helper:
       registry: registry1.dso.mil
       repository: ironbank/gitlab/gitlab-runner/gitlab-runner-helper
-      tag: "v18.0.2"
+      tag: "v18.2.0"
   
     # runner configuration, where the multi line strings is evaluated as
     # template so you can specify helm values inside of it.
