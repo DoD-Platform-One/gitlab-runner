@@ -2,6 +2,12 @@
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.79.0-bb.0] (2025-07-29)
+
+### Changed
+
+- Update gitlab-runner chart version minor v0.79.0 -> v0.79.1
+
 ## [0.79.0-bb.0] (2025-07-24)
 
 ### Changed
