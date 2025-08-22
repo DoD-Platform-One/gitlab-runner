@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # gitlab-runner
 
-![Version: 0.79.1-bb.1](https://img.shields.io/badge/Version-0.79.1--bb.1-informational?style=flat-square) ![AppVersion: v18.2.0](https://img.shields.io/badge/AppVersion-v18.2.0-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
+![Version: 0.79.1-bb.2](https://img.shields.io/badge/Version-0.79.1--bb.2-informational?style=flat-square) ![AppVersion: v18.2.0](https://img.shields.io/badge/AppVersion-v18.2.0-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
 GitLab Runner
 
@@ -83,6 +83,9 @@ helm install gitlab-runner chart/
 | upstream.image.tag | string | `"v18.2.0"` |  |
 | upstream.useTini | bool | `true` |  |
 | upstream.gitlabUrl | string | `"http://gitlab-webservice-default.gitlab.svc.cluster.local:8181"` |  |
+| upstream.concurrent | int | `50` |  |
+| upstream.rbac.create | bool | `true` |  |
+| upstream.rbac.generatedServiceAccountName | string | `""` |  |
 | upstream.metrics.enabled | bool | `false` |  |
 | upstream.metrics.portName | string | `"tcp-metrics"` |  |
 | upstream.service.enabled | bool | `true` |  |
