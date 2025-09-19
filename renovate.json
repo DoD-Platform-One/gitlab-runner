@@ -39,8 +39,8 @@
   "customManagers": [
     {
       "customType": "regex",
-      "fileMatch": [
-        "^tests/images\\.txt$"
+      "managerFilePatterns": [
+        "/^tests/images\\.txt$/"
       ],
       "matchStrings": [
         "s*(?<depName>.+):(?<currentValue>.+)"
@@ -49,8 +49,8 @@
     },
     {
       "customType": "regex",
-      "fileMatch": [
-        "^chart/values\\.yaml$"
+      "managerFilePatterns": [
+        "/^chart/values\\.yaml$/"
       ],
       "matchStrings": [
         "image:.+\\s+registry:.+\\s+repository:.(?<depName>.+)\\s+tag:\\s+(?<currentValue>.+)"
@@ -59,8 +59,8 @@
     },
     {
       "customType": "regex",
-      "fileMatch": [
-        "^chart/values\\.yaml$"
+      "managerFilePatterns": [
+        "/^chart/values\\.yaml$/"
       ],
       "matchStrings": [
         "helper:\\s+registry:.+\\s+repository:.(?<depName>.+)\\s+tag:\\s+\"(?<currentValue>.+)\""
@@ -69,8 +69,8 @@
     },
     {
       "customType": "regex",
-      "fileMatch": [
-        "^chart/values\\.yaml$"
+      "managerFilePatterns": [
+        "/^chart/values\\.yaml$/"
       ],
       "matchStrings": [
         "image = \"(?<depName>.+):(?<currentValue>.+)\""
@@ -79,8 +79,8 @@
     },
     {
       "customType": "regex",
-      "fileMatch": [
-        "^chart/Chart\\.yaml$"
+      "managerFilePatterns": [
+        "/^chart/Chart\\.yaml$/"
       ],
       "matchStrings": [
         "- Gitlab Runner:\\s+(?<currentValue>.+)"
@@ -90,8 +90,8 @@
     },
     {
       "customType": "regex",
-      "fileMatch": [
-        "^chart/Chart\\.yaml$"
+      "managerFilePatterns": [
+        "/^chart/Chart\\.yaml$/"
       ],
       "matchStrings": [
         "image:[^\\S\\r\\n]+(?<depName>.+):(?<currentValue>.+)"
@@ -100,8 +100,8 @@
     },
     {
       "customType": "regex",
-      "fileMatch": [
-        "^chart/Chart\\.yaml$"
+      "managerFilePatterns": [
+        "/^chart/Chart\\.yaml$/"
       ],
       "matchStrings": [
         "appVersion:[^\\S\\r\\n]+(?<currentValue>.+)"
