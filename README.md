@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # gitlab-runner
 
-![Version: 0.80.1-bb.1](https://img.shields.io/badge/Version-0.80.1--bb.1-informational?style=flat-square) ![AppVersion: v18.3.0](https://img.shields.io/badge/AppVersion-v18.3.0-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
+![Version: 0.81.0-bb.0](https://img.shields.io/badge/Version-0.81.0--bb.0-informational?style=flat-square) ![AppVersion: v18.4.0](https://img.shields.io/badge/AppVersion-v18.4.0-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
 GitLab Runner
 
@@ -80,7 +80,7 @@ helm install gitlab-runner chart/
 | upstream.fullnameOverride | string | `"gitlab-runner"` |  |
 | upstream.image.registry | string | `"registry1.dso.mil"` |  |
 | upstream.image.image | string | `"ironbank/gitlab/gitlab-runner/gitlab-runner"` |  |
-| upstream.image.tag | string | `"v18.2.0"` |  |
+| upstream.image.tag | string | `"v18.3.0"` |  |
 | upstream.useTini | bool | `true` |  |
 | upstream.gitlabUrl | string | `"http://gitlab-webservice-default.gitlab.svc.cluster.local:8181"` |  |
 | upstream.concurrent | int | `50` |  |
@@ -94,7 +94,7 @@ helm install gitlab-runner chart/
 | upstream.runners.job.tag | string | `"9.6"` |  |
 | upstream.runners.helper.registry | string | `"registry1.dso.mil"` |  |
 | upstream.runners.helper.repository | string | `"ironbank/gitlab/gitlab-runner/gitlab-runner-helper"` |  |
-| upstream.runners.helper.tag | string | `"v18.3.0"` |  |
+| upstream.runners.helper.tag | string | `"v18.4.0"` |  |
 | upstream.runners.config | string | `"[[runners]]\n  clone_url = \"http://gitlab-webservice-default.gitlab.svc.cluster.local:8181\"\n  cache_dir = \"/tmp/gitlab-runner/cache\"\n  [runners.kubernetes]\n    pull_policy = \"always\"\n    namespace = \"{{.Release.Namespace}}\"\n    image = \"{{ printf \"%s/%s:%s\" .Values.runners.job.registry .Values.runners.job.repository .Values.runners.job.tag }}\"\n    helper_image = \"{{ printf \"%s/%s:%s\" .Values.runners.helper.registry .Values.runners.helper.repository .Values.runners.helper.tag }}\"\n    image_pull_secrets = [\"private-registry\"]\n  [runners.kubernetes.pod_security_context]\n    run_as_non_root = true\n    run_as_user = 1001\n  [runners.kubernetes.helper_container_security_context]\n    run_as_non_root = true\n    run_as_user = 1001\n  [runners.kubernetes.pod_labels]\n    \"job_id\" = \"${CI_JOB_ID}\"\n    \"job_name\" = \"${CI_JOB_NAME}\"\n    \"pipeline_id\" = \"${CI_PIPELINE_ID}\"\n    \"app\" = \"gitlab-runner\"\n"` |  |
 | upstream.runners.secret | string | `"gitlab-gitlab-runner-secret"` |  |
 | upstream.securityContext.allowPrivilegeEscalation | bool | `false` |  |
