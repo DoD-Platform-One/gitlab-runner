@@ -6,6 +6,7 @@
   "dependencyDashboard": true,
   "dependencyDashboardTitle": "Renovate: Upgrade Gitlab Runner Package Dependencies",
   "draftPR": true,
+  "branchName": "renovate/ironbank",
   "enabledManagers": [
     "custom.regex",
     "helmv3"
@@ -16,15 +17,12 @@
     "Package Sustainment",
     "kind::maintenance"
   ],
-  "commitMessagePrefix": "SKIP UPDATE CHECK",
   "postUpdateOptions": [
     "helmUpdateSubChartArchives"
   ],
   "packageRules": [
     {
-      "matchDatasources": [
-        "docker"
-      ],
+      "matchManagers": ["custom.regex"],
       "groupName": "Ironbank",
       "registryUrls": [
         "https://registry1.dso.mil"
