@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # gitlab-runner
 
-![Version: 0.81.0-bb.3](https://img.shields.io/badge/Version-0.81.0--bb.3-informational?style=flat-square) ![AppVersion: v18.4.0](https://img.shields.io/badge/AppVersion-v18.4.0-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
+![Version: 0.82.0-bb.0](https://img.shields.io/badge/Version-0.82.0--bb.0-informational?style=flat-square) ![AppVersion: v18.4.0](https://img.shields.io/badge/AppVersion-v18.4.0-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
 GitLab Runner
 
@@ -80,6 +80,7 @@ helm install gitlab-runner chart/
 | upstream.fullnameOverride | string | `"gitlab-runner"` |  |
 | upstream.image.registry | string | `"registry1.dso.mil"` |  |
 | upstream.image.image | string | `"ironbank/gitlab/gitlab-runner/gitlab-runner"` |  |
+| upstream.image.tag | string | `"v18.4.0"` |  |
 | upstream.image.tag | string | `"v18.4.0"` |  |
 | upstream.useTini | bool | `true` |  |
 | upstream.gitlabUrl | string | `"http://gitlab-webservice-default.gitlab.svc.cluster.local:8181"` |  |
