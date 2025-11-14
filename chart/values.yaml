@@ -52,6 +52,8 @@ networkPolicies:
   enabled: false
   # See `kubectl cluster-info` and then resolve to IP
   controlPlaneCidr: 0.0.0.0/0
+  # See `kubectl cluster-info` and then resolve to IP
+  vpcCidr: 0.0.0.0/0
   # -- Kube API Port, defaults to 443 and 6443 within the template but can be set to custom port
   # The port where the Kubernetes API server listens for secure connections.
   kubeAPIPort: ""
