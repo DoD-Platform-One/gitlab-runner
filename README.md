@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # gitlab-runner
 
-![Version: 0.82.0-bb.3](https://img.shields.io/badge/Version-0.82.0--bb.3-informational?style=flat-square) ![AppVersion: v18.5.0](https://img.shields.io/badge/AppVersion-v18.5.0-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
+![Version: 0.82.0-bb.4](https://img.shields.io/badge/Version-0.82.0--bb.4-informational?style=flat-square) ![AppVersion: v18.5.0](https://img.shields.io/badge/AppVersion-v18.5.0-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
 GitLab Runner
 
@@ -92,7 +92,7 @@ helm install gitlab-runner chart/
 | upstream.service.enabled | bool | `true` |  |
 | upstream.runners.job.registry | string | `"registry1.dso.mil"` |  |
 | upstream.runners.job.repository | string | `"ironbank/redhat/ubi/ubi9"` |  |
-| upstream.runners.job.tag | string | `"9.6"` |  |
+| upstream.runners.job.tag | string | `"9.7"` |  |
 | upstream.runners.helper.registry | string | `"registry1.dso.mil"` |  |
 | upstream.runners.helper.repository | string | `"ironbank/gitlab/gitlab-runner/gitlab-runner-helper"` |  |
 | upstream.runners.helper.tag | string | `"v18.5.0"` |  |
