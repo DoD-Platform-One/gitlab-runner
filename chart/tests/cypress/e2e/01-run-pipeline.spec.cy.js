@@ -19,6 +19,15 @@ describe('Gitlab Runner: Run Pipeline', () => {
     cy.visit(`${Cypress.env('url')}/users/sign_in`)
     cy.performGitlabLogin('root', Cypress.env('adminpassword'))
 
+    // close welcome redesign popup if it exists
+    cy.get('body').then($body => {
+      if ($body.find('button[aria-label="Close"]').length) {
+        cy.get('button[aria-label="Close"]').click()
+      } else if ($body.find('button:contains("Get started")').length) {
+        cy.contains('button', 'Get started').click()
+      }
+    })
+
     cy.createGitlabProject(Cypress.env('url'), Cypress.env('gitlab_project'))
 
     // Disable Auto DevOps
@@ -34,7 +43,7 @@ describe('Gitlab Runner: Run Pipeline', () => {
       cy.get('input[id="file_name"]').click().type('.gitlab-ci.yml')
       cy.get('div[class="view-line"]').click().type('pipeline-test:{enter}{backspace}  stage: test{enter}{backspace}  script:{enter}{backspace}{backspace}    - echo The pipeline test is successful!{enter}')
       // commit file and start pipeline
-      cy.scrollTo('bottom')
+      cy.scrollTo('bottom', { ensureScrollable: false })
       cy.get('button[data-testid="blob-edit-header-commit-button"]').click()
       cy.get('button[data-testid="commit-change-modal-commit-button').click()
     })

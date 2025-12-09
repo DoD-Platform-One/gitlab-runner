@@ -2,6 +2,13 @@
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.83.2-bb.0] (2025-11-28)
+
+### Changed
+
+- Update gitlab-runner chart version minor v0.83.1 -> v0.83.2
+- gluon 0.9.6 -> 0.9.7
+
 ## [0.83.1-bb.0] (2025-11-24)
 
 ### Changed
