@@ -56,5 +56,9 @@ describe('Gitlab Runner: Run Pipeline', () => {
     cy.wait(2000)
     //Remove created project
     cy.deleteGitlabProject(Cypress.env('url'), 'root', Cypress.env('gitlab_project'))
+
+    // Wait for GitLab UI to finish redirect BEFORE Cypress continues
+    cy.url().should('include', 'deletion_scheduled');
+
   })
 })
