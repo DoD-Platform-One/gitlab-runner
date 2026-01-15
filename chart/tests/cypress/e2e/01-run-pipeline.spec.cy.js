@@ -45,7 +45,7 @@ describe('Gitlab Runner: Run Pipeline', () => {
       // commit file and start pipeline
       cy.scrollTo('bottom', { ensureScrollable: false })
       cy.get('button[data-testid="blob-edit-header-commit-button"]').click()
-      cy.get('button[data-testid="commit-change-modal-commit-button').click()
+      cy.get('button[data-testid="commit-change-modal-commit-button"]').click()
     })
     // Go to pipelines page
     cy.url().should('eq', `${Cypress.env('url')}/root/${Cypress.env('gitlab_project')}/-/blob/main/.gitlab-ci.yml`) 
