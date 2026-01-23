@@ -4,6 +4,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 
 
+## [0.85.0-bb.0] (2026-01-22)
+
+### Changed
+
+- Update gitlab-runner chart version minor v0.84.1-> v0.85.0
+- ironbank/gitlab/gitlab-runner/gitlab-runner (source) v18.5.0 -> v18.8.0
+- ironbank/gitlab/gitlab-runner/gitlab-runner-helper (source) v18.5.0 -> v18.8.0
+- registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner v18.5.0 -> v18.8.0
+- registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner-helper v18.5.0 -> v18.8.0
+
+
 ## [0.84.1-bb.0] (2026-01-05)
 
 ### Changed
