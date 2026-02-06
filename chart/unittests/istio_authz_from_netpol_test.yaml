@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/helm-unittest/helm-unittest/main/schema/helm-testsuite.json
+suite: test authz from netpol
+templates:
+  - templates/bigbang/network-policies.yaml
+release:
+  name: test
+values:
+  - values/istio-authz-from-netpol.yaml
+tests:
+  - it: generates AuthorizationPolicy for gitlab namespace from ingress netpol
+    documentSelector:
+      path: kind
+      value: AuthorizationPolicy
+    asserts:
+      - equal:
+          path: apiVersion
+          value: security.istio.io/v1
+      - equal:
+          path: metadata.name
+          value: allow-ingress-to-gitlab-runner-tcp-port-9252-from-ns-gitlab
+      - equal:
+          path: spec.rules[0].from[0].source.namespaces[0]
+          value: gitlab

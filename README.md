@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # gitlab-runner
 
-![Version: 0.85.0-bb.0](https://img.shields.io/badge/Version-0.85.0--bb.0-informational?style=flat-square) ![AppVersion: v18.8.0](https://img.shields.io/badge/AppVersion-v18.8.0-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
+![Version: 0.85.0-bb.1](https://img.shields.io/badge/Version-0.85.0--bb.1-informational?style=flat-square) ![AppVersion: v18.8.0](https://img.shields.io/badge/AppVersion-v18.8.0-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
 GitLab Runner
 
@@ -64,10 +64,10 @@ helm install gitlab-runner chart/
 | istio.mtls.mode | string | `"STRICT"` | STRICT = Allow only mutual TLS traffic, PERMISSIVE = Allow both plain text and mutual TLS traffic |
 | monitoring.enabled | bool | `false` |  |
 | networkPolicies.enabled | bool | `false` |  |
-| networkPolicies.controlPlaneCidr | string | `"0.0.0.0/0"` |  |
-| networkPolicies.vpcCidr | string | `"0.0.0.0/0"` |  |
-| networkPolicies.kubeAPIPort | string | `""` | Kube API Port, defaults to 443 and 6443 within the template but can be set to custom port The port where the Kubernetes API server listens for secure connections. |
 | networkPolicies.additionalPolicies | list | `[]` |  |
+| networkPolicies.egress.from.gitlab-runner.to.k8s.gitlab/* | bool | `true` |  |
+| networkPolicies.egress.from.gitlab-runner.to.definition.kubeAPI | bool | `true` |  |
+| networkPolicies.ingress.to.gitlab-runner:9252.from.definition.monitoring | bool | `true` |  |
 | autoRegister.enabled | bool | `false` |  |
 | autoRegister.selectorLabels | object | `{}` |  |
 | bbtests.enabled | bool | `false` |  |

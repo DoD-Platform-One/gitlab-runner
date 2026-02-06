@@ -1,0 +1,18 @@
+istio:
+  enabled: true
+  authorizationPolicies:
+    enabled: true
+    generateFromNetpol: true
+    defaults:
+      enabled: false
+
+networkPolicies:
+  enabled: true
+  ingress:
+    defaults:
+      enabled: false
+    to:
+      gitlab-runner:9252:
+        from:
+          k8s:
+            gitlab/*: true

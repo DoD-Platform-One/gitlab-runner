@@ -2,11 +2,11 @@
 
 ### See [bb MR testing](./docs/test-package-against-bb.md) for details regarding testing changes against bigbang umbrella chart
 
-There are certain integrations within the bigbang ecosystem and this package that require additional testing outside of the specific package tests ran during CI.  This is a requirement when files within those integrations are changed, as to avoid causing breaks up through the bigbang umbrella.  Currently, these include changes to the istio implementation within gitlab-runner (see: [istio templates](./chart/templates/bigbang/istio/), [network policy templates](./chart/templates/bigbang/networkpolicies/), [service entry templates](./chart/templates/bigbang/serviceentries/)), and kyverno (see: [kyverno custom entries](./chart/templates/bigbang/kyverno/)).
+There are certain integrations within the bigbang ecosystem and this package that require additional testing outside of the specific package tests ran during CI. This is a requirement when files within those integrations are changed, as to avoid causing breaks up through the bigbang umbrella. Currently, these include changes to the Istio implementation within gitlab-runner (now governed by `bb-common` via `chart/templates/bigbang/istio.yaml` and the `networkPolicies`/`istio` values), network policy templates (see: [network policy templates](./chart/templates/bigbang/network-policies.yaml)), and kyverno (see: [kyverno custom entries](./chart/templates/bigbang/kyverno/)).
 
 Be aware that any changes to files listed in the [Modifications made to upstream chart](#modifications-made-to-upstream-chart) section will also require a codeowner to validate the changes using above method, to ensure that they do not affect the package or its integrations adversely.
 
-Be sure to also test against monitoring locally as it is integrated by default with these high-impact service control packages, and needs to be validated using the necessary chart values beneath `istio.hardened` block with `monitoring.enabled` set to true as part of your dev-overrides.yaml
+Be sure to also test against monitoring locally as it is integrated by default with these high-impact service control packages, and needs to be validated using the necessary chart values beneath the `istio` block (bb-common) with `monitoring.enabled` set to true as part of your dev-overrides.yaml.
 
 # How to upgrade the Gitlab Runner Package chart
 
@@ -80,9 +80,9 @@ This is a high-level list of modifications that Big Bang has made to the upstrea
 
 - Kyverno policies
 - NetworkPolicies
-- Istio peerAuthentications
+- Istio resources are now rendered via `bb-common` (`chart/templates/bigbang/istio.yaml`)
 - add support for Grafana dashboards
-- Istio authorization policies
+- Istio authorization policies are now rendered via `bb-common`
 
 ## /chart/templates/tests/*
 
