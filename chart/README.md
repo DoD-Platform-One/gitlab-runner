@@ -144,8 +144,6 @@ helm install gitlab-runner chart/
 | istio.mtls.mode | string | `"STRICT"` | STRICT = Allow only mutual TLS traffic, PERMISSIVE = Allow both plain text and mutual TLS traffic |
 | monitoring.enabled | bool | `false` |  |
 | networkPolicies.enabled | bool | `false` |  |
-| networkPolicies.controlPlaneCidr | string | `"0.0.0.0/0"` |  |
-| networkPolicies.kubeAPIPort | string | `""` | Kube API Port, defaults to 443 and 6443 within the template but can be set to custom port The port where the Kubernetes API server listens for secure connections.  |
 | networkPolicies.additionalPolicies | list | `[]` |  |
 | autoRegister.enabled | bool | `false` |  |
 | autoRegister.selectorLabels | object | `{}` |  |

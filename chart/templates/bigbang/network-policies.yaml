@@ -1,0 +1,3 @@
+{{- if and .Values.networkPolicies.enabled (ne .Release.Namespace "gitlab") }}
+{{- include "bb-common.network-policies.render" . }}
+{{- end }}

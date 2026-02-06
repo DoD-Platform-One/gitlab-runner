@@ -3,6 +3,11 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [0.85.0-bb.1] (2026-03-3)
+
+### Added
+
+- Added bb-common integration. Network policies and authorization policies are now managed via bb-common. See https://docs-bigbang.dso.mil/3.15.0/blog/streamlining-integration-with-bb-common/ for more information.
 
 ## [0.85.0-bb.0] (2026-01-22)
 

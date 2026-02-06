@@ -50,17 +50,25 @@ monitoring:
 
 networkPolicies:
   enabled: false
-  # See `kubectl cluster-info` and then resolve to IP
-  controlPlaneCidr: 0.0.0.0/0
-  # See `kubectl cluster-info` and then resolve to IP
-  vpcCidr: 0.0.0.0/0
-  # -- Kube API Port, defaults to 443 and 6443 within the template but can be set to custom port
-  # The port where the Kubernetes API server listens for secure connections.
-  kubeAPIPort: ""
-  additionalPolicies: []
+
+  egress:
+    from:
+      gitlab-runner:
+        to:
+          k8s:
+            gitlab/*: true
+          definition:
+            kubeAPI: true
+
+  ingress:
+    to:
+      gitlab-runner:9252:
+        from:
+          k8s:
+            monitoring-monitoring-kube-prometheus@monitoring/prometheus: false
+
   # expected use case is to open egress for runner jobs
-  # This is a dev example policy spec and CIDR 0.0.0.0/0 is unsafe for operational environments
-  # requests to controlPlane should also be blocked in an operational policy
+  additionalPolicies: []
   # - name: egress-runner-jobs
   #   spec:
   #     podSelector: {}
@@ -73,8 +81,7 @@ networkPolicies:
   #           except:
   #           # Block requests to AWS cloud metadata IP
   #           - 169.254.169.254/32
-  #           # Block requests to controlPlane if CIDR not 0.0.0.0/0
-  #           # - "{{ $.Values.networkPolicies.controlPlaneCidr }}"
+
 
 # autoRegister requires kyverno deployed in k8s cluster and is intended for an in-cluster Gitlab
 autoRegister:
@@ -128,7 +135,7 @@ upstream:
     registry: registry1.dso.mil
     image: ironbank/gitlab/gitlab-runner/gitlab-runner
     tag: "v18.8.0"
-  
+
   ## When using GitLab Runner Helm Chart with gitlab-runner-ubi-images (https://gitlab.com/gitlab-org/ci-cd/gitlab-runner-ubi-images/container_registry)
   ## the installation fails because dumb-init is not packaged in the image. However, the tini is present.
   ## This configuration will allow gitlab-runner-ubi-images users to explicitly enabled the use of `tini` instead of `dumb-init`
@@ -137,7 +144,7 @@ upstream:
   ## ref: https://docs.gitlab.com/runner/commands/index.html#gitlab-runner-register
   ##
   gitlabUrl: http://gitlab-webservice-default.gitlab.svc.cluster.local:8181
-  
+
   ## Configure the maximum number of concurrent jobs
   ## ref: https://docs.gitlab.com/runner/configuration/advanced-configuration.html#the-global-section
   ##
@@ -153,7 +160,7 @@ upstream:
     ## It defaults to "gitlab-runner.fullname" if not provided
     ## DEPRECATED: Please use `serviceAccount.name` instead
     generatedServiceAccountName: ""
-    
+
     ## Specify annotations for Service Accounts, useful for annotations such as eks.amazonaws.com/role-arn.
     ## Values may refer to other values as the _tpl_ function is implicitly applied. Mind the quotes when using this, e.g.
     ## serviceAccountAnnotations:
@@ -164,23 +171,33 @@ upstream:
     ## DEPRECATED: Please use `serviceAccount.annotations` instead
     ##
     # serviceAccountAnnotations: { }
-  
+
   ## Configure integrated Prometheus metrics exporter
   ##
   ## ref: https://docs.gitlab.com/runner/monitoring/#configuration-of-the-metrics-http-server
   ##
   metrics:
     enabled: false
-  
+
     ## Define a name for the metrics port
     ##
-    portName: tcp-metrics
-  
+    portName: http-metrics
+
+    ## Provide a port number for the integrated Prometheus metrics exporter
+    ##
+    port: 9252
+
+    ## Configure a prometheus-operator serviceMonitor for scraping metrics.
+    ##
+    serviceMonitor:
+      enabled: false
+      namespace: ""
+
   ## Configure a service resource e.g., to allow scraping metrics via
   ## prometheus-operator serviceMonitor
   service:
     enabled: true
-  
+
   ## Configuration for the Pods that the runner launches for each new job
   ##
   runners:
@@ -192,7 +209,7 @@ upstream:
       registry: registry1.dso.mil
       repository: ironbank/gitlab/gitlab-runner/gitlab-runner-helper
       tag: "v18.8.0"
-  
+
     # runner configuration, where the multi line strings is evaluated as
     # template so you can specify helm values inside of it.
     #
@@ -222,7 +239,7 @@ upstream:
 
     ## The name of the secret containing runner-token and runner-registration-token
     secret: gitlab-gitlab-runner-secret
-  
+
   ## Configure securitycontext for the main container
   ## ref: https://kubernetes.io/docs/concepts/security/pod-security-standards/
   ##
@@ -235,7 +252,7 @@ upstream:
     privileged: false
     capabilities:
       drop: ["ALL"]
-  
+
   ## Configure securitycontext valid for the whole pod
   ## ref: https://kubernetes.io/docs/concepts/security/pod-security-standards/
   ##
@@ -245,17 +262,17 @@ upstream:
     # runAsGroup: 65533
     fsGroup: 65533
     # supplementalGroups: [65533]
-  
+
     ## Note: values for the ubuntu image:
     # runAsUser: 999
     # fsGroup: 999
-  
+
   containerSecurityContext:
     runAsNonRoot: true
   capabilities:
       drop:
         - ALL
-  
+
   ## Configure resource requests and limits
   ## ref: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
   ##
