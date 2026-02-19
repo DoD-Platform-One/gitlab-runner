@@ -54,6 +54,9 @@ networkPolicies:
   egress:
     from:
       gitlab-runner:
+        podSelector:
+          matchLabels:
+            app: gitlab-runner
         to:
           k8s:
             gitlab/*: true
@@ -63,6 +66,9 @@ networkPolicies:
   ingress:
     to:
       gitlab-runner:9252:
+        podSelector:
+          matchLabels:
+            app: gitlab-runner
         from:
           k8s:
             monitoring-monitoring-kube-prometheus@monitoring/prometheus: false
