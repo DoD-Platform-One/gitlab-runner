@@ -1,0 +1,45 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/helm-unittest/helm-unittest/main/schema/helm-testsuite.json
+suite: test network policy selectors
+templates:
+  - templates/bigbang/network-policies.yaml
+release:
+  name: test
+  namespace: gitlab-runner
+values:
+  - values/network-policies-selectors.yaml
+tests:
+  - it: uses app selector for gitlab runner kubeapi egress policy
+    documentSelector:
+      path: metadata.name
+      value: allow-egress-from-gitlab-runner-to-kubeapi
+    asserts:
+      - equal:
+          path: kind
+          value: NetworkPolicy
+      - equal:
+          path: spec.podSelector.matchLabels.app
+          value: gitlab-runner
+
+  - it: uses app selector for gitlab namespace egress policy
+    documentSelector:
+      path: metadata.name
+      value: allow-egress-from-gitlab-runner-to-ns-gitlab-any-pod-any-port
+    asserts:
+      - equal:
+          path: kind
+          value: NetworkPolicy
+      - equal:
+          path: spec.podSelector.matchLabels.app
+          value: gitlab-runner
+
+  - it: uses app selector for metrics ingress policy
+    documentSelector:
+      path: metadata.name
+      value: allow-ingress-to-gitlab-runner-tcp-port-9252-from-ns-monitoring-pod-prometheus
+    asserts:
+      - equal:
+          path: kind
+          value: NetworkPolicy
+      - equal:
+          path: spec.podSelector.matchLabels.app
+          value: gitlab-runner

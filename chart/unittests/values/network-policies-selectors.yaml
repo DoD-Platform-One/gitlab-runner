@@ -1,0 +1,8 @@
+networkPolicies:
+  enabled: true
+  ingress:
+    to:
+      gitlab-runner:9252:
+        from:
+          k8s:
+            monitoring-monitoring-kube-prometheus@monitoring/prometheus: true

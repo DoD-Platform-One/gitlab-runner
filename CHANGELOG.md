@@ -3,6 +3,13 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [0.85.0-bb.2] (2026-02-19)
+
+### Changed
+
+- Update gitlab-runner network policy selectors to target ephemeral runner job pods using `app: gitlab-runner`
+- Add unit test coverage for gitlab-runner network policy selectors
+
 ## [0.85.0-bb.1] (2026-03-3)
 
 ### Added
