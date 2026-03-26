@@ -2,6 +2,17 @@
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.86.0-bb.0] (2026-03-25)
+
+### Changed
+
+- Updated bb-common `0.14.0` -> `0.14.1`
+- Updated [gitlab-runner](https://gitlab.com/gitlab-org/charts/gitlab-runner) `0.85.0` -> `0.86.0`
+- Updated gluon `0.9.7` -> `0.9.8`
+- Updated [ironbank/gitlab/gitlab-runner/gitlab-runner](https://about.gitlab.com/) ([source](https://repo1.dso.mil/dsop/gitlab/gitlab-runner/gitlab-runner)) `v18.8.0` -> `v18.9.0`
+- Updated [ironbank/gitlab/gitlab-runner/gitlab-runner-helper](https://about.gitlab.com/) ([source](https://repo1.dso.mil/dsop/gitlab/gitlab-runner/gitlab-runner-helper)) `v18.8.0` -> `v18.9.0`
+- Updated [registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner](https://about.gitlab.com/) ([source](https://repo1.dso.mil/dsop/gitlab/gitlab-runner/gitlab-runner)) `v18.8.0` -> `v18.9.0`
+- Updated [registry1.dso.mil/ironbank/gitlab/gitlab-runner/gitlab-runner-helper](https://about.gitlab.com/) ([source](https://repo1.dso.mil/dsop/gitlab/gitlab-runner/gitlab-runner-helper)) `v18.8.0` -> `v18.9.0`
 
 ## [0.85.0-bb.2] (2026-02-19)
 
@@ -10,7 +21,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Update gitlab-runner network policy selectors to target ephemeral runner job pods using `app: gitlab-runner`
 - Add unit test coverage for gitlab-runner network policy selectors
 
-## [0.85.0-bb.1] (2026-03-3)
+## [0.85.0-bb.1] (2026-02-06)
 
 ### Added
 

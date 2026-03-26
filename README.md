@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # gitlab-runner
 
-![Version: 0.85.0-bb.2](https://img.shields.io/badge/Version-0.85.0--bb.2-informational?style=flat-square) ![AppVersion: v18.8.0](https://img.shields.io/badge/AppVersion-v18.8.0-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
+![Version: 0.86.0-bb.0](https://img.shields.io/badge/Version-0.86.0--bb.0-informational?style=flat-square) ![AppVersion: v18.9.0](https://img.shields.io/badge/AppVersion-v18.9.0-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
 GitLab Runner
 
@@ -13,8 +13,8 @@ GitLab Runner
 
 ## Upstream Release Notes
 
-- [Find our upstream chart's CHANGELOG here](https://gitlab.com/gitlab-org/charts/gitlab-runner/-/blob/v0.79.0/CHANGELOG.md)
-- [and our upstream application release notes here](https://gitlab.com/gitlab-org/charts/gitlab-runner/-/blob/v0.79.0/CHANGELOG.md?ref_type=tags#v0790-2025-07-12)
+- [Find our upstream chart's CHANGELOG here](https://gitlab.com/gitlab-org/charts/gitlab-runner/-/blob/v0.86.0/CHANGELOG.md)
+- [and our upstream application release notes here](http://gitlab.com/gitlab-org/charts/gitlab-runner/-/blob/v0.86.0/CHANGELOG.md?ref_type=tags#v0860-2026-02-20)
 
 ## Learn More
 
@@ -83,7 +83,7 @@ helm install gitlab-runner chart/
 | upstream.fullnameOverride | string | `"gitlab-runner"` |  |
 | upstream.image.registry | string | `"registry1.dso.mil"` |  |
 | upstream.image.image | string | `"ironbank/gitlab/gitlab-runner/gitlab-runner"` |  |
-| upstream.image.tag | string | `"v18.8.0"` |  |
+| upstream.image.tag | string | `"v18.9.0"` |  |
 | upstream.useTini | bool | `true` |  |
 | upstream.gitlabUrl | string | `"http://gitlab-webservice-default.gitlab.svc.cluster.local:8181"` |  |
 | upstream.concurrent | int | `50` |  |
@@ -100,7 +100,7 @@ helm install gitlab-runner chart/
 | upstream.runners.job.tag | string | `"9.7"` |  |
 | upstream.runners.helper.registry | string | `"registry1.dso.mil"` |  |
 | upstream.runners.helper.repository | string | `"ironbank/gitlab/gitlab-runner/gitlab-runner-helper"` |  |
-| upstream.runners.helper.tag | string | `"v18.8.0"` |  |
+| upstream.runners.helper.tag | string | `"v18.9.0"` |  |
 | upstream.runners.config | string | `"[[runners]]\n  clone_url = \"http://gitlab-webservice-default.gitlab.svc.cluster.local:8181\"\n  cache_dir = \"/tmp/gitlab-runner/cache\"\n  [runners.kubernetes]\n    pull_policy = \"always\"\n    namespace = \"{{.Release.Namespace}}\"\n    image = \"{{ printf \"%s/%s:%s\" .Values.runners.job.registry .Values.runners.job.repository .Values.runners.job.tag }}\"\n    helper_image = \"{{ printf \"%s/%s:%s\" .Values.runners.helper.registry .Values.runners.helper.repository .Values.runners.helper.tag }}\"\n    image_pull_secrets = [\"private-registry\"]\n  [runners.kubernetes.pod_security_context]\n    run_as_non_root = true\n    run_as_user = 1001\n  [runners.kubernetes.helper_container_security_context]\n    run_as_non_root = true\n    run_as_user = 1001\n  [runners.kubernetes.pod_labels]\n    \"job_id\" = \"${CI_JOB_ID}\"\n    \"job_name\" = \"${CI_JOB_NAME}\"\n    \"pipeline_id\" = \"${CI_PIPELINE_ID}\"\n    \"app\" = \"gitlab-runner\"\n"` |  |
 | upstream.runners.secret | string | `"gitlab-gitlab-runner-secret"` |  |
 | upstream.securityContext.allowPrivilegeEscalation | bool | `false` |  |

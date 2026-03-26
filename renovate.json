@@ -51,7 +51,7 @@
         "/^chart/values\\.yaml$/"
       ],
       "matchStrings": [
-        "image:.+\\s+registry:.+\\s+repository:.(?<depName>.+)\\s+tag:\\s+(?<currentValue>.+)"
+        "registry:.+\\s+repository:.(?<depName>.+)\\s+tag:\\s+(?<currentValue>.+)"
       ],
       "datasourceTemplate": "docker"
     },
